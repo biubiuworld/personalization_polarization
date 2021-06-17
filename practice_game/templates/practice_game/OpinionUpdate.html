@@ -1,0 +1,28 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Round {{ group.round_number }} of {{ Constants.num_rounds }}
+{% endblock %}
+
+{% block content %}
+    <p>
+    {% if group.round_number > 1 %}
+    Your opinion in previous round (Round {{ last_round }}) is: {{ opinion_last_round }}
+    {% else %}
+    Your initial opinion is: {{ opinion_last_round }}
+    {% endif %}
+    </p>
+    <p>
+    Subjects you observed in this round (Round {{ group.round_number }}):
+    </br>
+        Player 1: {{ observed_player1 }}
+    </br>
+        Player 2: {{ observed_player2 }}
+    </p>
+    <p>
+        {% formfields %}
+    </p>
+    {% next_button %}
+
+{% endblock %}
