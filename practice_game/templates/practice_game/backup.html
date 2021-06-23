@@ -1,0 +1,31 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Round {{ group.round_number }} of {{ Constants.num_rounds }}
+{% endblock %}
+
+{% block content %}
+    <p>
+    {% if group.round_number > 1 %}
+    Your opinion in previous round (Round {{ last_round }}) is: {{ opinion_last_round }}
+    {% else %}
+    Your initial opinion is: {{ opinion_last_round }}
+    {% endif %}
+    </p>
+    <p>
+    {% if num_neighbors == 0 %}
+    You don't have neighbors in this round.
+    {% elif num_neighbors == 1 %}
+    You have {{ num_neighbors }} neighbor in this round (Round {{ group.round_number }}) and his or her opinion is: {{ neighbors_opinion_set }}
+    {% else %}
+    You have {{ num_neighbors }} neighbors in this round (Round {{ group.round_number }}) and their opinions are: {{ neighbors_opinion_set }}
+    {% endif %}
+    </p>
+    <p>
+       {% formfields %}
+    </p>
+
+    {% next_button %}
+
+{% endblock %}
