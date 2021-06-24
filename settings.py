@@ -7,6 +7,12 @@ SESSION_CONFIGS = [
        num_demo_participants=3,
        app_sequence=['practice_game']
     ),
+    dict(
+        name='quiz',
+        display_name="quiz",
+        num_demo_participants=1,
+        app_sequence=['quiz']
+    ),
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs

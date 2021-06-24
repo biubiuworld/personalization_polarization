@@ -7,10 +7,16 @@
 
 {% block content %}
     <table class="table">
+        <tr>
+            <th>Round </th>
+            <th>Opinion this round</th>
+            <th>Payoff this round</th>
+        </tr>
         {% for round in player_all_rounds %}
         <tr>
             <td>Round {{ round.round_number }} </td>
             <td>{{ round.opinion_this_round }}</td>
+            <td>{{ round.payoff }}</td>
         </tr>
     {% endfor %}
     </table>

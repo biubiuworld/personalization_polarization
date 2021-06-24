@@ -31,7 +31,7 @@ class NeighborUpdate(Page):
     form_fields = ['if_connect_player1', 'if_connect_player2']
     # live_method = 'live_getselectedneighbor'
 
-
+    # timeout_seconds = 15
     def vars_for_template(self):
         return {
             'opinion_last_round': self.player.opinion_last_round,
@@ -67,6 +67,7 @@ class NeighborUpdate(Page):
 class OpinionUpdate(Page):
     form_model = 'player'
     form_fields = ['opinion_this_round']
+    # timeout_seconds = 30
     def vars_for_template(self):
         return {
             'opinion_last_round': self.player.opinion_last_round,
@@ -74,7 +75,14 @@ class OpinionUpdate(Page):
             'num_neighbors': self.player.num_neighbors,
             'neighbors_opinion_set': self.participant.vars['neighbors_opinion_set'],
         }
-
+    def before_next_page(self):
+        if self.player.num_neighbors == 0 and self.player.opinion_this_round != None:
+            self.player.payoff = -(self.player.opinion_this_round-self.player.opinion_last_round)*(self.player.opinion_this_round-self.player.opinion_last_round)*10000
+        elif self.player.num_neighbors > 0 and self.player.opinion_this_round != None:
+            for neighbor_Opinion in self.participant.vars['neighbors_opinion_set']:
+                self.player.payoff += (Constants.V-Constants.f*(self.player.opinion_this_round - neighbor_Opinion)*(self.player.opinion_this_round - neighbor_Opinion) - (1-Constants.f)*(self.player.opinion_this_round - self.player.opinion_last_round)*(self.player.opinion_this_round - self.player.opinion_last_round))*10000
+        else:
+            self.player.payoff = 0
 class Results(Page):
     def is_displayed(self):
         return self.round_number == Constants.num_rounds

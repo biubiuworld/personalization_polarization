@@ -81,8 +81,14 @@ class Player(BasePlayer):
     observed_opinion_player2 = models.FloatField(min=0, max=1) # The observed player 2's last round opinion
     observed_id_player1 = models.IntegerField(min=1, max=11) # The observed player 1's ID
     observed_id_player2 = models.IntegerField(min=1, max=11) # The observed player 2's ID
-    if_connect_player1 = models.BooleanField(label='Do you want to connect with Player 1?', blank=True) # Whether to connect with player 1
-    if_connect_player2 = models.BooleanField(label='Do you want to connect with Player 2?', blank=True) # Whether to connect with player 2
+    if_connect_player1 = models.BooleanField(
+        widget = widgets.RadioSelectHorizontal(),
+        label='Do you want to connect with Player 1?', blank=True
+    ) # Whether to connect with player 1
+    if_connect_player2 = models.BooleanField(
+        widget = widgets.RadioSelectHorizontal(),
+        label='Do you want to connect with Player 2?', blank=True
+    ) # Whether to connect with player 2
     num_neighbors = models.IntegerField(initial=0)
     disconnect_with_player1 = models.BooleanField()
     disconnect_with_player2 = models.BooleanField()
