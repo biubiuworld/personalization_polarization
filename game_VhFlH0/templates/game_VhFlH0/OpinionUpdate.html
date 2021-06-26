@@ -1,0 +1,121 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Round {{ group.round_number }} of {{ Constants.num_rounds }}
+{% endblock %}
+
+{% block styles %}
+<style type="text/css">
+.slider {
+  width: 100%; /* Full-width */
+  height: 15px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  border-radius: 5px;
+}
+.slider:hover {
+  opacity: 1;
+}
+.ticks {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+.slider_container{
+    width: 100%; /* Width of the outside container */
+	background: #d3d3d3;
+}
+
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+var V = {{ Constants.V }};
+var f = {{ Constants.f }};
+var previousOpinion = {{ opinion_last_round }};
+var outputValue_1 = document.getElementById("outputValue_1");
+var outputValue_2 = document.getElementById("outputValue_2");
+const neighborsOpinionSet = {{ neighbors_opinion_set }};
+
+function update() {
+total = 0;
+currentOpinion = (document.getElementById("sliderValue").value)/100;
+outputValue_1.innerHTML = (document.getElementById("sliderValue").value)/100;
+const neighborsPayoffSet = neighborsOpinionSet.map(neighborPayoffFunction);
+neighborsPayoffSet.forEach(totalFunction);
+if (neighborsOpinionSet.length <= 0) {
+    total = -1*(currentOpinion-previousOpinion)*(currentOpinion-previousOpinion);
+}
+outputValue_2.innerHTML = Math.round(total*10000)/10000;
+}
+
+function neighborPayoffFunction(neighborOpinion, index, array) {
+  return V-f*(currentOpinion-neighborOpinion)*(currentOpinion-neighborOpinion)-(1-f)*(currentOpinion-previousOpinion)*(currentOpinion-previousOpinion);
+}
+function totalFunction(value) {
+  total += value;
+  return total
+}
+
+
+
+</script>
+{% endblock %}
+
+{% block content %}
+    {% if if_miss_opinion_last_round == 1 %}
+    <div class="card bg-light m-3">
+    <div class="card-body">
+    <p>
+    <b style="color:Tomato;">ATTENTION</b>
+    <br>
+    You didn't update opinion last round! Your opinion last round is defaulted to the last valid opinion you have. Your payoff in last round was 0.
+    </p>
+    </div>
+    </div>
+    {% endif %}
+    <p>
+
+    {% if group.round_number > 1 %}
+    Your opinion in previous round (Round {{ last_round }}) is: {{ opinion_last_round }}
+    {% else %}
+    Your initial opinion is: {{ opinion_last_round }}
+    {% endif %}
+    </p>
+    <p>
+    {% if num_neighbors == 0 %}
+    You don't have neighbors in this round.
+    {% elif num_neighbors == 1 %}
+    You have {{ num_neighbors }} neighbor in this round (Round {{ group.round_number }}) and his or her opinion is: {{ neighbors_opinion_set }}
+    {% else %}
+    You have {{ num_neighbors }} neighbors in this round (Round {{ group.round_number }}) and their opinions are: {{ neighbors_opinion_set }}
+    {% endif %}
+    </p>
+
+
+
+    <h5>Reference slider</h5>
+
+    <div class="silder_container", oninput="update()">
+        <input type="range" min="0" max="100" value="50" class="slider" id="sliderValue">
+       <p>Your opinion: <span id="outputValue_1"></span></p>
+        <p>Total payoff: <span id="outputValue_2"></span></p>
+    </div>
+
+
+
+
+
+
+
+
+
+    <p>
+       {% formfields %}
+    </p>
+
+    {% next_button %}
+
+{% endblock %}

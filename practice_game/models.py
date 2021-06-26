@@ -9,7 +9,7 @@ from otree.api import (
     currency_range,
 )
 import random
-import numpy as np
+
 
 author = 'Your name here'
 
@@ -45,7 +45,7 @@ class Subsession(BaseSubsession):
             p.participant.vars['others_id_in_group'] = []
             for other in p.get_others_in_subsession():
                 p.participant.vars['others_id_in_group'].append(other.id_in_group) #stores all 10 other players' ids
-                p.participant.vars['others_last_opinions'].append(other.in_round(p.round_number).opinion_last_round) #stores all 10 other players' last round opinions
+                p.participant.vars['others_last_opinions'].append(other.opinion_last_round) #stores all 10 other players' last round opinions
             observed_players_id_this_round = random.sample(p.participant.vars['others_id_in_group'], 2) #randomly choose 2 observed players (id)
             p.observed_id_player1 = observed_players_id_this_round[0]
             p.observed_id_player2 = observed_players_id_this_round[1]

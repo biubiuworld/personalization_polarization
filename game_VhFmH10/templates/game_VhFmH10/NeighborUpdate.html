@@ -1,0 +1,74 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Round {{ group.round_number }} of {{ Constants.num_rounds }}
+{% endblock %}
+
+{% block content %}
+
+    {% if if_miss_neighbor_last_round == 1 %}
+    <div class="card bg-light m-3">
+    <div class="card-body">
+    <p>
+    <b style="color:Tomato;">ATTENTION</b>
+    <br>
+    You didn't select neighbors last round! Your payoff in last round was 0.
+    </p>
+    </div>
+    </div>
+    {% endif %}
+
+    <p>
+    {% if group.round_number > 1 %}
+    Your opinion in <b>previous</b> round (Round {{ last_round }}) is: <b style="color:Tomato;">{{ opinion_last_round }}</b>
+    {% else %}
+    Your <b>initial</b> opinion is: <b style="color:Tomato;">{{ opinion_last_round }}</b>
+    {% endif %}
+    </p>
+    <p>
+    Subjects you observed in this round (Round {{ group.round_number }}):
+    <ul>
+        <li>Player 1: <b style="color:DodgerBlue;">{{ observed_player1 }}</b></li>
+        <li>Player 2: <b style="color:DodgerBlue;">{{ observed_player2 }}</b></li>
+    </ul>
+    </p>
+    <div class="card bg-light m-3">
+    <div class="card-body">
+
+    <h5>Please choose your neighbor(s):</h5>
+    <p>
+    {% if player.disconnect_with_player1 > 0 %}
+    Your have already connected with this player. You may select 'No' to disconnect with this player.
+    {% endif %}
+<!--    <input type="checkbox" id="player1" name="{{if_connect_player1}}" value="1"> Player1-Connect-->
+<!--    <input type="checkbox" id="player2" name="{{if_connect_player2}}" value="1"> Player2-Connect-->
+<!--    <button type="button" id="btn">Submit Player Connect Selection</button></br>-->
+    {% formfield player.if_connect_player1 %}
+    <br>
+    {% if player.disconnect_with_player2 > 0 %}
+    Your have already connected with this player. You may select 'No' to disconnect with this player.
+    {% endif %}
+       {% formfield player.if_connect_player2 %}
+    </p>
+    </div>
+    </div>
+    {% next_button %}
+
+<!--
+<script>
+    function getSelectedCheckboxValues(name) {
+        const checkboxes = document.querySelectorAll(`input[name="${name}"]:checked`);
+        let values = [];
+        checkboxes.forEach((checkbox) => {
+            values.push(checkbox.value);
+        });
+        return values;
+        }
+    btn.onclick = function () {
+        liveSend(getSelectedCheckboxValues('player'));
+    };
+</script>
+-->
+<!--{{ form.non_field_errors }}-->
+{% endblock %}
