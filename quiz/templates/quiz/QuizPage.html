@@ -1,0 +1,19 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+{% load staticfiles %}
+
+{% block title %}
+    Question ({{ group.round_number }} of {{ Constants.num_rounds }})
+{% endblock %}
+
+{% block content %}
+    <p>
+        {{ questiontext}}
+    </p>
+    <p>
+        {% formfield player.answer with label="" %}
+    </p>
+
+    {% next_button %}
+
+{% endblock %}

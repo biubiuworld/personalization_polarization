@@ -20,8 +20,24 @@ Your app description
 class Constants(BaseConstants):
     name_in_url = 'quiz'
     players_per_group = None
-    num_rounds = 1
+    num_rounds = 2 #number of quiz questions
+    quiz_question_text = [
+        '''
+        If you don’t have any neighbor, your maximum payoff would be:
+        ''', #q1
+        '''
+        Which of the following statements is true?
+        ''', #q2
+     ]
+    quiz_question_choices = [
+        [[1, 'A. Any positive number'], [2, 'B. Any negative number'], [3, 'C. 0']],  # q1
+        [[1, 'A. If I didn’t select neighbors/update my opinion this round, I would earn 0.'],
+         [2, 'B. If I didn’t select neighbors/update my opinion this round, I would earn a random positive payoff.'],
+         [3, 'C. If I didn’t select neighbors/update my opinion this round, I would earn a random negative payoff.']],  # q2
 
+    ]
+
+    correct_answers = [3, 1]
 
 class Subsession(BaseSubsession):
     pass
@@ -32,6 +48,4 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    question1 = models.IntegerField(choices=[(0, "2"), (1, "2 or 3"), (2, "1 or 2 or 3"), (3, "3")],
-                                    label='As Player 1, if you see the true number is 1, which message might show up in the message menu?',
-                                    widget=widgets.RadioSelectHorizontal)
+    answer = models.IntegerField(widget=widgets.RadioSelect())
