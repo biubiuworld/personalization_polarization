@@ -6,23 +6,38 @@
 {% endblock %}
 
 {% block content %}
+
+    {% if if_miss_neighbor_last_round == 1 %}
+    <div class="card bg-light m-3">
+    <div class="card-body">
+    <p>
+    <b style="color:Tomato;">ATTENTION</b>
+    <br>
+    You didn't select neighbors last round! Your payoff in last round was 0.
+    </p>
+    </div>
+    </div>
+    {% endif %}
+
     <p>
     {% if group.round_number > 1 %}
-    Your opinion in previous round (Round {{ last_round }}) is: {{ opinion_last_round }}
+    Your opinion in <b>previous</b> round (Round {{ last_round }}) is: <b style="color:Tomato;">{{ opinion_last_round }}</b>
     {% else %}
-    Your initial opinion is: {{ opinion_last_round }}
+    Your <b>initial</b> opinion is: <b style="color:Tomato;">{{ opinion_last_round }}</b>
     {% endif %}
     </p>
     <p>
     Subjects you observed in this round (Round {{ group.round_number }}):
     <ul>
-        <li>Player 1: {{ observed_player1 }}</li>
-        <li>Player 2: {{ observed_player2 }}</li>
+        <li>Player 1: <b style="color:DodgerBlue;">{{ observed_player1 }}</b></li>
+        <li>Player 2: <b style="color:DodgerBlue;">{{ observed_player2 }}</b></li>
     </ul>
     </p>
+    <div class="card bg-light m-3">
+    <div class="card-body">
+
+    <h5>Please choose your neighbor(s):</h5>
     <p>
-    Please choose your neighbor(s):
-    <br>
     {% if player.disconnect_with_player1 > 0 %}
     Your have already connected with this player. You may select 'No' to disconnect with this player.
     {% endif %}
@@ -36,7 +51,8 @@
     {% endif %}
        {% formfield player.if_connect_player2 %}
     </p>
-
+    </div>
+    </div>
     {% next_button %}
 
 <!--

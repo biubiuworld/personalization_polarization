@@ -2,7 +2,7 @@
 {% load otree static %}
 
 {% block title %}
-    Results of the game in all rounds
+    Results
 {% endblock %}
 
 {% block content %}
@@ -10,12 +10,14 @@
         <tr>
             <th>Round </th>
             <th>Opinion this round</th>
+            <th>Num. of neighbors this round</th>
             <th>Payoff this round</th>
         </tr>
         {% for round in player_all_rounds %}
         <tr>
             <td>Round {{ round.round_number }} </td>
             <td>{{ round.opinion_this_round }}</td>
+            <td>{{ round.num_neighbors }}</td>
             <td>{{ round.payoff }}</td>
         </tr>
     {% endfor %}

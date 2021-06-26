@@ -65,7 +65,19 @@ function totalFunction(value) {
 {% endblock %}
 
 {% block content %}
+    {% if if_miss_opinion_last_round == 1 %}
+    <div class="card bg-light m-3">
+    <div class="card-body">
     <p>
+    <b style="color:Tomato;">ATTENTION</b>
+    <br>
+    You didn't update opinion last round! Your opinion last round is defaulted to the last valid opinion you have. Your payoff in last round was 0.
+    </p>
+    </div>
+    </div>
+    {% endif %}
+    <p>
+
     {% if group.round_number > 1 %}
     Your opinion in previous round (Round {{ last_round }}) is: {{ opinion_last_round }}
     {% else %}

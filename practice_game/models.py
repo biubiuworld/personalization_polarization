@@ -9,6 +9,7 @@ from otree.api import (
     currency_range,
 )
 import random
+import numpy as np
 
 author = 'Your name here'
 
@@ -21,6 +22,7 @@ class Constants(BaseConstants):
     name_in_url = 'practice_game'
     players_per_group = None
     num_rounds = 2
+    min_opinion = 0.00001
     V = 0.05
     f = 0.5
     h = 10
@@ -29,7 +31,7 @@ class Constants(BaseConstants):
 class Subsession(BaseSubsession):
     def generate_initial_opinion(self):
         for p in self.get_players():
-            p.initial_opinion = round(random.uniform(0, 1),
+            p.initial_opinion = round(random.uniform(Constants.min_opinion, 1),
                                       2)  # generate a random 2-decimal number as the initial opinion
             p.opinion_last_round = p.initial_opinion
 
@@ -49,7 +51,7 @@ class Subsession(BaseSubsession):
             p.observed_id_player2 = observed_players_id_this_round[1]
             p.observed_opinion_player1 = p.participant.vars['others_last_opinions'][p.participant.vars['others_id_in_group'].index(p.observed_id_player1)]
             p.observed_opinion_player2 = p.participant.vars['others_last_opinions'][p.participant.vars['others_id_in_group'].index(p.observed_id_player2)]
-
+            # Whether 2 observed players are already in neighbor set. If so, return whether to disconnect.
             if p.observed_id_player1 in p.participant.vars['neighbors_id_set']:
                 p.disconnect_with_player1 = 1
             else:
@@ -74,11 +76,14 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    initial_opinion = models.FloatField(min=0, max=1) # The initial opinion assigned to each player
-    opinion_last_round = models.FloatField(min=0, max=1)
-    opinion_this_round = models.FloatField(min=0, max=1, label='Please update your opinion in this round')
-    observed_opinion_player1 = models.FloatField(min=0, max=1) # The observed player 1's last round opinion
-    observed_opinion_player2 = models.FloatField(min=0, max=1) # The observed player 2's last round opinion
+    initial_opinion = models.FloatField(min=Constants.min_opinion, max=1) # The initial opinion assigned to each player
+    opinion_last_round = models.FloatField(min=Constants.min_opinion, max=1)
+    opinion_this_round = models.FloatField(
+        min=Constants.min_opinion, max=1,
+        help_text='Note: please fill in a number between 0 and 1',
+        label='Please update your opinion in this round')
+    observed_opinion_player1 = models.FloatField(min=Constants.min_opinion, max=1) # The observed player 1's last round opinion
+    observed_opinion_player2 = models.FloatField(min=Constants.min_opinion, max=1) # The observed player 2's last round opinion
     observed_id_player1 = models.IntegerField(min=1, max=11) # The observed player 1's ID
     observed_id_player2 = models.IntegerField(min=1, max=11) # The observed player 2's ID
     if_connect_player1 = models.BooleanField(
@@ -92,6 +97,8 @@ class Player(BasePlayer):
     num_neighbors = models.IntegerField(initial=0)
     disconnect_with_player1 = models.BooleanField()
     disconnect_with_player2 = models.BooleanField()
+    if_miss_neighbor = models.BooleanField(initial=0)
+    if_miss_opinion = models.BooleanField(initial=0)
 
     # def live_getselectedneighbor(self, data):
     #     print(data)
