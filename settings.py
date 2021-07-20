@@ -53,7 +53,7 @@ SESSION_CONFIGS = [
         name='practice_game',
         display_name="Pilot",
         num_demo_participants=3,
-        app_sequence=['game_VhFhH10', 'experiment_payment_dollar']
+        app_sequence=['practice_game','game_VhFmH0','game_VhFhH10', 'experiment_payment_dollar']
     ),
 ]
 
