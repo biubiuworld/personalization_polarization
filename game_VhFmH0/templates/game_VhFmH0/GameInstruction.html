@@ -2,17 +2,44 @@
 {% load otree static %}
 
 {% block title %}
-    Practice Game Instruction
+
+{% endblock %}
+
+{% block scripts %}
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
 {% endblock %}
 
 {% block content %}
     <div class="card bg-light m-3">
     <div class="card-body">
     <h3>
-        Instructions
+        Game 1 Instruction
     </h3>
+        <p>Hello! This is <strong>game 1 with 30 rounds.</strong>.</p>
+        <p style="text-align:justify">
+            At the beginning of each game, you will be randomly assigned an initial opinion and then in the following rounds, you will
+            (1) observe two other subjects <u>randomly</u> and decide whether to connect (or reconsider whether to keep the connection if they are already in your network) with them;
+            (2) keep updating your opinion based on your opinion and your neighbors' opinions in previous rounds. <br>
+            The goal of the game is to <strong>find agreements among all subjects</strong>. So you need to connect with subjects who have similar opinions. <br>
+            In game 1, you will have <b style="color:blue;">10 seconds</b> to choose neighbors and <b style="color:blue;">15 seconds</b> to update opinion each round.
+        </p>
         <p>
-        Hello! This is the practice game.
+            Your payoff in round \( t \) is as follows:
+        <ol type="1">
+            <li>
+                If you have neighbor(s), your payoff this round is: <br>
+                <strong>Payoff this round = sum of payoffs with all neighbors \( * 10000 \)</strong> <br>
+            And specifically, the payoff with one neighbor is:<br>
+<strong>Payoff with neighbor \(k \) = \( \color{red}{0.025} \) - \( \color{red}{0.5} \) \( * \) (your opinion in \( t \)  round - neighbor \( k \)'s opinion in \( t-1 \)  round)\( ^2 \) - \( \color{red}{0.5} \) \( * \)(your opinion in \( t \)  round - your opinion in \( t-1 \)  round)\( ^2 \)</strong><br>
+            </li>
+            <li>
+                If you don’t have neighbor, your payoff this round is:<br>
+	<strong>Payoff this round = - (your opinion in \( t \)  round - your opinion in \( t-1  \) round)\( ^2 * 10000 \)</strong>
+            </li>
+        </ol>
         </p>
     </div>
     </div>

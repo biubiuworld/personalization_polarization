@@ -1,53 +1,59 @@
 from os import environ
 
 SESSION_CONFIGS = [
+    # dict(
+    #    name='practice_game',
+    #    display_name="Practice Game",
+    #    num_demo_participants=3,
+    #    app_sequence=['practice_game']
+    # ),
+    # dict(
+    #     name='game_VhFlH0',
+    #     display_name="game_VhFlH0",
+    #     num_demo_participants=3,
+    #     app_sequence=['game_VhFlH0']
+    # ),
+    # dict(
+    #     name='game_VhFmH0',
+    #     display_name="game_VhFmH0",
+    #     num_demo_participants=3,
+    #     app_sequence=['game_VhFmH0']
+    # ),
+    # dict(
+    #     name='game_VhFhH0',
+    #     display_name="game_VhFhH0",
+    #     num_demo_participants=3,
+    #     app_sequence=['game_VhFhH0']
+    # ),
+    # dict(
+    #     name='game_VlFmH0',
+    #     display_name="game_VlFmH0",
+    #     num_demo_participants=3,
+    #     app_sequence=['game_VlFmH0']
+    # ),
+    # dict(
+    #     name='game_VhFmH10',
+    #     display_name="game_VhFmH10",
+    #     num_demo_participants=3,
+    #     app_sequence=['game_VhFmH10']
+    # ),
+    # dict(
+    #     name='game_VhFhH10',
+    #     display_name="game_VhFhH10",
+    #     num_demo_participants=3,
+    #     app_sequence=['game_VhFhH10']
+    # ),
+    # dict(
+    #     name='quiz',
+    #     display_name="quiz",
+    #     num_demo_participants=1,
+    #     app_sequence=['quiz']
+    # ),
     dict(
-       name='practice_game',
-       display_name="Practice Game",
-       num_demo_participants=3,
-       app_sequence=['practice_game']
-    ),
-    dict(
-        name='game_VhFlH0',
-        display_name="game_VhFlH0",
+        name='practice_game',
+        display_name="Pilot",
         num_demo_participants=3,
-        app_sequence=['game_VhFlH0']
-    ),
-    dict(
-        name='game_VhFmH0',
-        display_name="game_VhFmH0",
-        num_demo_participants=3,
-        app_sequence=['game_VhFmH0']
-    ),
-    dict(
-        name='game_VhFhH0',
-        display_name="game_VhFhH0",
-        num_demo_participants=3,
-        app_sequence=['game_VhFhH0']
-    ),
-    dict(
-        name='game_VlFmH0',
-        display_name="game_VlFmH0",
-        num_demo_participants=3,
-        app_sequence=['game_VlFmH0']
-    ),
-    dict(
-        name='game_VhFmH10',
-        display_name="game_VhFmH10",
-        num_demo_participants=3,
-        app_sequence=['game_VhFmH10']
-    ),
-    dict(
-        name='game_VhFhH10',
-        display_name="game_VhFhH10",
-        num_demo_participants=3,
-        app_sequence=['game_VhFhH10']
-    ),
-    dict(
-        name='quiz',
-        display_name="quiz",
-        num_demo_participants=1,
-        app_sequence=['quiz']
+        app_sequence=['game_VhFhH10', 'experiment_payment_dollar']
     ),
 ]
 
