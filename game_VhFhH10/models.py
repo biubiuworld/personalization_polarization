@@ -24,7 +24,7 @@ class Constants(BaseConstants):
     num_rounds = 30
     min_opinion = 0
     V = 0.025
-    f = 0.5
+    f = 0.9
     h = 10
 
 

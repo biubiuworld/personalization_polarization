@@ -103,7 +103,7 @@ class OpinionUpdate(Page):
         if self.timeout_happened:
             self.player.timeout_update_opinion = 1
 
-        if self.player.opinion_this_round is None:
+        if self.player.opinion_this_round < 0:
             self.player.if_miss_opinion = 1
             self.player.opinion_this_round = self.player.opinion_last_round
 
