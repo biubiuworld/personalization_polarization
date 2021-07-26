@@ -53,7 +53,7 @@ SESSION_CONFIGS = [
         name='practice_game',
         display_name="Pilot",
         num_demo_participants=3,
-        app_sequence=['practice_game','game_VhFmH0','game_VhFhH10', 'experiment_payment_dollar']
+        app_sequence=['game_VhFmH0','game_VhFhH10', 'experiment_payment_dollar']
     ),
 ]
 
@@ -66,6 +66,13 @@ SESSION_CONFIG_DEFAULTS = dict(
     real_world_currency_per_point=1.00, participation_fee=0.00, doc=""
 )
 
+ROOMS = [
+    dict(
+        name='practice_game',
+        display_name="Pilot",
+        participant_label_file='_rooms/participant_label.txt',
+    ),
+]
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans
 LANGUAGE_CODE = 'en'
