@@ -22,7 +22,8 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
     participation_fee = 4.00
-    dollar_per_credit = 0.005
+    dollar_per_credit = 0.01
+    endowment = 6.00
 
 class Subsession(BaseSubsession):
     # def set_payoff(self):

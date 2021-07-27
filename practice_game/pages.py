@@ -7,7 +7,7 @@ class GameInstruction(Page):
         return self.round_number == 1
     def before_next_page(self):
         self.participant.vars['neighbors_id_set'] = []
-        self.participant.vars['practice_game_payoff_list'] = []
+        # self.participant.vars['practice_game_payoff_list'] = []
         self.participant.vars['practice_game_payoff'] = 0.
 
 
@@ -89,12 +89,12 @@ class OpinionUpdate(Page):
 
     def before_next_page(self):
         # print(self.player.opinion_this_round == 0)
-        self.player.opinion_this_round = self.player.opinion_this_round/100
+        # self.player.opinion_this_round = self.player.opinion_this_round/100
         if (self.player.num_neighbors == 0) & (self.player.opinion_this_round >= 0):
-            self.player.payoff = -(self.player.opinion_this_round-self.player.opinion_last_round)*(self.player.opinion_this_round-self.player.opinion_last_round)*10000
+            self.player.payoff = -(self.player.opinion_this_round-self.player.opinion_last_round)*(self.player.opinion_this_round-self.player.opinion_last_round)
         elif (self.player.num_neighbors > 0) & (self.player.opinion_this_round >= 0):
             for neighbor_Opinion in self.participant.vars['neighbors_opinion_set']:
-                self.player.payoff += (Constants.V-Constants.f*(self.player.opinion_this_round - neighbor_Opinion)*(self.player.opinion_this_round - neighbor_Opinion) - (1-Constants.f)*(self.player.opinion_this_round - self.player.opinion_last_round)*(self.player.opinion_this_round - self.player.opinion_last_round))*10000
+                self.player.payoff += (Constants.V-Constants.f*(self.player.opinion_this_round - neighbor_Opinion)*(self.player.opinion_this_round - neighbor_Opinion) - (1-Constants.f)*(self.player.opinion_this_round - self.player.opinion_last_round)*(self.player.opinion_this_round - self.player.opinion_last_round))
         else:
             self.player.payoff = 0
         if (self.player.if_connect_player1 is None) | (self.player.if_connect_player2 is None):
@@ -107,8 +107,9 @@ class OpinionUpdate(Page):
             self.player.if_miss_opinion = 1
             self.player.opinion_this_round = self.player.opinion_last_round
 
-        self.participant.vars['practice_game_payoff_list'].append(self.player.payoff)
-        self.participant.vars['practice_game_payoff'] = random.choices(self.participant.vars['practice_game_payoff_list'])[0]
+        # self.participant.vars['practice_game_payoff_list'].append(self.player.payoff)
+        # self.participant.vars['practice_game_payoff'] = random.choices(self.participant.vars['practice_game_payoff_list'])[0]
+        self.participant.vars['practice_game_payoff'] = self.player.payoff
         self.player.game_payoff = self.participant.vars['practice_game_payoff']
 class Results(Page):
     # def is_displayed(self):

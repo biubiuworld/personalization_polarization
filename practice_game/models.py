@@ -21,16 +21,16 @@ Your app description
 class Constants(BaseConstants):
     name_in_url = 'practice_game'
     players_per_group = None
-    num_rounds = 5
+    num_rounds = 3
     min_opinion = 0
-    V = 0.025
-    f = 0.2
+    V = 150
+    f = 0.3
     h = 0
 
 
 class Subsession(BaseSubsession):
     def generate_initial_opinion(self):
-        initial_opinion_set = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+        initial_opinion_set = [0.0, 10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0, 90.0, 100.0]
         random.shuffle(initial_opinion_set)
         for p in self.get_players():
             # p.initial_opinion = round(random.uniform(Constants.min_opinion, 1),
