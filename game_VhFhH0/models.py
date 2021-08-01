@@ -26,7 +26,9 @@ class Constants(BaseConstants):
     V = 250
     f = 0.9
     h = 0
-
+    participation_fee = 4.00
+    dollar_per_credit = 0.01
+    endowment = 6.00
 
 class Subsession(BaseSubsession):
     def generate_initial_opinion(self):
@@ -101,6 +103,8 @@ class Player(BasePlayer):
 
     timeout_choose_neighbors = models.BooleanField(initial=0)
     timeout_update_opinion = models.BooleanField(initial=0)
+
+    total_payoff_experiment_dollar = models.FloatField()
 
     # def live_getselectedneighbor(self, data):
     #     print(data)

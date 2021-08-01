@@ -19,17 +19,17 @@ SESSION_CONFIGS = [
     #     num_demo_participants=3,
     #     app_sequence=['game_VhFmH0']
     # ),
-    dict(
-        name='game_VhFhH0',
-        display_name="game_VhFhH0",
-        num_demo_participants=3,
-        app_sequence=['game_VhFhH0']
-    ),
+    # dict(
+    #     name='game_VhFhH0',
+    #     display_name="game_VhFhH0",
+    #     num_demo_participants=3,
+    #     app_sequence=['game_VhFhH0']
+    # ),
     dict(
         name='game_VlFmH0',
         display_name="game_VlFmH0",
         num_demo_participants=3,
-        app_sequence=['game_VlFmH0']
+        app_sequence=['game_VlFmH0', 'game_VhFhH0']
     ),
     # dict(
     #     name='game_VhFmH10',
