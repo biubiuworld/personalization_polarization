@@ -25,12 +25,12 @@ SESSION_CONFIGS = [
     #     num_demo_participants=3,
     #     app_sequence=['game_VhFhH0']
     # ),
-    # dict(
-    #     name='game_VlFmH0',
-    #     display_name="game_VlFmH0",
-    #     num_demo_participants=3,
-    #     app_sequence=['game_VlFmH0']
-    # ),
+    dict(
+        name='game_VlFmH0',
+        display_name="game_VlFmH0",
+        num_demo_participants=3,
+        app_sequence=['game_VlFmH0']
+    ),
     # dict(
     #     name='game_VhFmH10',
     #     display_name="game_VhFmH10",
@@ -43,18 +43,25 @@ SESSION_CONFIGS = [
     #     num_demo_participants=3,
     #     app_sequence=['game_VhFhH10']
     # ),
+    dict(
+        name='quiz',
+        display_name="quiz",
+        num_demo_participants=1,
+        app_sequence=['quiz']
+    ),
     # dict(
-    #     name='quiz',
-    #     display_name="quiz",
+    #     name='Experiment_Survey',
+    #     display_name="Experiment_Survey",
     #     num_demo_participants=1,
-    #     app_sequence=['quiz']
+    #     app_sequence=['Experiment_Survey']
     # ),
     # dict(
-    #     name='practice_game',
+    #     name='game_VhFmH0',
     #     display_name="Pilot",
     #     num_demo_participants=3,
     #     app_sequence=['game_VhFmH0','game_VhFhH10', 'experiment_payment_dollar']
     # ),
+
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs

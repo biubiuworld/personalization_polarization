@@ -1,0 +1,23 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+        LEEPS | Session Survey
+{% endblock %}
+
+{% block content %}
+        <p>Thank you so much for completing experiment today! Before the you leave, we need some of your information to verify your identity and make sure you get paid correctly.
+        Please fill in the session survey. For all your personal information, please use your registration information on our online recruitment system.</p>
+
+        <p>{% formfield player.First_name %}</p>
+        <p>{% formfield player.Last_name %}</p>
+        <p>{% formfield player.Email %}</p>
+        <p>{% formfield player.Student_ID %}</p>
+        <p>{% formfield player.Session_date %}</p>
+        <p>{% formfield player.Participant_ID %}</p>
+        <p>{% formfield player.Venmo_ID %}</p>
+        <p>{% formfield player.Comments %}</p>
+        <p>{% formfield player.Strategy %}</p>
+    {% next_button %}
+
+{% endblock %}

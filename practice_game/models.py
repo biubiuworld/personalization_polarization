@@ -21,7 +21,7 @@ Your app description
 class Constants(BaseConstants):
     name_in_url = 'practice_game'
     players_per_group = None
-    num_rounds = 3
+    num_rounds = 2
     min_opinion = 0
     V = 150
     f = 0.3
@@ -66,15 +66,6 @@ class Subsession(BaseSubsession):
                 p.disconnect_with_player2 = 0
 
 
-
-
-    # def collect_neighbors(self):
-    #     for p in self.get_players():
-    #         if p.if_connect_player1 == 1:
-    #             p.participant.vars['neighbors_id_set'].append(p.observed_id_player1)
-    #         if p.if_connect_player2 == 1:
-    #             p.participant.vars['neighbors_id_set'].append(p.observed_id_player2)
-    #         p.participant.vars['neighbors_id_set'] = list(dict.fromkeys(p.participant.vars['neighbors_id_set']))
 
 class Group(BaseGroup):
     pass

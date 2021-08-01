@@ -30,7 +30,8 @@ class QuizPage(Page):
 
 
 class Results(Page):
-    pass
+    def is_displayed(self):
+        return self.round_number == Constants.num_rounds
 
 
 page_sequence = [QuizInstruction, QuizPage, Results]

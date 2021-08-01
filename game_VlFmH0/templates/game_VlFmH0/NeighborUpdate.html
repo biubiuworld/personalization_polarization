@@ -2,32 +2,31 @@
 {% load otree static %}
 
 {% block title %}
-    Round {{ group.round_number }} of {{ Constants.num_rounds }}
+    Round {{ group.round_number }}
 {% endblock %}
 
 {% block content %}
 
-    {% if if_miss_neighbor_last_round == 1 %}
     <div class="card bg-light m-3">
     <div class="card-body">
     <p>
-    <b style="color:Tomato;">ATTENTION</b>
+    <b style="color:red;">ATTENTION</b>
     <br>
-    You didn't select neighbors last round! Your payoff in last round was 0.
+    If you don't select answers for the following questions, your payoff will be <b style="color:red;">zero</b> this round!
     </p>
     </div>
     </div>
-    {% endif %}
 
     <p>
     {% if group.round_number > 1 %}
-    Your opinion in <b>previous</b> round (Round {{ last_round }}) is: <b style="color:Tomato;">{{ opinion_last_round }}</b>
+    Your position in <b>previous</b> round is: <b style="color:Tomato;">{{ opinion_last_round }}</b>
     {% else %}
-    Your <b>initial</b> opinion is: <b style="color:Tomato;">{{ opinion_last_round }}</b>
+    Your <b>initial</b> position is: <b style="color:Tomato;">{{ opinion_last_round }}</b>
     {% endif %}
+
     </p>
     <p>
-    Subjects you observed in this round (Round {{ group.round_number }}):
+    Subjects you observed in this round:
     <ul>
         <li>Player 1: <b style="color:DodgerBlue;">{{ observed_player1 }}</b></li>
         <li>Player 2: <b style="color:DodgerBlue;">{{ observed_player2 }}</b></li>
@@ -37,17 +36,15 @@
     <div class="card-body">
 
     <h5>Please choose your neighbor(s):</h5>
+    <br>
     <p>
     {% if player.disconnect_with_player1 > 0 %}
-    Your have already connected with this player. You may select 'No' to disconnect with this player.
+    Your have already connected with this player (Player 1). You may select 'No' to disconnect with this player.
     {% endif %}
-<!--    <input type="checkbox" id="player1" name="{{if_connect_player1}}" value="1"> Player1-Connect-->
-<!--    <input type="checkbox" id="player2" name="{{if_connect_player2}}" value="1"> Player2-Connect-->
-<!--    <button type="button" id="btn">Submit Player Connect Selection</button></br>-->
     {% formfield player.if_connect_player1 %}
     <br>
     {% if player.disconnect_with_player2 > 0 %}
-    Your have already connected with this player. You may select 'No' to disconnect with this player.
+    Your have already connected with this player (Player 2). You may select 'No' to disconnect with this player.
     {% endif %}
        {% formfield player.if_connect_player2 %}
     </p>

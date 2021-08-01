@@ -2,7 +2,7 @@
 {% load otree static %}
 
 {% block title %}
-    Round {{ group.round_number }} of {{ Constants.num_rounds }}
+    Round {{ group.round_number }}
 {% endblock %}
 
 {% block styles %}
@@ -41,18 +41,18 @@ const neighborsOpinionSet = {{ neighbors_opinion_set }};
 
 function update() {
 total = 0;
-currentOpinion = (document.getElementById("sliderValue").value)/100;
-outputValue_1.innerHTML = (document.getElementById("sliderValue").value)/100;
+currentOpinion = (document.getElementById("opinion_this_round").value)/1;
+outputValue_1.innerHTML = (document.getElementById("opinion_this_round").value)/1;
 const neighborsPayoffSet = neighborsOpinionSet.map(neighborPayoffFunction);
 neighborsPayoffSet.forEach(totalFunction);
 if (neighborsOpinionSet.length <= 0) {
-    total = -1*(currentOpinion-previousOpinion)*(currentOpinion-previousOpinion);
+    total = -1*(currentOpinion-previousOpinion)*(currentOpinion-previousOpinion)*1;
 }
-outputValue_2.innerHTML = Math.round(total*10000)/10000;
+outputValue_2.innerHTML = Math.round(total*1)/1;
 }
 
 function neighborPayoffFunction(neighborOpinion, index, array) {
-  return V-f*(currentOpinion-neighborOpinion)*(currentOpinion-neighborOpinion)-(1-f)*(currentOpinion-previousOpinion)*(currentOpinion-previousOpinion);
+  return 1*(V-f*(currentOpinion-neighborOpinion)*(currentOpinion-neighborOpinion)-(1-f)*(currentOpinion-previousOpinion)*(currentOpinion-previousOpinion));
 }
 function totalFunction(value) {
   total += value;
@@ -65,57 +65,45 @@ function totalFunction(value) {
 {% endblock %}
 
 {% block content %}
-    {% if if_miss_opinion_last_round == 1 %}
     <div class="card bg-light m-3">
     <div class="card-body">
     <p>
-    <b style="color:Tomato;">ATTENTION</b>
+    <b style="color:red;">ATTENTION</b>
     <br>
-    You didn't update opinion last round! Your opinion last round is defaulted to the last valid opinion you have. Your payoff in last round was 0.
+    If you don't move the slider to update your position or if your position is negative, your payoff will be <b style="color:red;">zero</b> this round!
     </p>
     </div>
     </div>
-    {% endif %}
-    <p>
 
+    <p>
     {% if group.round_number > 1 %}
-    Your opinion in previous round (Round {{ last_round }}) is: {{ opinion_last_round }}
+        Your position in previous round is: <b style="color:Tomato;">{{ opinion_last_round }}</b>
     {% else %}
-    Your initial opinion is: {{ opinion_last_round }}
+        Your initial position is: <b style="color:Tomato;">{{ opinion_last_round }}</b>
     {% endif %}
     </p>
     <p>
     {% if num_neighbors == 0 %}
     You don't have neighbors in this round.
     {% elif num_neighbors == 1 %}
-    You have {{ num_neighbors }} neighbor in this round (Round {{ group.round_number }}) and his or her opinion is: {{ neighbors_opinion_set }}
+        You have <b style="color:DodgerBlue;">{{ num_neighbors }}</b> neighbor in this round and his or her position is: <b style="color:DodgerBlue;">{{ neighbors_opinion_set }}</b>
     {% else %}
-    You have {{ num_neighbors }} neighbors in this round (Round {{ group.round_number }}) and their opinions are: {{ neighbors_opinion_set }}
+        You have <b style="color:DodgerBlue;">{{ num_neighbors }}</b> neighbors in this round and their positions are: <b style="color:DodgerBlue;">{{ neighbors_opinion_set }}</b>
     {% endif %}
     </p>
 
 
 
-    <h5>Reference slider</h5>
-
+    <h5>Slider</h5>
+    <p><strong>Please move the slider and update your position this round. Your position should be between 0 and 100.</strong></p>
     <div class="silder_container", oninput="update()">
-        <input type="range" min="0" max="100" value="50" class="slider" id="sliderValue">
+        <input type="range" min="-1" max="100" value="-1" class="slider" name="opinion_this_round" id="opinion_this_round">
        <p>Your opinion: <span id="outputValue_1"></span></p>
-        <p>Total payoff: <span id="outputValue_2"></span></p>
+        <p>Total payoff: <span id="outputValue_2"></span> points </p>
     </div>
 
 
 
-
-
-
-
-
-
-    <p>
-       {% formfields %}
-    </p>
-
     {% next_button %}
-
+{{ form.opinion_this_round.errors }}
 {% endblock %}
