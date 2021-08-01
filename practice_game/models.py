@@ -102,6 +102,9 @@ class Player(BasePlayer):
     timeout_choose_neighbors = models.BooleanField(initial=0)
     timeout_update_opinion = models.BooleanField(initial=0)
 
+    neighbors_id_set = models.LongStringField()
+    neighbors_opinion_set = models.LongStringField()
+
     # def live_getselectedneighbor(self, data):
     #     print(data)
     #     if "player1" in data:

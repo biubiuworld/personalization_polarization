@@ -62,6 +62,8 @@ class NeighborUpdate(Page):
         for neighbor in self.participant.vars['neighbors_id_set']:
             self.participant.vars['neighbors_opinion_set'].append(self.participant.vars['others_last_opinions'][self.participant.vars['others_id_in_group'].index(neighbor)])
         self.player.num_neighbors = len(self.participant.vars['neighbors_opinion_set']) #number of neighbors this round
+        self.player.neighbors_id_set = ', '.join(map(str, self.participant.vars['neighbors_id_set']))
+        self.player.neighbors_opinion_set = ', '.join(map(str, self.participant.vars['neighbors_opinion_set']))
         self.participant.vars['neighbors_opinion_set'].sort() #reorder neighbors' opinons from low to high
         if (self.player.if_connect_player1 is None) | (self.player.if_connect_player2 is None):
             self.player.if_miss_neighbor = 1
