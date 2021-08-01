@@ -106,6 +106,9 @@ class Player(BasePlayer):
 
     total_payoff_experiment_dollar = models.FloatField()
 
+    neighbors_id_set = models.LongStringField()
+    neighbors_opinion_set = models.LongStringField()
+
     # def live_getselectedneighbor(self, data):
     #     print(data)
     #     if "player1" in data:
