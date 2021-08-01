@@ -25,12 +25,12 @@ SESSION_CONFIGS = [
     #     num_demo_participants=3,
     #     app_sequence=['game_VhFhH0']
     # ),
-    dict(
-        name='game_VlFmH0',
-        display_name="game_VlFmH0",
-        num_demo_participants=3,
-        app_sequence=['game_VlFmH0', 'game_VhFhH0']
-    ),
+    # dict(
+    #     name='game_VlFmH0',
+    #     display_name="game_VlFmH0",
+    #     num_demo_participants=3,
+    #     app_sequence=['game_VlFmH0', 'game_VhFhH0']
+    # ),
     # dict(
     #     name='game_VhFmH10',
     #     display_name="game_VhFmH10",
@@ -47,7 +47,7 @@ SESSION_CONFIGS = [
         name='quiz',
         display_name="quiz",
         num_demo_participants=1,
-        app_sequence=['quiz']
+        app_sequence=['quiz', 'game_VlFmH0', 'game_VhFhH0']
     ),
     # dict(
     #     name='Experiment_Survey',

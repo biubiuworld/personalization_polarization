@@ -33,7 +33,7 @@ class NeighborUpdate(Page):
     form_fields = ['if_connect_player1', 'if_connect_player2']
     # live_method = 'live_getselectedneighbor'
 
-    timeout_seconds = 20
+    # timeout_seconds = 15
     def vars_for_template(self):
         return {
             'opinion_last_round': self.player.opinion_last_round,
@@ -76,7 +76,7 @@ class NeighborUpdate(Page):
 class OpinionUpdate(Page):
     form_model = 'player'
     form_fields = ['opinion_this_round']
-    timeout_seconds = 30
+    # timeout_seconds = 15
 
     def vars_for_template(self):
         return {
@@ -114,7 +114,7 @@ class OpinionUpdate(Page):
 class Results(Page):
     # def is_displayed(self):
     #     return self.round_number == Constants.num_rounds
-    timeout_seconds = 5
+    # timeout_seconds = 5
 
     def vars_for_template(self):
         return {
