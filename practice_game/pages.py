@@ -114,7 +114,7 @@ class OpinionUpdate(Page):
 class Results(Page):
     # def is_displayed(self):
     #     return self.round_number == Constants.num_rounds
-    timeout_seconds = 10
+    timeout_seconds = 5
 
     def vars_for_template(self):
         return {
