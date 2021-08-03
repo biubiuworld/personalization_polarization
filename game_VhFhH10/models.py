@@ -26,6 +26,9 @@ class Constants(BaseConstants):
     V = 250
     f = 0.9
     h = 10
+    participation_fee = 4.00
+    dollar_per_credit = 0.002
+    endowment = 2.00
 
 
 class Subsession(BaseSubsession):
