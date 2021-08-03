@@ -22,15 +22,15 @@ class Constants(BaseConstants):
     name_in_url = 'game_VhFhH10'
     players_per_group = None
     num_rounds = 2
-    min_opinion = 0
-    V = 0.025
+    min_opinion = 0.
+    V = 250
     f = 0.9
     h = 10
 
 
 class Subsession(BaseSubsession):
     def generate_initial_opinion(self):
-        initial_opinion_set = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+        initial_opinion_set = [0.0, 10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0, 90.0, 100.0]
         random.shuffle(initial_opinion_set)
         for p in self.get_players():
             # p.initial_opinion = round(random.uniform(Constants.min_opinion, 1),
@@ -120,6 +120,9 @@ class Player(BasePlayer):
 
     timeout_choose_neighbors = models.BooleanField(initial=0)
     timeout_update_opinion = models.BooleanField(initial=0)
+
+    neighbors_id_set = models.LongStringField()
+    neighbors_opinion_set = models.LongStringField()
 
     # def live_getselectedneighbor(self, data):
     #     print(data)
