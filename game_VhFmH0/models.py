@@ -23,14 +23,14 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 2
     min_opinion = 0
-    V = 0.025
+    V = 250
     f = 0.5
-
+    h = 0
 
 
 class Subsession(BaseSubsession):
     def generate_initial_opinion(self):
-        initial_opinion_set = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+        initial_opinion_set = [0.0, 10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0, 90.0, 100.0]
         random.shuffle(initial_opinion_set)
         for p in self.get_players():
             # p.initial_opinion = round(random.uniform(Constants.min_opinion, 1),
@@ -68,14 +68,6 @@ class Subsession(BaseSubsession):
 
 
 
-    # def collect_neighbors(self):
-    #     for p in self.get_players():
-    #         if p.if_connect_player1 == 1:
-    #             p.participant.vars['neighbors_id_set'].append(p.observed_id_player1)
-    #         if p.if_connect_player2 == 1:
-    #             p.participant.vars['neighbors_id_set'].append(p.observed_id_player2)
-    #         p.participant.vars['neighbors_id_set'] = list(dict.fromkeys(p.participant.vars['neighbors_id_set']))
-
 class Group(BaseGroup):
     pass
 
@@ -110,6 +102,9 @@ class Player(BasePlayer):
 
     timeout_choose_neighbors = models.BooleanField(initial=0)
     timeout_update_opinion = models.BooleanField(initial=0)
+
+    neighbors_id_set = models.LongStringField()
+    neighbors_opinion_set = models.LongStringField()
 
     # def live_getselectedneighbor(self, data):
     #     print(data)

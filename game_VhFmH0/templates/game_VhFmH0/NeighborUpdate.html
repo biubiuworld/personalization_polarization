@@ -19,9 +19,16 @@
 
     <p>
     {% if group.round_number > 1 %}
-    Your opinion in <b>previous</b> round is: <b style="color:Tomato;">{{ opinion_last_round }}</b>
+    Your position in <b>previous</b> round is: <b style="color:Tomato;">{{ opinion_last_round }}</b>
+    <br>
+
+        {% if num_neighbors == 0 %}
+        You don't have neighbors in previous round.
+        {% else %}
+        Your neighbor(s) position in previous round: <b style="color:DodgerBlue;">{{ neighbors_opinion_set }}</b>
+        {% endif %}
     {% else %}
-    Your <b>initial</b> opinion is: <b style="color:Tomato;">{{ opinion_last_round }}</b>
+    Your <b>initial</b> position is: <b style="color:Tomato;">{{ opinion_last_round }}</b>
     {% endif %}
 
     </p>
@@ -36,6 +43,7 @@
     <div class="card-body">
 
     <h5>Please choose your neighbor(s):</h5>
+    <br>
     <p>
     {% if player.disconnect_with_player1 > 0 %}
     Your have already connected with this player (Player 1). You may select 'No' to disconnect with this player.
