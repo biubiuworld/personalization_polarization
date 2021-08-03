@@ -1,0 +1,51 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Payment
+{% endblock %}
+
+{% block content %}
+    <p>You have completed the experiment.</p>
+    <p>You will earn ${{Constants.dollar_per_credit}} for every credit earned in game 1 and game 2 as your additional payment.</p>
+    <br>
+<h5> <b style="color:#1E8BDC"> Your total payment is as follows: </b> </h5>
+<table class="table">
+    <tr>
+        <td>Game 1 credits earned</td>
+        <td>{{payoff_game1}}</td>
+    </tr>
+    <tr>
+        <td>Game 2 credits earned</td>
+        <td>{{payoff_game2}}</td>
+    </tr>
+        <tr>
+        <td>Additional credits earned (game 1 + game 2)</td>
+        <td>{{payoff_experiment}}</td>
+    </tr>
+    <tr>
+        <td>Additional payment earned</td>
+        <td>${{payoff_experiment_dollar}}</td>
+    </tr>
+    <tr>
+        <td>Participation fee</td>
+        <td>${{Constants.participation_fee}}</td>
+    </tr>
+    <tr>
+        <td>Endowment</td>
+        <td>${{Constants.endowment}}</td>
+    </tr>
+    <tr>
+        <th>Total Payments</th>
+        <th><b>${{total_payoff_experiment_dollar}}</b></th>
+    </tr>
+</table>
+
+<p>
+    Please click next button to close the experiment and fill out the survey. You can find the session survey form in the <b>zoom chat room</b>. <br>
+    After you complete the survey, please click on the blue "raise your hand" icon in Zoom and the host will send you to a breakout room for ID check.
+</p>
+<br>
+    {% next_button %}
+
+{% endblock %}
