@@ -27,8 +27,8 @@ class Constants(BaseConstants):
     f = 0.9
     h = 0
     participation_fee = 4.00
-    dollar_per_credit = 0.01
-    endowment = 6.00
+    dollar_per_credit = 0.002
+    endowment = 2.00
 
 class Subsession(BaseSubsession):
     def generate_initial_opinion(self):
