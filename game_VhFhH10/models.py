@@ -52,11 +52,11 @@ class Subsession(BaseSubsession):
             p.participant.vars['others_p'] = []
             p.participant.vars['total_p'] = 0
             for other in p.get_others_in_subsession():
-                p.participant.vars['total_p'] += (1.-abs(p.opinion_last_round - other.opinion_last_round))**Constants.h
+                p.participant.vars['total_p'] += (1.-0.01*abs(p.opinion_last_round - other.opinion_last_round))**Constants.h
             for other in p.get_others_in_subsession():
                 p.participant.vars['others_id_in_group'].append(other.id_in_group) #stores all 10 other players' ids
                 p.participant.vars['others_last_opinions'].append(other.opinion_last_round) #stores all 10 other players' last round opinions
-                p.participant.vars['others_p'].append(((1.-abs(p.opinion_last_round - other.opinion_last_round))**Constants.h)/p.participant.vars['total_p'])
+                p.participant.vars['others_p'].append(((1.-0.01*abs(p.opinion_last_round - other.opinion_last_round))**Constants.h)/p.participant.vars['total_p'])
             observed_players_id_this_round = np.random.choice(np.asarray(p.participant.vars['others_id_in_group']),
                                                               size=2,
                                                               replace=False,
