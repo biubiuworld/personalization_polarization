@@ -28,7 +28,7 @@ class Constants(BaseConstants):
     h = 10
     participation_fee = 4.00
     dollar_per_credit = 0.002
-    endowment = 2.00
+    endowment = 5.00
 
 
 class Subsession(BaseSubsession):
