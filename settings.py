@@ -49,11 +49,17 @@ SESSION_CONFIGS = [
     #     num_demo_participants=3,
     #     app_sequence=['quiz', 'practice_game', 'game_VlFmH0', 'game_VhFhH0']
     # ),
+    # dict(
+    #     name='quiz',
+    #     display_name="pilot",
+    #     num_demo_participants=3,
+    #     app_sequence=['quiz', 'practice_game', 'game_VhFmH0', 'game_VhFlH0']
+    # ),
     dict(
         name='quiz',
         display_name="pilot",
-        num_demo_participants=3,
-        app_sequence=['quiz', 'practice_game', 'game_VhFmH0', 'game_VhFlH0']
+        num_demo_participants=5,
+        app_sequence=['quiz', 'practice_game', 'game_VhFmH10', 'game_VhFhH10']
     ),
     # dict(
     #     name='quiz',

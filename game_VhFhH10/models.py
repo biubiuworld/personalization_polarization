@@ -21,7 +21,7 @@ Your app description
 class Constants(BaseConstants):
     name_in_url = 'game_VhFhH10'
     players_per_group = None
-    num_rounds = 2
+    num_rounds = 50
     min_opinion = 0.
     V = 250
     f = 0.9
@@ -123,6 +123,8 @@ class Player(BasePlayer):
 
     timeout_choose_neighbors = models.BooleanField(initial=0)
     timeout_update_opinion = models.BooleanField(initial=0)
+
+    total_payoff_experiment_dollar = models.FloatField()
 
     neighbors_id_set = models.LongStringField()
     neighbors_opinion_set = models.LongStringField()
