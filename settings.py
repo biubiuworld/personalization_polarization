@@ -58,7 +58,7 @@ SESSION_CONFIGS = [
     dict(
         name='quiz',
         display_name="pilot",
-        num_demo_participants=5,
+        num_demo_participants=3,
         app_sequence=['quiz', 'practice_game', 'game_VhFmH10', 'game_VhFhH10']
     ),
     # dict(
