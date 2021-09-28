@@ -113,7 +113,7 @@ class OpinionUpdate(Page):
 
         # self.participant.vars['practice_game_payoff_list'].append(self.player.payoff)
         # self.participant.vars['practice_game_payoff'] = random.choices(self.participant.vars['practice_game_payoff_list'])[0]
-        self.participant.vars['VhFmH0_game_payoff'] = self.player.payoff
+        self.participant.vars['VhFmH0_game_payoff'] += self.player.payoff
         self.player.game_payoff = self.participant.vars['VhFmH0_game_payoff']
 class Results(Page):
     # def is_displayed(self):
