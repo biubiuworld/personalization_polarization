@@ -21,7 +21,7 @@ Your app description
 class Constants(BaseConstants):
     name_in_url = 'practice_game'
     players_per_group = None
-    num_rounds = 5
+    num_rounds = 3
     min_opinion = 0
     V = 150
     f = 0.3
@@ -105,10 +105,3 @@ class Player(BasePlayer):
     neighbors_id_set = models.LongStringField()
     neighbors_opinion_set = models.LongStringField()
 
-    # def live_getselectedneighbor(self, data):
-    #     print(data)
-    #     if "player1" in data:
-    #         print('connected with player 1')
-    #     if "player2" in data:
-    #         print('connected with player 2')
-    #     print('end of live data send')
