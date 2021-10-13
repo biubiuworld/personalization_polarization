@@ -29,7 +29,7 @@ class GenerateObservedPlayersWaitPage(WaitPage):
 
 class NeighborUpdate(Page):
     form_model = 'player'
-    form_fields = ['if_connect_player1', 'if_connect_player2']
+    form_fields = ['if_connect_player1', 'if_connect_player2', 'opinion_this_round']
 
     # timeout_seconds = 25
     def vars_for_template(self):
@@ -70,25 +70,7 @@ class NeighborUpdate(Page):
 
         if self.timeout_happened:
             self.player.timeout_choose_neighbors = 1
-
-
-
-class OpinionUpdate(Page):
-    form_model = 'player'
-    form_fields = ['opinion_this_round']
-    # timeout_seconds = 25
-
-    def vars_for_template(self):
-        return {
-            'opinion_last_round': self.player.opinion_last_round,
-            'last_round': self.round_number - 1,
-            'num_neighbors': self.player.num_neighbors,
-            'neighbors_opinion_set': self.participant.vars['neighbors_opinion_set'],
-
-        }
-
-    def before_next_page(self):
-
+            
         if (self.player.num_neighbors == 0) & (self.player.opinion_this_round >= 0):
             self.player.payoff = -(self.player.opinion_this_round-self.player.opinion_last_round)*(self.player.opinion_this_round-self.player.opinion_last_round)
         elif (self.player.num_neighbors > 0) & (self.player.opinion_this_round >= 0):
@@ -108,6 +90,9 @@ class OpinionUpdate(Page):
 
         self.participant.vars['practice_game_payoff'] += self.player.payoff
         self.player.game_payoff = self.participant.vars['practice_game_payoff']
+
+
+
 class Results(Page):
 
     # timeout_seconds = 5
@@ -134,7 +119,6 @@ page_sequence = [
     OpinionUpdateWaitPage,
     GenerateObservedPlayersWaitPage,
     NeighborUpdate,
-    OpinionUpdate,
     Results,
     GamePayment,
 ]

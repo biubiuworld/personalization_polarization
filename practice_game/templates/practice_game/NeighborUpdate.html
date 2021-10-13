@@ -5,6 +5,154 @@
     Round {{ group.round_number }}
 {% endblock %}
 
+{% block styles %}
+<style type="text/css">
+.slider {
+  width: 100%; /* Full-width */
+  height: 15px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  border-radius: 5px;
+}
+.slider:hover {
+  opacity: 1;
+}
+.ticks {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+.slider_container{
+    width: 100%; /* Width of the outside container */
+	background: #d3d3d3;
+}
+
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    var V = {{ Constants.V }};
+    var f = {{ Constants.f }};
+    var previousOpinion = {{ opinion_last_round }};
+    var outputValue_1 = document.getElementById("outputValue_1");
+    var outputValue_2 = document.getElementById("outputValue_2");
+    const neighborsOpinionSet = []//{{ neighbors_opinion_set }};
+
+    // Elements for each radio button 
+    var if_connect_player1Yes = document.getElementById("id_if_connect_player1_0");
+    var if_connect_player1No = document.getElementById("id_if_connect_player1_1");
+
+    var if_connect_player2Yes = document.getElementById("id_if_connect_player2_0");
+    var if_connect_player2No = document.getElementById("id_if_connect_player2_1");
+
+    var player1OpinionValue = {{observed_player1}};
+    var player2OpinionValue = {{observed_player2}};
+
+    var num_neighbors = 0;
+
+    function update() {
+        total = 0;
+        currentOpinion = (document.getElementById("opinion_this_round").value)/1;
+        outputValue_1.innerHTML = (document.getElementById("opinion_this_round").value)/1;
+        const neighborsPayoffSet = neighborsOpinionSet.map(neighborPayoffFunction);
+        neighborsPayoffSet.forEach(totalFunction);
+        if (neighborsOpinionSet.length <= 0) {
+            total = -1*(currentOpinion-previousOpinion)*(currentOpinion-previousOpinion)*1;
+        }
+        outputValue_2.innerHTML = Math.round(total*1)/1;
+    }
+
+    function neighborPayoffFunction(neighborOpinion, index, array) {
+        return 1*(V-f*(currentOpinion-neighborOpinion)*(currentOpinion-neighborOpinion)-(1-f)*(currentOpinion-previousOpinion)*(currentOpinion-previousOpinion));
+    }
+
+    function totalFunction(value) {
+        total += value;
+        return total
+    }
+
+    // Event Listeners to update neighbor set
+    
+    if_connect_player1Yes.addEventListener('change', function() {
+        if (this.checked) {
+            neighborsOpinionSet.push(player1OpinionValue);
+        } else {
+            const index = neighborsOpinionSet.indexOf(player1OpinionValue);
+            if (index > -1) {
+                neighborsOpinionSet.splice(index, 1);
+            }
+        }
+        num_neighbors = neighborsOpinionSet.length;
+        if (num_neighbors == 0)
+            document.getElementById("neighbor_p").innerHTML = "You don't have neighbors in this round.";
+        else if (num_neighbors == 1)
+            document.getElementById("neighbor_p").innerHTML =
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbor in this round and his or her position is: <b style='color:DodgerBlue;''>" + neighborsOpinionSet + "</b>" ;
+        else
+            document.getElementById("neighbor_p").innerHTML =
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'>" + neighborsOpinionSet + "</b>";
+        update();
+    });
+
+    if_connect_player1No.addEventListener('change', function() {
+        const index = neighborsOpinionSet.indexOf(player1OpinionValue);
+            if (index > -1) {
+                neighborsOpinionSet.splice(index, 1);
+            }
+        num_neighbors = neighborsOpinionSet.length;
+        if (num_neighbors == 0)
+            document.getElementById("neighbor_p").innerHTML = "You don't have neighbors in this round.";
+        else if (num_neighbors == 1)
+            document.getElementById("neighbor_p").innerHTML =
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbor in this round and his or her position is: <b style='color:DodgerBlue;''>" + neighborsOpinionSet + "</b>" ;
+        else
+            document.getElementById("neighbor_p").innerHTML =
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'>" + neighborsOpinionSet + "</b>";
+        update();
+    });
+
+    if_connect_player2Yes.addEventListener('change', function() {
+        if (this.checked) {
+            neighborsOpinionSet.push(player2OpinionValue);
+        } else {
+            const index = neighborsOpinionSet.indexOf(player2OpinionValue);
+            if (index > -1) {
+                neighborsOpinionSet.splice(index, 1);
+            }
+        }
+        num_neighbors = neighborsOpinionSet.length;
+        if (num_neighbors == 0)
+            document.getElementById("neighbor_p").innerHTML = "You don't have neighbors in this round.";
+        else if (num_neighbors == 1)
+            document.getElementById("neighbor_p").innerHTML =
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbor in this round and his or her position is: <b style='color:DodgerBlue;''>" + neighborsOpinionSet + "</b>" ;
+        else
+            document.getElementById("neighbor_p").innerHTML =
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'>" + neighborsOpinionSet + "</b>";
+        update();
+    });
+
+    if_connect_player2No.addEventListener('change', function() {
+        const index = neighborsOpinionSet.indexOf(player2OpinionValue);
+            if (index > -1) {
+                neighborsOpinionSet.splice(index, 1);
+            }
+        num_neighbors = neighborsOpinionSet.length;
+        if (num_neighbors == 0)
+            document.getElementById("neighbor_p").innerHTML = "You don't have neighbors in this round.";
+        else if (num_neighbors == 1)
+            document.getElementById("neighbor_p").innerHTML =
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbor in this round and his or her position is: <b style='color:DodgerBlue;''>" + neighborsOpinionSet + "</b>" ;
+        else
+            document.getElementById("neighbor_p").innerHTML =
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'>" + neighborsOpinionSet + "</b>";
+        update();
+    });
+
+</script>
+{% endblock %}
+
 {% block content %}
 
     <div class="card bg-light m-3">
@@ -57,8 +205,6 @@
     </p>
     </div>
     </div>
-    {% next_button %}
-
 <!--
 <script>
     function getSelectedCheckboxValues(name) {
@@ -75,4 +221,33 @@
 </script>
 -->
 <!--{{ form.non_field_errors }}-->
+
+    <div class="card bg-light m-3">
+    <div class="card-body">
+    <p>
+    <b style="color:red;">ATTENTION</b>
+    <br>
+    If you don't move the slider to update your position or if your position is negative, your payoff will be <b style="color:red;">zero</b> this round!
+    </p>
+    </div>
+    </div>
+
+    <p id="neighbor_p">
+    You don't have neighbors in this round.
+    </p>
+
+
+
+    <h5>Slider</h5>
+    <p><strong>Please move the slider and update your position this round. Your position should be between 0 and 100.</strong></p>
+    <div class="silder_container", oninput="update()">
+        <input type="range" min="-1" max="100" value="-1" class="slider" name="opinion_this_round" id="opinion_this_round">
+       <p>Your opinion: <span id="outputValue_1"></span></p>
+        <p>Total payoff: <span id="outputValue_2"></span> points </p>
+    </div>
+
+
+
+    {% next_button %}
+{{ form.opinion_this_round.errors }}
 {% endblock %}
