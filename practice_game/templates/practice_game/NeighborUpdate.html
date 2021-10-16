@@ -37,7 +37,7 @@
     var previousOpinion = {{ opinion_last_round }};
     var outputValue_1 = document.getElementById("outputValue_1");
     var outputValue_2 = document.getElementById("outputValue_2");
-    const neighborsOpinionSet = []//{{ neighbors_opinion_set }};
+    var neighborsOpinionSet = {{ neighbors_opinion_set }};
 
     // Elements for each radio button 
     var if_connect_player1Yes = document.getElementById("id_if_connect_player1_0");
@@ -49,7 +49,7 @@
     var player1OpinionValue = {{observed_player1}};
     var player2OpinionValue = {{observed_player2}};
 
-    var num_neighbors = 0;
+    var num_neighbors = {{num_neighbors}};
 
     function update() {
         total = 0;
@@ -73,7 +73,7 @@
     }
 
     // Event Listeners to update neighbor set
-    
+
     if_connect_player1Yes.addEventListener('change', function() {
         if (this.checked) {
             neighborsOpinionSet.push(player1OpinionValue);

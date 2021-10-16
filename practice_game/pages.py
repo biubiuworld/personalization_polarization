@@ -40,8 +40,8 @@ class NeighborUpdate(Page):
             'last_round': self.round_number - 1,
             'if_connect_player1': self.player.if_connect_player1,
             'if_connect_player2': self.player.if_connect_player2,
-            'neighbors_opinion_set': self.participant.vars['neighbors_opinion_set'] if self.round_number>1 else None,
-            'num_neighbors': len(self.participant.vars['neighbors_opinion_set']) if self.round_number>1 else None,
+            'neighbors_opinion_set': self.participant.vars['neighbors_opinion_set'] if self.round_number>1 else [],
+            'num_neighbors': len(self.participant.vars['neighbors_opinion_set']) if self.round_number>1 else 0,
 
         }
 
