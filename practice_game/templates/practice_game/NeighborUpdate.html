@@ -233,7 +233,13 @@
     </div>
 
     <p id="neighbor_p">
-    You don't have neighbors in this round.
+        {% if num_neighbors == 0 %}
+        You don't have neighbors in this round.
+        {% elif num_neighbors == 1 %}
+            You have <b style="color:DodgerBlue;">{{ num_neighbors }}</b> neighbor in this round and his or her position is: <b style="color:DodgerBlue;">{{ neighbors_opinion_set }}</b>
+        {% else %}
+            You have <b style="color:DodgerBlue;">{{ num_neighbors }}</b> neighbors in this round and their positions are: <b style="color:DodgerBlue;">{{ neighbors_opinion_set }}</b>
+        {% endif %}
     </p>
 
 
