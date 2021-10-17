@@ -33,6 +33,9 @@ class NeighborUpdate(Page):
 
     # timeout_seconds = 25
     def vars_for_template(self):
+        self.participant.vars['neighbors_opinion_set'] = []
+        for neighbor in self.participant.vars['neighbors_id_set']:
+            self.participant.vars['neighbors_opinion_set'].append(self.participant.vars['others_last_opinions'][self.participant.vars['others_id_in_group'].index(neighbor)])
         return {
             'opinion_last_round': self.player.opinion_last_round,
             'observed_player1': self.player.observed_opinion_player1,

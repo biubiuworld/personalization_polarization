@@ -39,6 +39,11 @@
     var outputValue_2 = document.getElementById("outputValue_2");
     var neighborsOpinionSet = {{ neighbors_opinion_set }};
 
+    var disconnect1 = ("{{ player.disconnect_with_player1 }}" != "True");
+    var disconnect2 = ("{{ player.disconnect_with_player2 }}" != "True" );
+    console.log(disconnect1);
+    console.log(disconnect2);
+
     // Elements for each radio button 
     var if_connect_player1Yes = document.getElementById("id_if_connect_player1_0");
     var if_connect_player1No = document.getElementById("id_if_connect_player1_1");
@@ -76,8 +81,12 @@
 
     if_connect_player1Yes.addEventListener('change', function() {
         if (this.checked) {
-            neighborsOpinionSet.push(player1OpinionValue);
+            if(disconnect1){
+                disconnect1 = false;
+                neighborsOpinionSet.push(player1OpinionValue);
+            }
         } else {
+            disconnect1 = true;
             const index = neighborsOpinionSet.indexOf(player1OpinionValue);
             if (index > -1) {
                 neighborsOpinionSet.splice(index, 1);
@@ -88,14 +97,15 @@
             document.getElementById("neighbor_p").innerHTML = "You don't have neighbors in this round.";
         else if (num_neighbors == 1)
             document.getElementById("neighbor_p").innerHTML =
-                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbor in this round and his or her position is: <b style='color:DodgerBlue;''>" + neighborsOpinionSet + "</b>" ;
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbor in this round and his or her position is: <b style='color:DodgerBlue;''> [" + neighborsOpinionSet + "] </b>" ;
         else
             document.getElementById("neighbor_p").innerHTML =
-                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'>" + neighborsOpinionSet + "</b>";
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'> [" + neighborsOpinionSet + "] </b>";
         update();
     });
 
     if_connect_player1No.addEventListener('change', function() {
+        disconnect1 = true;
         const index = neighborsOpinionSet.indexOf(player1OpinionValue);
             if (index > -1) {
                 neighborsOpinionSet.splice(index, 1);
@@ -105,17 +115,21 @@
             document.getElementById("neighbor_p").innerHTML = "You don't have neighbors in this round.";
         else if (num_neighbors == 1)
             document.getElementById("neighbor_p").innerHTML =
-                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbor in this round and his or her position is: <b style='color:DodgerBlue;''>" + neighborsOpinionSet + "</b>" ;
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbor in this round and his or her position is: <b style='color:DodgerBlue;''> [" + neighborsOpinionSet + "] </b>" ;
         else
             document.getElementById("neighbor_p").innerHTML =
-                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'>" + neighborsOpinionSet + "</b>";
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'> [" + neighborsOpinionSet + "] </b>";
         update();
     });
 
     if_connect_player2Yes.addEventListener('change', function() {
         if (this.checked) {
-            neighborsOpinionSet.push(player2OpinionValue);
+            if(disconnect2){
+                disconnect2 = false;
+                neighborsOpinionSet.push(player2OpinionValue);
+            }
         } else {
+            disconnect2 = true;
             const index = neighborsOpinionSet.indexOf(player2OpinionValue);
             if (index > -1) {
                 neighborsOpinionSet.splice(index, 1);
@@ -126,14 +140,15 @@
             document.getElementById("neighbor_p").innerHTML = "You don't have neighbors in this round.";
         else if (num_neighbors == 1)
             document.getElementById("neighbor_p").innerHTML =
-                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbor in this round and his or her position is: <b style='color:DodgerBlue;''>" + neighborsOpinionSet + "</b>" ;
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbor in this round and his or her position is: <b style='color:DodgerBlue;''> [" + neighborsOpinionSet + "] </b>" ;
         else
             document.getElementById("neighbor_p").innerHTML =
-                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'>" + neighborsOpinionSet + "</b>";
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'> [" + neighborsOpinionSet + "] </b>";
         update();
     });
 
     if_connect_player2No.addEventListener('change', function() {
+        disconnect2 = true;
         const index = neighborsOpinionSet.indexOf(player2OpinionValue);
             if (index > -1) {
                 neighborsOpinionSet.splice(index, 1);
@@ -143,10 +158,10 @@
             document.getElementById("neighbor_p").innerHTML = "You don't have neighbors in this round.";
         else if (num_neighbors == 1)
             document.getElementById("neighbor_p").innerHTML =
-                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbor in this round and his or her position is: <b style='color:DodgerBlue;''>" + neighborsOpinionSet + "</b>" ;
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbor in this round and his or her position is: <b style='color:DodgerBlue;''> [" + neighborsOpinionSet + "] </b>" ;
         else
             document.getElementById("neighbor_p").innerHTML =
-                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'>" + neighborsOpinionSet + "</b>";
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'> [" + neighborsOpinionSet + "] </b>";
         update();
     });
 
