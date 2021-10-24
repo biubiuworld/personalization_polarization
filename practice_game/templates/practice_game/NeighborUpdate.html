@@ -43,6 +43,7 @@
   height: 10px;
   line-height: 40px;
   margin: 0 0 20px 0;
+  font-weight: bold;
 }
 
 </style>
@@ -207,7 +208,15 @@
         p = document.createElement("p");
         p.innerHTML = i;
         p.id = i.toString();
-        p.style.opacity = '0';
+        if(parseInt(previousOpinion) == i) {
+            p.style.color = "#FF0000";
+            //p.style.backgroundColor = "red";
+            p.style.opacity = '100';
+        } else {
+            p.style.color = "#00FF00";
+            //p.style.backgroundColor = "green";
+            p.style.opacity = '0';
+        }
         sliderTicks.append(p);
     }
     for(let i = 0; i < neighborsOpinionSet.length; i++){
