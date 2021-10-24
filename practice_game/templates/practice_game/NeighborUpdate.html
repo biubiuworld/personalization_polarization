@@ -27,10 +27,32 @@
 	background: #d3d3d3;
 }
 
+.sliderticks {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.sliderticks p {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 1px;
+  background: #D3D3D3;
+  height: 10px;
+  line-height: 40px;
+  margin: 0 0 20px 0;
+}
+
 </style>
 {% endblock %}
 
 {% block scripts %}
+<!-- include the jQuery and jQuery UI scripts -->
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="https://rawgit.com/simeydotme/jQuery-ui-Slider-Pips/master/src/js/jquery-ui-slider-pips.js"></script>
+                
 <script>
     var V = {{ Constants.V }};
     var f = {{ Constants.f }};
@@ -55,6 +77,8 @@
     var player2OpinionValue = {{observed_player2}};
 
     var num_neighbors = {{num_neighbors}};
+
+    $("#opinion_this_round").slider().slider("pips");
 
     function update() {
         total = 0;
@@ -84,12 +108,16 @@
             if(disconnect1){
                 disconnect1 = false;
                 neighborsOpinionSet.push(player1OpinionValue);
+                var p = document.getElementById(parseInt(player1OpinionValue).toString());
+                p.style.opacity = '100';
             }
         } else {
             disconnect1 = true;
             const index = neighborsOpinionSet.indexOf(player1OpinionValue);
             if (index > -1) {
                 neighborsOpinionSet.splice(index, 1);
+                var p = document.getElementById(parseInt(player1OpinionValue).toString());
+                p.style.opacity = '0';
             }
         }
         num_neighbors = neighborsOpinionSet.length;
@@ -109,6 +137,8 @@
         const index = neighborsOpinionSet.indexOf(player1OpinionValue);
             if (index > -1) {
                 neighborsOpinionSet.splice(index, 1);
+                var p = document.getElementById(parseInt(player1OpinionValue).toString());
+                p.style.opacity = '0';
             }
         num_neighbors = neighborsOpinionSet.length;
         if (num_neighbors == 0)
@@ -127,12 +157,16 @@
             if(disconnect2){
                 disconnect2 = false;
                 neighborsOpinionSet.push(player2OpinionValue);
+                var p = document.getElementById(parseInt(player2OpinionValue).toString());
+                p.style.opacity = '100';
             }
         } else {
             disconnect2 = true;
             const index = neighborsOpinionSet.indexOf(player2OpinionValue);
             if (index > -1) {
                 neighborsOpinionSet.splice(index, 1);
+                var p = document.getElementById(parseInt(player2OpinionValue).toString());
+                p.style.opacity = '0';
             }
         }
         num_neighbors = neighborsOpinionSet.length;
@@ -152,8 +186,10 @@
         const index = neighborsOpinionSet.indexOf(player2OpinionValue);
             if (index > -1) {
                 neighborsOpinionSet.splice(index, 1);
+                var p = document.getElementById(parseInt(player2OpinionValue).toString());
+                p.style.opacity = '0';
             }
-        num_neighbors = neighborsOpinionSet.length;
+            
         if (num_neighbors == 0)
             document.getElementById("neighbor_p").innerHTML = "You don't have neighbors in this round.";
         else if (num_neighbors == 1)
@@ -165,6 +201,19 @@
         update();
     });
 
+    var sliderTicks = document.getElementById("sliderticks");
+    var p;
+    for (let i = 0; i < 101; i++){
+        p = document.createElement("p");
+        p.innerHTML = i;
+        p.id = i.toString();
+        p.style.opacity = '0';
+        sliderTicks.append(p);
+    }
+    for(let i = 0; i < neighborsOpinionSet.length; i++){
+        p = document.getElementById(parseInt(neighborsOpinionSet[i]).toString());
+        p.style.opacity = '100';
+    }
 </script>
 {% endblock %}
 
@@ -263,10 +312,11 @@
     <p><strong>Please move the slider and update your position this round. Your position should be between 0 and 100.</strong></p>
     <div class="silder_container", oninput="update()">
         <input type="range" min="-1" max="100" value="-1" class="slider" name="opinion_this_round" id="opinion_this_round">
+        <div class="sliderticks" id="sliderticks">
+          </div>
        <p>Your opinion: <span id="outputValue_1"></span></p>
         <p>Total payoff: <span id="outputValue_2"></span> points </p>
     </div>
-
 
 
     {% next_button %}
