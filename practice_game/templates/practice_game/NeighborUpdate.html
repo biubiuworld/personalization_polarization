@@ -38,11 +38,30 @@
   display: flex;
   justify-content: center;
   text-align: center;
-  width: 1px;
+  width: .8px;
   background: #D3D3D3;
   height: 10px;
   line-height: 40px;
   margin: 0 0 20px 0;
+  padding: 0 1px 0 1px; 
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.sliderticksAbove {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.sliderticksAbove p {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 1px;
+  height: 10px;
+  margin: 0 0 1.5px 0;
   font-weight: bold;
 }
 
@@ -203,21 +222,42 @@
     });
 
     var sliderTicks = document.getElementById("sliderticks");
+    var sliderTicksAbove = document.getElementById("sliderticksAbove");
     var p;
+    var node;
     for (let i = 0; i < 101; i++){
         p = document.createElement("p");
         p.innerHTML = i;
         p.id = i.toString();
-        if(parseInt(previousOpinion) == i) {
-            p.style.color = "#FF0000";
-            //p.style.backgroundColor = "red";
-            p.style.opacity = '100';
-        } else {
-            p.style.color = "#00FF00";
-            //p.style.backgroundColor = "green";
-            p.style.opacity = '0';
-        }
+        p.style.color = "#00FF00";
+        p.style.opacity = '0';
         sliderTicks.append(p);
+
+        var div = document.createElement("div");
+        div.style.opacity = '0';
+        div.style.display = 'flex';
+        div.style.flexDirection = 'column';
+
+        p = document.createElement("p");
+        p.style.opacity = '0';
+        if(parseInt(previousOpinion) == i) {
+            p = document.createElement("p");
+            p.innerHTML = i.toString();// + " <br/>  |";
+            p.style.color = "#FF0000";
+            p.style.opacity = '100';
+
+            div.style.opacity = '100';
+        }
+
+        sliderTicksAbove.append(div);
+        
+        div.append(p);
+        
+        node = document.createElement("p");
+        node.style.fontWeight = '0.2';
+        node.innerHTML = '|';
+        div.append(node);
+        
     }
     for(let i = 0; i < neighborsOpinionSet.length; i++){
         p = document.getElementById(parseInt(neighborsOpinionSet[i]).toString());
@@ -320,9 +360,11 @@
     <h5>Slider</h5>
     <p><strong>Please move the slider and update your position this round. Your position should be between 0 and 100.</strong></p>
     <div class="silder_container", oninput="update()">
+        <div class="sliderticksAbove" id="sliderticksAbove">
+        </div>
         <input type="range" min="-1" max="100" value="-1" class="slider" name="opinion_this_round" id="opinion_this_round">
         <div class="sliderticks" id="sliderticks">
-          </div>
+        </div>
        <p>Your opinion: <span id="outputValue_1"></span></p>
         <p>Total payoff: <span id="outputValue_2"></span> points </p>
     </div>
