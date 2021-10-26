@@ -229,7 +229,7 @@
         p = document.createElement("p");
         p.innerHTML = i;
         p.id = i.toString();
-        p.style.color = "#00FF00";
+        p.style.color = "#1E90FF";
         p.style.opacity = '0';
         sliderTicks.append(p);
 
@@ -243,7 +243,7 @@
         if(parseInt(previousOpinion) == i) {
             p = document.createElement("p");
             p.innerHTML = i.toString();// + " <br/>  |";
-            p.style.color = "#FF0000";
+            p.style.color = "#FF6347";
             p.style.opacity = '100';
 
             div.style.opacity = '100';
@@ -273,7 +273,7 @@
     <p>
     <b style="color:red;">ATTENTION</b>
     <br>
-    If you don't select answers for the following questions, your payoff will be <b style="color:red;">zero</b> this round!
+    If you don't select answers for the following questions or if you don't move the slider to update your position, your payoff will be <b style="color:red;">zero</b> this round!
     </p>
     </div>
     </div>
@@ -335,15 +335,7 @@
 -->
 <!--{{ form.non_field_errors }}-->
 
-    <div class="card bg-light m-3">
-    <div class="card-body">
-    <p>
-    <b style="color:red;">ATTENTION</b>
-    <br>
-    If you don't move the slider to update your position or if your position is negative, your payoff will be <b style="color:red;">zero</b> this round!
-    </p>
-    </div>
-    </div>
+
 
     <p id="neighbor_p">
         {% if num_neighbors == 0 %}
@@ -356,8 +348,9 @@
     </p>
 
 
-
-    <h5>Slider</h5>
+    <div class="card bg-light m-3">
+    <div class="card-body">
+        <h5>Slider</h5>
     <p><strong>Please move the slider and update your position this round. Your position should be between 0 and 100.</strong></p>
     <div class="silder_container", oninput="update()">
         <div class="sliderticksAbove" id="sliderticksAbove">
@@ -368,6 +361,10 @@
        <p>Your opinion: <span id="outputValue_1"></span></p>
         <p>Total payoff: <span id="outputValue_2"></span> points </p>
     </div>
+    </div>
+    </div>
+
+
 
 
     {% next_button %}
