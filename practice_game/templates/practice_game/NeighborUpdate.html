@@ -38,14 +38,14 @@
   display: flex;
   justify-content: center;
   text-align: center;
-  width: .8px;
+  width: 1px;
   background: #D3D3D3;
   height: 10px;
   line-height: 40px;
-  margin: 0 0 20px 0;
+  margin: 0 0 20px 8.5px;
   padding: 0 1px 0 1px; 
   font-weight: bold;
-  font-size: 1em;
+  font-size: 0.6em;
 }
 
 .sliderticksAbove {
@@ -61,8 +61,9 @@
   text-align: center;
   width: 1px;
   height: 10px;
-  margin: 0 0 1.5px 0;
+  margin: 0 1px 1.5px 8.5px;
   font-weight: bold;
+  font-size: 0.6em;
 }
 
 </style>
@@ -225,7 +226,7 @@
     var sliderTicksAbove = document.getElementById("sliderticksAbove");
     var p;
     var node;
-    for (let i = 0; i < 101; i++){
+    for (let i = 0; i < 81; i++){
         p = document.createElement("p");
         p.innerHTML = i;
         p.id = i.toString();
@@ -351,11 +352,11 @@
     <div class="card bg-light m-3">
     <div class="card-body">
         <h5>Slider</h5>
-    <p><strong>Please move the slider and update your position this round. Your position should be between 0 and 100.</strong></p>
+    <p><strong>Please move the slider and update your position this round. Your position should be between 0 and 80. Your </strong> <b style="color:Tomato;">previous position</b> <strong> and </strong> <b style="color:DodgerBlue;">neighbor positions</b> <strong> are labeled on slider.</strong></p>
     <div class="silder_container", oninput="update()">
         <div class="sliderticksAbove" id="sliderticksAbove">
         </div>
-        <input type="range" min="-1" max="100" value="-1" class="slider" name="opinion_this_round" id="opinion_this_round">
+        <input type="range" min="-1" max="80" value="-1" class="slider" name="opinion_this_round" id="opinion_this_round">
         <div class="sliderticks" id="sliderticks">
         </div>
        <p>Your opinion: <span id="outputValue_1"></span></p>
@@ -363,7 +364,7 @@
     </div>
     </div>
     </div>
-
+    <p><strong>Want a higher payoff? Try different connection options and move slider again. </strong></p>
 
 
 
