@@ -95,7 +95,6 @@ class NeighborUpdate(Page):
         self.player.game_payoff = self.participant.vars['practice_game_payoff']
 
 
-
 class Results(Page):
 
     # timeout_seconds = 5

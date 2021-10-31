@@ -83,12 +83,12 @@ class Player(BasePlayer):
     observed_id_player1 = models.IntegerField(min=1, max=11) # The observed player 1's ID
     observed_id_player2 = models.IntegerField(min=1, max=11) # The observed player 2's ID
     if_connect_player1 = models.BooleanField(
-        null=True, blank=True,
+        null=True,
         widget = widgets.RadioSelectHorizontal(),
         label='Do you want to connect with Player 1?'
     ) # Whether to connect with player 1
     if_connect_player2 = models.BooleanField(
-        null=True, blank=True,
+        null=True,
         widget = widgets.RadioSelectHorizontal(),
         label='Do you want to connect with Player 2?'
     ) # Whether to connect with player 2
