@@ -50,7 +50,7 @@ class Constants(BaseConstants):
         ''',  # q6
      ]
     quiz_question_choices = [
-        [[1, 'A. The initial position could be 24.'], [2, 'B. The initial position is randomly selected from [0.0, 10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0, 90.0, 100.0]'], [3, 'C. The initial position could be any number between 0 and 100.']],  # q1
+        [[1, 'A. The initial position could be 24.'], [2, 'B. The initial position is randomly selected from [0.0, 10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0]'], [3, 'C. The initial position could be any number between 0 and 80.']],  # q1
         [[1, 'A. If I didn’t answer neighbor choosing questions, my payoff would be 0 this round.'],
          [2, 'B. If I didn’t answer neighbor choosing questions, my payoff would be a random positive value this round.'],
          [3, 'C. If I didn’t answer neighbor choosing questions, my payoff would be a random negative value this round.']],  # q2
