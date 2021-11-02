@@ -31,7 +31,8 @@ class NeighborUpdate(Page):
     form_model = 'player'
     form_fields = ['if_connect_player1', 'if_connect_player2', 'opinion_this_round']
 
-    # timeout_seconds = 25
+    timeout_seconds = 60
+
     def vars_for_template(self):
         self.participant.vars['neighbors_opinion_set'] = []
         for neighbor in self.participant.vars['neighbors_id_set']:
@@ -70,10 +71,12 @@ class NeighborUpdate(Page):
         self.participant.vars['neighbors_opinion_set'].sort() #reorder neighbors' opinons from low to high
         if (self.player.if_connect_player1 is None) | (self.player.if_connect_player2 is None):
             self.player.if_miss_neighbor = 1
+            self.player.payoff = 0
 
         if self.timeout_happened:
             self.player.timeout_choose_neighbors = 1
-            
+
+
         if (self.player.num_neighbors == 0) & (self.player.opinion_this_round >= 0):
             self.player.payoff = -(self.player.opinion_this_round-self.player.opinion_last_round)*(self.player.opinion_this_round-self.player.opinion_last_round)
         elif (self.player.num_neighbors > 0) & (self.player.opinion_this_round >= 0):
@@ -81,8 +84,7 @@ class NeighborUpdate(Page):
                 self.player.payoff += (Constants.V-Constants.f*(self.player.opinion_this_round - neighbor_Opinion)*(self.player.opinion_this_round - neighbor_Opinion) - (1-Constants.f)*(self.player.opinion_this_round - self.player.opinion_last_round)*(self.player.opinion_this_round - self.player.opinion_last_round))
         else:
             self.player.payoff = 0
-        if (self.player.if_connect_player1 is None) | (self.player.if_connect_player2 is None):
-            self.player.payoff = 0
+
         # If a subject didn't update opinion this round, use previous opinion instead.
         if self.timeout_happened:
             self.player.timeout_update_opinion = 1
@@ -97,7 +99,7 @@ class NeighborUpdate(Page):
 
 class Results(Page):
 
-    # timeout_seconds = 5
+    timeout_seconds = 5
 
     def vars_for_template(self):
         return {
@@ -111,7 +113,7 @@ class GamePayment(Page):
         return self.round_number == Constants.num_rounds
 
     def vars_for_template(self):
-        last_rounds = 2
+        last_rounds = 5
         game_payoff_selection_list = self.participant.vars['practice_payoff_in_all_rounds'][-last_rounds:]
         self.participant.vars['practice_game_payoff'] = random.choice(game_payoff_selection_list)
         self.player.game_payoff = self.participant.vars['practice_game_payoff']

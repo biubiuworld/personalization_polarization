@@ -21,7 +21,7 @@ Your app description
 class Constants(BaseConstants):
     name_in_url = 'practice_game'
     players_per_group = None
-    num_rounds = 3
+    num_rounds = 15
     min_opinion = 0
     V = 250
     f = 0.3
