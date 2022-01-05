@@ -29,7 +29,9 @@ class GenerateObservedPlayersWaitPage(WaitPage):
 
 class NeighborUpdate(Page):
     form_model = 'player'
-    form_fields = ['if_connect_player1', 'if_connect_player2', 'opinion_this_round']
+    form_fields = ['if_connect_player1', 'if_connect_player2', 'opinion_this_round', 'update_neighbor_opinion_1',
+                   'update_neighbor_opinion_2', 'update_neighbor_opinion_3', 'update_neighbor_opinion_4',
+                   'update_neighbor_opinion_5','update_neighbor_opinion_6','update_neighbor_opinion_7','update_neighbor_opinion_8']
 
     timeout_seconds = 60
 
@@ -48,6 +50,8 @@ class NeighborUpdate(Page):
             'num_neighbors': len(self.participant.vars['neighbors_opinion_set']) if self.round_number>1 else 0,
 
         }
+
+
 
     def before_next_page(self):
         if (self.player.if_connect_player1 == 1) & (self.player.disconnect_with_player1 == 0):
@@ -68,13 +72,87 @@ class NeighborUpdate(Page):
         self.player.num_neighbors = len(self.participant.vars['neighbors_opinion_set']) #number of neighbors this round
         self.player.neighbors_id_set = ', '.join(map(str, self.participant.vars['neighbors_id_set']))
         self.player.neighbors_opinion_set = ', '.join(map(str, self.participant.vars['neighbors_opinion_set']))
-        self.participant.vars['neighbors_opinion_set'].sort() #reorder neighbors' opinons from low to high
+        # self.participant.vars['neighbors_opinion_set'].sort() #reorder neighbors' opinons from low to high
         if (self.player.if_connect_player1 is None) | (self.player.if_connect_player2 is None):
             self.player.if_miss_neighbor = 1
             self.player.payoff = 0
 
         if self.timeout_happened:
             self.player.timeout_choose_neighbors = 1
+
+        #Slice neighbor opinion individually
+        if self.player.num_neighbors == 1:
+            self.player.neighbor_opinion_1 = self.participant.vars['neighbors_opinion_set'][0]
+            self.player.neighbor_opinion_2 = None
+            self.player.neighbor_opinion_3 = None
+            self.player.neighbor_opinion_4 = None
+            self.player.neighbor_opinion_5 = None
+            self.player.neighbor_opinion_6 = None
+            self.player.neighbor_opinion_7 = None
+            self.player.neighbor_opinion_8 = None
+        if self.player.num_neighbors == 2:
+            self.player.neighbor_opinion_1 = self.participant.vars['neighbors_opinion_set'][0]
+            self.player.neighbor_opinion_2 = self.participant.vars['neighbors_opinion_set'][1]
+            self.player.neighbor_opinion_3 = None
+            self.player.neighbor_opinion_4 = None
+            self.player.neighbor_opinion_5 = None
+            self.player.neighbor_opinion_6 = None
+            self.player.neighbor_opinion_7 = None
+            self.player.neighbor_opinion_8 = None
+        if self.player.num_neighbors == 3:
+            self.player.neighbor_opinion_1 = self.participant.vars['neighbors_opinion_set'][0]
+            self.player.neighbor_opinion_2 = self.participant.vars['neighbors_opinion_set'][1]
+            self.player.neighbor_opinion_3 = self.participant.vars['neighbors_opinion_set'][2]
+            self.player.neighbor_opinion_4 = None
+            self.player.neighbor_opinion_5 = None
+            self.player.neighbor_opinion_6 = None
+            self.player.neighbor_opinion_7 = None
+            self.player.neighbor_opinion_8 = None
+        if self.player.num_neighbors == 4:
+            self.player.neighbor_opinion_1 = self.participant.vars['neighbors_opinion_set'][0]
+            self.player.neighbor_opinion_2 = self.participant.vars['neighbors_opinion_set'][1]
+            self.player.neighbor_opinion_3 = self.participant.vars['neighbors_opinion_set'][2]
+            self.player.neighbor_opinion_4 = self.participant.vars['neighbors_opinion_set'][3]
+            self.player.neighbor_opinion_5 = None
+            self.player.neighbor_opinion_6 = None
+            self.player.neighbor_opinion_7 = None
+            self.player.neighbor_opinion_8 = None
+        if self.player.num_neighbors == 5:
+            self.player.neighbor_opinion_1 = self.participant.vars['neighbors_opinion_set'][0]
+            self.player.neighbor_opinion_2 = self.participant.vars['neighbors_opinion_set'][1]
+            self.player.neighbor_opinion_3 = self.participant.vars['neighbors_opinion_set'][2]
+            self.player.neighbor_opinion_4 = self.participant.vars['neighbors_opinion_set'][3]
+            self.player.neighbor_opinion_5 = self.participant.vars['neighbors_opinion_set'][4]
+            self.player.neighbor_opinion_6 = None
+            self.player.neighbor_opinion_7 = None
+            self.player.neighbor_opinion_8 = None
+        if self.player.num_neighbors == 6:
+            self.player.neighbor_opinion_1 = self.participant.vars['neighbors_opinion_set'][0]
+            self.player.neighbor_opinion_2 = self.participant.vars['neighbors_opinion_set'][1]
+            self.player.neighbor_opinion_3 = self.participant.vars['neighbors_opinion_set'][2]
+            self.player.neighbor_opinion_4 = self.participant.vars['neighbors_opinion_set'][3]
+            self.player.neighbor_opinion_5 = self.participant.vars['neighbors_opinion_set'][4]
+            self.player.neighbor_opinion_6 = self.participant.vars['neighbors_opinion_set'][5]
+            self.player.neighbor_opinion_7 = None
+            self.player.neighbor_opinion_8 = None
+        if self.player.num_neighbors == 7:
+            self.player.neighbor_opinion_1 = self.participant.vars['neighbors_opinion_set'][0]
+            self.player.neighbor_opinion_2 = self.participant.vars['neighbors_opinion_set'][1]
+            self.player.neighbor_opinion_3 = self.participant.vars['neighbors_opinion_set'][2]
+            self.player.neighbor_opinion_4 = self.participant.vars['neighbors_opinion_set'][3]
+            self.player.neighbor_opinion_5 = self.participant.vars['neighbors_opinion_set'][4]
+            self.player.neighbor_opinion_6 = self.participant.vars['neighbors_opinion_set'][5]
+            self.player.neighbor_opinion_7 = self.participant.vars['neighbors_opinion_set'][6]
+            self.player.neighbor_opinion_8 = None
+        if self.player.num_neighbors == 8:
+            self.player.neighbor_opinion_1 = self.participant.vars['neighbors_opinion_set'][0]
+            self.player.neighbor_opinion_2 = self.participant.vars['neighbors_opinion_set'][1]
+            self.player.neighbor_opinion_3 = self.participant.vars['neighbors_opinion_set'][2]
+            self.player.neighbor_opinion_4 = self.participant.vars['neighbors_opinion_set'][3]
+            self.player.neighbor_opinion_5 = self.participant.vars['neighbors_opinion_set'][4]
+            self.player.neighbor_opinion_6 = self.participant.vars['neighbors_opinion_set'][5]
+            self.player.neighbor_opinion_7 = self.participant.vars['neighbors_opinion_set'][6]
+            self.player.neighbor_opinion_8 = self.participant.vars['neighbors_opinion_set'][7]
 
 
         if (self.player.num_neighbors == 0) & (self.player.opinion_this_round >= 0):

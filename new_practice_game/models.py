@@ -21,7 +21,7 @@ Your app description
 class Constants(BaseConstants):
     name_in_url = 'new_practice_game'
     players_per_group = None
-    num_rounds = 15
+    num_rounds = 5
     min_opinion = 0
     V = 250
     f = 0.3
@@ -111,3 +111,24 @@ class Player(BasePlayer):
 
     neighbors_id_set = models.LongStringField()
     neighbors_opinion_set = models.LongStringField()
+
+    neighbor_opinion_1 = models.FloatField()
+    neighbor_opinion_2 = models.FloatField()
+    neighbor_opinion_3 = models.FloatField()
+    neighbor_opinion_4 = models.FloatField()
+    neighbor_opinion_5 = models.FloatField()
+    neighbor_opinion_6 = models.FloatField()
+    neighbor_opinion_7 = models.FloatField()
+    neighbor_opinion_8 = models.FloatField()
+
+    update_neighbor_opinion_1 = models.IntegerField(label='', min=0, max=80,blank=True)
+    update_neighbor_opinion_2 = models.IntegerField(label='', min=0, max=80,blank=True)
+    update_neighbor_opinion_3 = models.IntegerField(label='', min=0, max=80,blank=True)
+    update_neighbor_opinion_4 = models.IntegerField(label='', min=0, max=80,blank=True)
+    update_neighbor_opinion_5 = models.IntegerField(label='', min=0, max=80,blank=True)
+    update_neighbor_opinion_6 = models.IntegerField(label='', min=0, max=80,blank=True)
+    update_neighbor_opinion_7 = models.IntegerField(label='', min=0, max=80,blank=True)
+    update_neighbor_opinion_8 = models.IntegerField(label='', min=0, max=80,blank=True)
+    # update_neighbor_opinion = models.StringField(
+    #     label="Please guess all neighbors new positions orderly.(If you don't have neighbor this round, please type NA.)"
+    # )
