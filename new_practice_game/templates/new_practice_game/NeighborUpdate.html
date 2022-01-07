@@ -346,6 +346,7 @@
         {% else %}
             You have <b style="color:DodgerBlue;">{{ num_neighbors }}</b> neighbors in this round and their positions are: <b style="color:DodgerBlue;">{{ neighbors_opinion_set }}</b>
         {% endif %}
+
     <table class="table">
         <tr>
             <th>Neighbor </th>
@@ -360,14 +361,14 @@
         </tr>
         <tr>
             <th>Position this round </th>
-            <td>{{player.neighbor_opinion_1}}</td>
-            <td>{{player.neighbor_opinion_2}}</td>
-            <td>{{player.neighbor_opinion_3}}</td>
-            <td>{{player.neighbor_opinion_4}}</td>
-            <td>{{player.neighbor_opinion_5}}</td>
-            <td>{{player.neighbor_opinion_6}}</td>
-            <td>{{player.neighbor_opinion_7}}</td>
-            <td>{{player.neighbor_opinion_8}}</td>
+            <td>{{neighbor_opinion_1}}</td>
+            <td>{{neighbor_opinion_2}}</td>
+            <td>{{neighbor_opinion_3}}</td>
+            <td>{{neighbor_opinion_4}}</td>
+            <td>{{neighbor_opinion_5}}</td>
+            <td>{{neighbor_opinion_6}}</td>
+            <td>{{neighbor_opinion_7}}</td>
+            <td>{{neighbor_opinion_8}}</td>
         </tr>
         <tr>
             <th>Your guess </th>
