@@ -6,22 +6,374 @@
 {% endblock %}
 
 {% block content %}
-    <table class="table">
-        <tr>
-            <th>Round </th>
-            <th>Position this round</th>
-            <th>Num. of neighbors this round</th>
-            <th>Payoff this round</th>
-        </tr>
-        {% for round in player_all_rounds %}
-        <tr>
-            <td>Round {{ round.round_number }} </td>
-            <td>{{ round.opinion_this_round }}</td>
-            <td>{{ round.num_neighbors }}</td>
-            <td>{{ round.payoff }}</td>
-        </tr>
-    {% endfor %}
-    </table>
+    {% if player.num_neighbors == 0 %}
+        <p>
+        You don't have neighbors this round and your position is {{player.opinion_this_round}}.
+        </p>
+    {% elif player.num_neighbors == 1 %}
+        <p>
+        You have {{player.num_neighbors}} neighbor this round and your position is {{player.opinion_this_round}}.
+        </p>
+         <table class="table">
+            <tr>
+                <th>Neighbor </th>
+                <th>Previous Position</th>
+                <th>Your Guess</th>
+                <th>Actual Position</th>
+                <th>Actual Payoff</th>
+            </tr>
+            <tr>
+                <td> 1 </td>
+                <td>{{ player.neighbor_opinion_1 }}</td>
+                <td>{{ player.update_neighbor_opinion_1 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+             </tr>
+         </table>
+
+    {% elif player.num_neighbors == 2 %}
+        <p>
+        You have {{player.num_neighbors}} neighbors this round and your position is {{player.opinion_this_round}}.
+        </p>
+         <table class="table">
+            <tr>
+                <th>Neighbor </th>
+                <th>Previous Position</th>
+                <th>Your Guess</th>
+                <th>Actual Position</th>
+                <th>Actual Payoff</th>
+            </tr>
+            <tr>
+                <td> 1 </td>
+                <td>{{ player.neighbor_opinion_1 }}</td>
+                <td>{{ player.update_neighbor_opinion_1 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+             <tr>
+                <td> 2 </td>
+                <td>{{ player.neighbor_opinion_2 }}</td>
+                <td>{{ player.update_neighbor_opinion_2 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+         </table>
+
+    {% elif player.num_neighbors == 3 %}
+        <p>
+        You have {{player.num_neighbors}} neighbors this round and your position is {{player.opinion_this_round}}.
+        </p>
+         <table class="table">
+            <tr>
+                <th>Neighbor </th>
+                <th>Previous Position</th>
+                <th>Your Guess</th>
+                <th>Actual Position</th>
+                <th>Actual Payoff</th>
+            </tr>
+            <tr>
+                <td> 1 </td>
+                <td>{{ player.neighbor_opinion_1 }}</td>
+                <td>{{ player.update_neighbor_opinion_1 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+             <tr>
+                <td> 2 </td>
+                <td>{{ player.neighbor_opinion_2 }}</td>
+                <td>{{ player.update_neighbor_opinion_2 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+             <tr>
+                <td> 3 </td>
+                <td>{{ player.neighbor_opinion_3 }}</td>
+                <td>{{ player.update_neighbor_opinion_3 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+         </table>
+
+    {% elif player.num_neighbors == 4 %}
+        <p>
+        You have {{player.num_neighbors}} neighbors this round and your position is {{player.opinion_this_round}}.
+        </p>
+         <table class="table">
+            <tr>
+                <th>Neighbor </th>
+                <th>Previous Position</th>
+                <th>Your Guess</th>
+                <th>Actual Position</th>
+                <th>Actual Payoff</th>
+            </tr>
+            <tr>
+                <td> 1 </td>
+                <td>{{ player.neighbor_opinion_1 }}</td>
+                <td>{{ player.update_neighbor_opinion_1 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+             <tr>
+                <td> 2 </td>
+                <td>{{ player.neighbor_opinion_2 }}</td>
+                <td>{{ player.update_neighbor_opinion_2 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+             <tr>
+                <td> 3 </td>
+                <td>{{ player.neighbor_opinion_3 }}</td>
+                <td>{{ player.update_neighbor_opinion_3 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+             <tr>
+                <td> 4 </td>
+                <td>{{ player.neighbor_opinion_4 }}</td>
+                <td>{{ player.update_neighbor_opinion_4 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+         </table>
+    {% elif player.num_neighbors == 5 %}
+        <p>
+        You have {{player.num_neighbors}} neighbors this round and your position is {{player.opinion_this_round}}.
+        </p>
+         <table class="table">
+            <tr>
+                <th>Neighbor </th>
+                <th>Previous Position</th>
+                <th>Your Guess</th>
+                <th>Actual Position</th>
+                <th>Actual Payoff</th>
+            </tr>
+            <tr>
+                <td> 1 </td>
+                <td>{{ player.neighbor_opinion_1 }}</td>
+                <td>{{ player.update_neighbor_opinion_1 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+             <tr>
+                <td> 2 </td>
+                <td>{{ player.neighbor_opinion_2 }}</td>
+                <td>{{ player.update_neighbor_opinion_2 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+             <tr>
+                <td> 3 </td>
+                <td>{{ player.neighbor_opinion_3 }}</td>
+                <td>{{ player.update_neighbor_opinion_3 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+             <tr>
+                <td> 4 </td>
+                <td>{{ player.neighbor_opinion_4 }}</td>
+                <td>{{ player.update_neighbor_opinion_4 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+             <tr>
+                <td> 5 </td>
+                <td>{{ player.neighbor_opinion_5 }}</td>
+                <td>{{ player.update_neighbor_opinion_5 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+         </table>
+
+    {% elif player.num_neighbors == 6 %}
+        <p>
+        You have {{player.num_neighbors}} neighbors this round and your position is {{player.opinion_this_round}}.
+        </p>
+         <table class="table">
+            <tr>
+                <th>Neighbor </th>
+                <th>Previous Position</th>
+                <th>Your Guess</th>
+                <th>Actual Position</th>
+                <th>Actual Payoff</th>
+            </tr>
+            <tr>
+                <td> 1 </td>
+                <td>{{ player.neighbor_opinion_1 }}</td>
+                <td>{{ player.update_neighbor_opinion_1 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+             <tr>
+                <td> 2 </td>
+                <td>{{ player.neighbor_opinion_2 }}</td>
+                <td>{{ player.update_neighbor_opinion_2 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+             <tr>
+                <td> 3 </td>
+                <td>{{ player.neighbor_opinion_3 }}</td>
+                <td>{{ player.update_neighbor_opinion_3 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+             <tr>
+                <td> 4 </td>
+                <td>{{ player.neighbor_opinion_4 }}</td>
+                <td>{{ player.update_neighbor_opinion_4 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+             <tr>
+                <td> 5 </td>
+                <td>{{ player.neighbor_opinion_5 }}</td>
+                <td>{{ player.update_neighbor_opinion_5 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+             <tr>
+                <td> 6 </td>
+                <td>{{ player.neighbor_opinion_6 }}</td>
+                <td>{{ player.update_neighbor_opinion_6 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+         </table>
+
+    {% elif player.num_neighbors == 7 %}
+        <p>
+        You have {{player.num_neighbors}} neighbors this round and your position is {{player.opinion_this_round}}.
+        </p>
+         <table class="table">
+            <tr>
+                <th>Neighbor </th>
+                <th>Previous Position</th>
+                <th>Your Guess</th>
+                <th>Actual Position</th>
+                <th>Actual Payoff</th>
+            </tr>
+            <tr>
+                <td> 1 </td>
+                <td>{{ player.neighbor_opinion_1 }}</td>
+                <td>{{ player.update_neighbor_opinion_1 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+             <tr>
+                <td> 2 </td>
+                <td>{{ player.neighbor_opinion_2 }}</td>
+                <td>{{ player.update_neighbor_opinion_2 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+             <tr>
+                <td> 3 </td>
+                <td>{{ player.neighbor_opinion_3 }}</td>
+                <td>{{ player.update_neighbor_opinion_3 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+             <tr>
+                <td> 4 </td>
+                <td>{{ player.neighbor_opinion_4 }}</td>
+                <td>{{ player.update_neighbor_opinion_4 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+             <tr>
+                <td> 5 </td>
+                <td>{{ player.neighbor_opinion_5 }}</td>
+                <td>{{ player.update_neighbor_opinion_5 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+             <tr>
+                <td> 6 </td>
+                <td>{{ player.neighbor_opinion_6 }}</td>
+                <td>{{ player.update_neighbor_opinion_6 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+             <tr>
+                <td> 7 </td>
+                <td>{{ player.neighbor_opinion_7 }}</td>
+                <td>{{ player.update_neighbor_opinion_7 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+         </table>
+
+    {% elif player.num_neighbors == 8 %}
+        <p>
+        You have {{player.num_neighbors}} neighbors this round and your position is {{player.opinion_this_round}}.
+        </p>
+         <table class="table">
+            <tr>
+                <th>Neighbor </th>
+                <th>Previous Position</th>
+                <th>Your Guess</th>
+                <th>Actual Position</th>
+                <th>Actual Payoff</th>
+            </tr>
+            <tr>
+                <td> 1 </td>
+                <td>{{ player.neighbor_opinion_1 }}</td>
+                <td>{{ player.update_neighbor_opinion_1 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+             <tr>
+                <td> 2 </td>
+                <td>{{ player.neighbor_opinion_2 }}</td>
+                <td>{{ player.update_neighbor_opinion_2 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+             <tr>
+                <td> 3 </td>
+                <td>{{ player.neighbor_opinion_3 }}</td>
+                <td>{{ player.update_neighbor_opinion_3 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+             <tr>
+                <td> 4 </td>
+                <td>{{ player.neighbor_opinion_4 }}</td>
+                <td>{{ player.update_neighbor_opinion_4 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+             <tr>
+                <td> 5 </td>
+                <td>{{ player.neighbor_opinion_5 }}</td>
+                <td>{{ player.update_neighbor_opinion_5 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+             <tr>
+                <td> 6 </td>
+                <td>{{ player.neighbor_opinion_6 }}</td>
+                <td>{{ player.update_neighbor_opinion_6 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+             <tr>
+                <td> 7 </td>
+                <td>{{ player.neighbor_opinion_7 }}</td>
+                <td>{{ player.update_neighbor_opinion_7 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+             <tr>
+                <td> 8 </td>
+                <td>{{ player.neighbor_opinion_8 }}</td>
+                <td>{{ player.update_neighbor_opinion_8 }}</td>
+                <td>TBD</td>
+                <td>TBD</td>
+            </tr>
+         </table>
+        {% endif %}
+
     {% next_button %}
 {% endblock %}
 
