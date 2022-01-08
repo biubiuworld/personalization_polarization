@@ -197,6 +197,12 @@ class NeighborUpdate(Page):
         # self.player.game_payoff = self.participant.vars['practice_game_payoff']
         self.participant.vars['practice_payoff_in_all_rounds'].append(self.player.payoff)
 
+
+class BeforeResultsWaitPage(WaitPage):
+    wait_for_all_groups = True
+    after_all_players_arrive = 'update_neighbor_actual_opinion_eachround'
+
+
 class Results(Page):
 
     # timeout_seconds = 5
@@ -227,6 +233,7 @@ page_sequence = [
     OpinionUpdateWaitPage,
     GenerateObservedPlayersWaitPage,
     NeighborUpdate,
+    BeforeResultsWaitPage,
     Results,
     GamePayment,
 ]
