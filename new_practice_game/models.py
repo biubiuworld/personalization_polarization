@@ -56,50 +56,60 @@ class Subsession(BaseSubsession):
                 p.participant.vars['neighbors_actual_opinion_set'].append(p.participant.vars['others_update_opinions'][
                                                                           p.participant.vars[
                                                                               'others_id_in_group'].index(neighbor)])
-                if len(p.participant.vars['neighbors_actual_opinion_set']) == 1:
-                    p.actual_opinion_neighbor_1 = p.participant.vars['neighbors_actual_opinion_set'][0]
-                if len(p.participant.vars['neighbors_actual_opinion_set']) == 2:
-                    p.actual_opinion_neighbor_1 = p.participant.vars['neighbors_actual_opinion_set'][0]
-                    p.actual_opinion_neighbor_2 = p.participant.vars['neighbors_actual_opinion_set'][1]
-                if len(p.participant.vars['neighbors_actual_opinion_set']) == 3:
-                    p.actual_opinion_neighbor_1 = p.participant.vars['neighbors_actual_opinion_set'][0]
-                    p.actual_opinion_neighbor_2 = p.participant.vars['neighbors_actual_opinion_set'][1]
-                    p.actual_opinion_neighbor_3 = p.participant.vars['neighbors_actual_opinion_set'][2]
-                if len(p.participant.vars['neighbors_actual_opinion_set']) == 4:
-                    p.actual_opinion_neighbor_1 = p.participant.vars['neighbors_actual_opinion_set'][0]
-                    p.actual_opinion_neighbor_2 = p.participant.vars['neighbors_actual_opinion_set'][1]
-                    p.actual_opinion_neighbor_3 = p.participant.vars['neighbors_actual_opinion_set'][2]
-                    p.actual_opinion_neighbor_4 = p.participant.vars['neighbors_actual_opinion_set'][3]
-                if len(p.participant.vars['neighbors_actual_opinion_set']) == 5:
-                    p.actual_opinion_neighbor_1 = p.participant.vars['neighbors_actual_opinion_set'][0]
-                    p.actual_opinion_neighbor_2 = p.participant.vars['neighbors_actual_opinion_set'][1]
-                    p.actual_opinion_neighbor_3 = p.participant.vars['neighbors_actual_opinion_set'][2]
-                    p.actual_opinion_neighbor_4 = p.participant.vars['neighbors_actual_opinion_set'][3]
-                    p.actual_opinion_neighbor_5 = p.participant.vars['neighbors_actual_opinion_set'][4]
-                if len(p.participant.vars['neighbors_actual_opinion_set']) == 6:
-                    p.actual_opinion_neighbor_1 = p.participant.vars['neighbors_actual_opinion_set'][0]
-                    p.actual_opinion_neighbor_2 = p.participant.vars['neighbors_actual_opinion_set'][1]
-                    p.actual_opinion_neighbor_3 = p.participant.vars['neighbors_actual_opinion_set'][2]
-                    p.actual_opinion_neighbor_4 = p.participant.vars['neighbors_actual_opinion_set'][3]
-                    p.actual_opinion_neighbor_5 = p.participant.vars['neighbors_actual_opinion_set'][4]
-                    p.actual_opinion_neighbor_6 = p.participant.vars['neighbors_actual_opinion_set'][5]
-                if len(p.participant.vars['neighbors_actual_opinion_set']) == 7:
-                    p.actual_opinion_neighbor_1 = p.participant.vars['neighbors_actual_opinion_set'][0]
-                    p.actual_opinion_neighbor_2 = p.participant.vars['neighbors_actual_opinion_set'][1]
-                    p.actual_opinion_neighbor_3 = p.participant.vars['neighbors_actual_opinion_set'][2]
-                    p.actual_opinion_neighbor_4 = p.participant.vars['neighbors_actual_opinion_set'][3]
-                    p.actual_opinion_neighbor_5 = p.participant.vars['neighbors_actual_opinion_set'][4]
-                    p.actual_opinion_neighbor_6 = p.participant.vars['neighbors_actual_opinion_set'][5]
-                    p.actual_opinion_neighbor_7 = p.participant.vars['neighbors_actual_opinion_set'][6]
-                if len(p.participant.vars['neighbors_actual_opinion_set']) == 8:
-                    p.actual_opinion_neighbor_1 = p.participant.vars['neighbors_actual_opinion_set'][0]
-                    p.actual_opinion_neighbor_2 = p.participant.vars['neighbors_actual_opinion_set'][1]
-                    p.actual_opinion_neighbor_3 = p.participant.vars['neighbors_actual_opinion_set'][2]
-                    p.actual_opinion_neighbor_4 = p.participant.vars['neighbors_actual_opinion_set'][3]
-                    p.actual_opinion_neighbor_5 = p.participant.vars['neighbors_actual_opinion_set'][4]
-                    p.actual_opinion_neighbor_6 = p.participant.vars['neighbors_actual_opinion_set'][5]
-                    p.actual_opinion_neighbor_7 = p.participant.vars['neighbors_actual_opinion_set'][6]
-                    p.actual_opinion_neighbor_8 = p.participant.vars['neighbors_actual_opinion_set'][7]
+            if len(p.participant.vars['neighbors_actual_opinion_set']) == 1:
+                p.actual_opinion_neighbor_1 = p.participant.vars['neighbors_actual_opinion_set'][0]
+            if len(p.participant.vars['neighbors_actual_opinion_set']) == 2:
+                p.actual_opinion_neighbor_1 = p.participant.vars['neighbors_actual_opinion_set'][0]
+                p.actual_opinion_neighbor_2 = p.participant.vars['neighbors_actual_opinion_set'][1]
+            if len(p.participant.vars['neighbors_actual_opinion_set']) == 3:
+                p.actual_opinion_neighbor_1 = p.participant.vars['neighbors_actual_opinion_set'][0]
+                p.actual_opinion_neighbor_2 = p.participant.vars['neighbors_actual_opinion_set'][1]
+                p.actual_opinion_neighbor_3 = p.participant.vars['neighbors_actual_opinion_set'][2]
+            if len(p.participant.vars['neighbors_actual_opinion_set']) == 4:
+                p.actual_opinion_neighbor_1 = p.participant.vars['neighbors_actual_opinion_set'][0]
+                p.actual_opinion_neighbor_2 = p.participant.vars['neighbors_actual_opinion_set'][1]
+                p.actual_opinion_neighbor_3 = p.participant.vars['neighbors_actual_opinion_set'][2]
+                p.actual_opinion_neighbor_4 = p.participant.vars['neighbors_actual_opinion_set'][3]
+            if len(p.participant.vars['neighbors_actual_opinion_set']) == 5:
+                p.actual_opinion_neighbor_1 = p.participant.vars['neighbors_actual_opinion_set'][0]
+                p.actual_opinion_neighbor_2 = p.participant.vars['neighbors_actual_opinion_set'][1]
+                p.actual_opinion_neighbor_3 = p.participant.vars['neighbors_actual_opinion_set'][2]
+                p.actual_opinion_neighbor_4 = p.participant.vars['neighbors_actual_opinion_set'][3]
+                p.actual_opinion_neighbor_5 = p.participant.vars['neighbors_actual_opinion_set'][4]
+            if len(p.participant.vars['neighbors_actual_opinion_set']) == 6:
+                p.actual_opinion_neighbor_1 = p.participant.vars['neighbors_actual_opinion_set'][0]
+                p.actual_opinion_neighbor_2 = p.participant.vars['neighbors_actual_opinion_set'][1]
+                p.actual_opinion_neighbor_3 = p.participant.vars['neighbors_actual_opinion_set'][2]
+                p.actual_opinion_neighbor_4 = p.participant.vars['neighbors_actual_opinion_set'][3]
+                p.actual_opinion_neighbor_5 = p.participant.vars['neighbors_actual_opinion_set'][4]
+                p.actual_opinion_neighbor_6 = p.participant.vars['neighbors_actual_opinion_set'][5]
+            if len(p.participant.vars['neighbors_actual_opinion_set']) == 7:
+                p.actual_opinion_neighbor_1 = p.participant.vars['neighbors_actual_opinion_set'][0]
+                p.actual_opinion_neighbor_2 = p.participant.vars['neighbors_actual_opinion_set'][1]
+                p.actual_opinion_neighbor_3 = p.participant.vars['neighbors_actual_opinion_set'][2]
+                p.actual_opinion_neighbor_4 = p.participant.vars['neighbors_actual_opinion_set'][3]
+                p.actual_opinion_neighbor_5 = p.participant.vars['neighbors_actual_opinion_set'][4]
+                p.actual_opinion_neighbor_6 = p.participant.vars['neighbors_actual_opinion_set'][5]
+                p.actual_opinion_neighbor_7 = p.participant.vars['neighbors_actual_opinion_set'][6]
+            if len(p.participant.vars['neighbors_actual_opinion_set']) == 8:
+                p.actual_opinion_neighbor_1 = p.participant.vars['neighbors_actual_opinion_set'][0]
+                p.actual_opinion_neighbor_2 = p.participant.vars['neighbors_actual_opinion_set'][1]
+                p.actual_opinion_neighbor_3 = p.participant.vars['neighbors_actual_opinion_set'][2]
+                p.actual_opinion_neighbor_4 = p.participant.vars['neighbors_actual_opinion_set'][3]
+                p.actual_opinion_neighbor_5 = p.participant.vars['neighbors_actual_opinion_set'][4]
+                p.actual_opinion_neighbor_6 = p.participant.vars['neighbors_actual_opinion_set'][5]
+                p.actual_opinion_neighbor_7 = p.participant.vars['neighbors_actual_opinion_set'][6]
+                p.actual_opinion_neighbor_8 = p.participant.vars['neighbors_actual_opinion_set'][7]
+
+        for p in self.get_players():
+            p.neighbors_actual_opinion_set = ', '.join(map(str, p.participant.vars['neighbors_actual_opinion_set']))
+            p.actual_payoff_round = 0
+            if p.num_neighbors == 0:
+                p.actual_payoff_round = -(p.opinion_this_round - p.opinion_last_round)**2
+            elif p.num_neighbors > 0:
+                for neighbor_Opinion in p.participant.vars['neighbors_actual_opinion_set']:
+                    p.actual_payoff_round = p.actual_payoff_round + Constants.V - Constants.f*(p.opinion_this_round - neighbor_Opinion)**2 - (1 - Constants.f)*(p.opinion_this_round - p.opinion_last_round)**2
+
 
     def generate_observed_players_eachround(self):
         for p in self.get_players():
@@ -162,6 +172,7 @@ class Player(BasePlayer):
     if_miss_opinion = models.BooleanField(initial=0)
 
     game_payoff = models.CurrencyField()
+    actual_payoff_round = models.CurrencyField()
 
     timeout_choose_neighbors = models.BooleanField(initial=0)
     timeout_update_opinion = models.BooleanField(initial=0)
@@ -178,6 +189,7 @@ class Player(BasePlayer):
     neighbor_opinion_7 = models.FloatField()
     neighbor_opinion_8 = models.FloatField()
 
+    neighbors_opinion_guess_set = models.LongStringField()
     update_neighbor_opinion_1 = models.IntegerField(label='', min=0, max=80,blank=True)
     update_neighbor_opinion_2 = models.IntegerField(label='', min=0, max=80,blank=True)
     update_neighbor_opinion_3 = models.IntegerField(label='', min=0, max=80,blank=True)
@@ -187,6 +199,7 @@ class Player(BasePlayer):
     update_neighbor_opinion_7 = models.IntegerField(label='', min=0, max=80,blank=True)
     update_neighbor_opinion_8 = models.IntegerField(label='', min=0, max=80,blank=True)
 
+    neighbors_actual_opinion_set = models.LongStringField()
     actual_opinion_neighbor_1 = models.FloatField()
     actual_opinion_neighbor_2 = models.FloatField()
     actual_opinion_neighbor_3 = models.FloatField()
@@ -195,6 +208,4 @@ class Player(BasePlayer):
     actual_opinion_neighbor_6 = models.FloatField()
     actual_opinion_neighbor_7 = models.FloatField()
     actual_opinion_neighbor_8 = models.FloatField()
-    # update_neighbor_opinion = models.StringField(
-    #     label="Please guess all neighbors new positions orderly.(If you don't have neighbor this round, please type NA.)"
-    # )
+
