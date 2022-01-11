@@ -43,7 +43,7 @@
   height: 10px;
   line-height: 40px;
   margin: 0 0 20px 8.5px;
-  padding: 0 1px 0 1px; 
+  padding: 0 1px 0 1px;
   font-weight: bold;
   font-size: 0.6em;
 }
@@ -73,7 +73,7 @@
 <!-- include the jQuery and jQuery UI scripts -->
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <script src="https://rawgit.com/simeydotme/jQuery-ui-Slider-Pips/master/src/js/jquery-ui-slider-pips.js"></script>
-                
+
 <script>
     var V = {{ Constants.V }};
     var f = {{ Constants.f }};
@@ -89,7 +89,7 @@
 
     var neighborTable = document.getElementById("neighborTable");
 
-    // Elements for each radio button 
+    // Elements for each radio button
     var if_connect_player1Yes = document.getElementById("id_if_connect_player1_0");
     var if_connect_player1No = document.getElementById("id_if_connect_player1_1");
 
@@ -100,6 +100,9 @@
     var player2OpinionValue = {{observed_player2}};
 
     var num_neighbors = {{num_neighbors}};
+
+    const neighborGuess = ['update_neighbor_opinion_1', 'update_neighbor_opinion_2', 'update_neighbor_opinion_3','update_neighbor_opinion_4',
+    'update_neighbor_opinion_5', 'update_neighbor_opinion_6','update_neighbor_opinion_7', 'update_neighbor_opinion_8']
 
     $("#opinion_this_round").slider().slider("pips");
 
@@ -148,18 +151,52 @@
             document.getElementById("neighbor_p").innerHTML = "You don't have neighbors in this round.";
         else if (num_neighbors == 1)
             document.getElementById("neighbor_p").innerHTML =
-                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbor in this round and his or her position is: <b style='color:DodgerBlue;''> [" + neighborsOpinionSet + "] </b>" ;
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbor in this round and his or her position is: <b style='color:DodgerBlue;''> [" + neighborsOpinionSet +
+                  "] </b><br> Please write down your guess of this neighbor's position in this round below:" ;
         else
             document.getElementById("neighbor_p").innerHTML =
-                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'> [" + neighborsOpinionSet + "] </b>";
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'> [" + neighborsOpinionSet +
+                  "] </b><br> Please write down your guesses of each neighbor's position in this round below:";
 
-        for (let j = 0; j < 9; j++) {
-            if (j < num_neighbors) {
-                neighborTable.rows[1].cells[j+1].innerHTML = neighborsOpinionSet[j].toString();
-            } else {
-                neighborTable.rows[1].cells[j+1].innerHTML = "None";
-            }
-        };
+        while(neighborTable.rows.length > 0) {
+          neighborTable.deleteRow(0);
+        }
+        var i;
+        if (num_neighbors > 0){
+          // add first row
+          var header = document.createElement('th');
+          header.innerText = 'Neighbor';
+          var row = document.createElement('tr');
+          row.appendChild(header);
+          for (i = 0; i < num_neighbors; i++) {
+            var cells = document.createElement('td');
+            cells.innerHTML = i + 1;
+            row.appendChild(cells);
+          }
+          neighborTable.appendChild(row);
+          // add second row
+          var header = document.createElement('th');
+          header.innerText = 'Position last round';
+          var row = document.createElement('tr');
+          row.appendChild(header);
+          for (i = 0; i < num_neighbors; i++) {
+            var cells = document.createElement('td');
+            cells.innerHTML = neighborsOpinionSet[i];
+            row.appendChild(cells);
+          }
+          neighborTable.appendChild(row);
+          // add third row
+          var header = document.createElement('th');
+          header.innerText = 'Your Guess';
+          var row = document.createElement('tr');
+          row.appendChild(header);
+          for (i = 0; i < num_neighbors; i++) {
+            var cells = document.createElement('td');
+            cells.innerHTML = '<input name=' + neighborGuess[i] + ' type="text" />';
+            row.appendChild(cells);
+          }
+          neighborTable.appendChild(row);
+        }
         update();
     });
 
@@ -176,16 +213,50 @@
             document.getElementById("neighbor_p").innerHTML = "You don't have neighbors in this round.";
         else if (num_neighbors == 1)
             document.getElementById("neighbor_p").innerHTML =
-                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbor in this round and his or her position is: <b style='color:DodgerBlue;''> [" + neighborsOpinionSet + "] </b>" ;
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbor in this round and his or her position is: <b style='color:DodgerBlue;''> [" + neighborsOpinionSet +
+                  "] </b><br> Please write down your guess of this neighbor's position in this round below:" ;
         else
             document.getElementById("neighbor_p").innerHTML =
-                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'> [" + neighborsOpinionSet + "] </b>";
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'> [" + neighborsOpinionSet +
+                  "] </b><br> Please write down your guesses of each neighbor's position in this round below:";
 
-        for (let j = 0; j < 9; j++) {
-            if (j < num_neighbors)
-                neighborTable.rows[1].cells[j+1].innerHTML = neighborsOpinionSet[j].toString();
-            else
-                neighborTable.rows[1].cells[j+1].innerHTML = 'None';
+        while(neighborTable.rows.length > 0) {
+          neighborTable.deleteRow(0);
+        }
+        var i;
+        if (num_neighbors > 0){
+          var header = document.createElement('th');
+          header.innerText = 'Neighbor';
+          var row = document.createElement('tr');
+          row.appendChild(header);
+          for (i = 0; i < num_neighbors; i++) {
+            var cells = document.createElement('td');
+            cells.innerHTML = i + 1;
+            row.appendChild(cells);
+          }
+          neighborTable.appendChild(row);
+          // add second row
+          var header = document.createElement('th');
+          header.innerText = 'Position last round';
+          var row = document.createElement('tr');
+          row.appendChild(header);
+          for (i = 0; i < num_neighbors; i++) {
+            var cells = document.createElement('td');
+            cells.innerHTML = neighborsOpinionSet[i];
+            row.appendChild(cells);
+          }
+          neighborTable.appendChild(row);
+          // add third row
+          var header = document.createElement('th');
+          header.innerText = 'Your Guess';
+          var row = document.createElement('tr');
+          row.appendChild(header);
+          for (i = 0; i < num_neighbors; i++) {
+            var cells = document.createElement('td');
+            cells.innerHTML = '<input name=' + neighborGuess[i] + ' type="text" />';
+            row.appendChild(cells);
+          }
+          neighborTable.appendChild(row);
         }
         update();
     });
@@ -212,15 +283,50 @@
             document.getElementById("neighbor_p").innerHTML = "You don't have neighbors in this round.";
         else if (num_neighbors == 1)
             document.getElementById("neighbor_p").innerHTML =
-                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbor in this round and his or her position is: <b style='color:DodgerBlue;''> [" + neighborsOpinionSet + "] </b>" ;
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbor in this round and his or her position is: <b style='color:DodgerBlue;''> [" + neighborsOpinionSet +
+                  "] </b><br> Please write down your guess of this neighbor's position in this round below:" ;
         else
             document.getElementById("neighbor_p").innerHTML =
-                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'> [" + neighborsOpinionSet + "] </b>";
-        for (let j = 0; j < 9; j++) {
-            if (j < num_neighbors)
-                neighborTable.rows[1].cells[j+1].innerHTML = neighborsOpinionSet[j].toString();
-            else
-                neighborTable.rows[1].cells[j+1].innerHTML = 'None';
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'> [" + neighborsOpinionSet +
+                  "] </b><br> Please write down your guesses of each neighbor's position in this round below:";
+
+        while(neighborTable.rows.length > 0) {
+          neighborTable.deleteRow(0);
+        }
+        var i;
+        if (num_neighbors > 0){
+          var header = document.createElement('th');
+          header.innerText = 'Neighbor';
+          var row = document.createElement('tr');
+          row.appendChild(header);
+          for (i = 0; i < num_neighbors; i++) {
+            var cells = document.createElement('td');
+            cells.innerHTML = i + 1;
+            row.appendChild(cells);
+          }
+          neighborTable.appendChild(row);
+          // add second row
+          var header = document.createElement('th');
+          header.innerText = 'Position last round';
+          var row = document.createElement('tr');
+          row.appendChild(header);
+          for (i = 0; i < num_neighbors; i++) {
+            var cells = document.createElement('td');
+            cells.innerHTML = neighborsOpinionSet[i];
+            row.appendChild(cells);
+          }
+          neighborTable.appendChild(row);
+          // add third row
+          var header = document.createElement('th');
+          header.innerText = 'Your Guess';
+          var row = document.createElement('tr');
+          row.appendChild(header);
+          for (i = 0; i < num_neighbors; i++) {
+            var cells = document.createElement('td');
+            cells.innerHTML = '<input name=' + neighborGuess[i] + ' type="text" />';
+            row.appendChild(cells);
+          }
+          neighborTable.appendChild(row);
         }
         update();
     });
@@ -238,15 +344,50 @@
             document.getElementById("neighbor_p").innerHTML = "You don't have neighbors in this round.";
         else if (num_neighbors == 1)
             document.getElementById("neighbor_p").innerHTML =
-                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbor in this round and his or her position is: <b style='color:DodgerBlue;''> [" + neighborsOpinionSet + "] </b>" ;
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbor in this round and his or her position is: <b style='color:DodgerBlue;''> [" + neighborsOpinionSet +
+                  "] </b><br> Please write down your guess of this neighbor's position in this round below:" ;
         else
             document.getElementById("neighbor_p").innerHTML =
-                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'> [" + neighborsOpinionSet + "] </b>";
-        for (let j = 0; j < 9; j++) {
-            if (j < num_neighbors)
-                neighborTable.rows[1].cells[j+1].innerHTML = neighborsOpinionSet[j].toString();
-            else
-                neighborTable.rows[1].cells[j+1].innerHTML = 'None';
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'> [" + neighborsOpinionSet +
+                  "] </b><br> Please write down your guesses of each neighbor's position in this round below:";
+
+        while(neighborTable.rows.length > 0) {
+          neighborTable.deleteRow(0);
+        }
+        var i;
+        if (num_neighbors > 0){
+          var header = document.createElement('th');
+          header.innerText = 'Neighbor';
+          var row = document.createElement('tr');
+          row.appendChild(header);
+          for (i = 0; i < num_neighbors; i++) {
+            var cells = document.createElement('td');
+            cells.innerHTML = i + 1;
+            row.appendChild(cells);
+          }
+          neighborTable.appendChild(row);
+          // add second row
+          var header = document.createElement('th');
+          header.innerText = 'Position last round';
+          var row = document.createElement('tr');
+          row.appendChild(header);
+          for (i = 0; i < num_neighbors; i++) {
+            var cells = document.createElement('td');
+            cells.innerHTML = neighborsOpinionSet[i];
+            row.appendChild(cells);
+          }
+          neighborTable.appendChild(row);
+          // add third row
+          var header = document.createElement('th');
+          header.innerText = 'Your Guess';
+          var row = document.createElement('tr');
+          row.appendChild(header);
+          for (i = 0; i < num_neighbors; i++) {
+            var cells = document.createElement('td');
+            cells.innerHTML = '<input name=' + neighborGuess[i] + ' type="text" />';
+            row.appendChild(cells);
+          }
+          neighborTable.appendChild(row);
         }
         update();
     });
@@ -280,14 +421,14 @@
         }
 
         sliderTicksAbove.append(div);
-        
+
         div.append(p);
-        
+
         node = document.createElement("p");
         node.style.fontWeight = '0.2';
         node.innerHTML = '|';
         div.append(node);
-        
+
     }
     for(let i = 0; i < neighborsOpinionSet.length; i++){
         p = document.getElementById(parseInt(neighborsOpinionSet[i]).toString());
@@ -372,44 +513,13 @@
         You don't have neighbors in this round.
         {% elif num_neighbors == 1 %}
             You have <b style="color:DodgerBlue;">{{ num_neighbors }}</b> neighbor in this round and his or her position is: <b style="color:DodgerBlue;">{{ neighbors_opinion_set }}</b>
+            <br> Please write down your guess of this neighbor's position in this round below:
         {% else %}
             You have <b style="color:DodgerBlue;">{{ num_neighbors }}</b> neighbors in this round and their positions are: <b style="color:DodgerBlue;">{{ neighbors_opinion_set }}</b>
+            <br> Please write down your guesses of each neighbor's position in this round below:
         {% endif %}
 
     <table class="table" id="neighborTable">
-        <tr>
-            <th>Neighbor </th>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-            <td>4</td>
-            <td>5</td>
-            <td>6</td>
-            <td>7</td>
-            <td>8</td>
-        </tr>
-        <tr>
-            <th>Position this round </th>
-            <td>{{neighbor_opinion_1}}</td>
-            <td>{{neighbor_opinion_2}}</td>
-            <td>{{neighbor_opinion_3}}</td>
-            <td>{{neighbor_opinion_4}}</td>
-            <td>{{neighbor_opinion_5}}</td>
-            <td>{{neighbor_opinion_6}}</td>
-            <td>{{neighbor_opinion_7}}</td>
-            <td>{{neighbor_opinion_8}}</td>
-        </tr>
-        <tr>
-            <th>Your guess </th>
-            <td>{% formfield player.update_neighbor_opinion_1 %}</td>
-            <td>{% formfield player.update_neighbor_opinion_2 %}</td>
-            <td>{% formfield player.update_neighbor_opinion_3 %}</td>
-            <td>{% formfield player.update_neighbor_opinion_4 %}</td>
-            <td>{% formfield player.update_neighbor_opinion_5 %}</td>
-            <td>{% formfield player.update_neighbor_opinion_6 %}</td>
-            <td>{% formfield player.update_neighbor_opinion_7 %}</td>
-            <td>{% formfield player.update_neighbor_opinion_8 %}</td>
-        </tr>
     </table>
 
     </p>
