@@ -87,6 +87,8 @@
     console.log(disconnect1);
     console.log(disconnect2);
 
+    var neighborTable = document.getElementById("neighborTable");
+
     // Elements for each radio button 
     var if_connect_player1Yes = document.getElementById("id_if_connect_player1_0");
     var if_connect_player1No = document.getElementById("id_if_connect_player1_1");
@@ -150,6 +152,14 @@
         else
             document.getElementById("neighbor_p").innerHTML =
                 "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'> [" + neighborsOpinionSet + "] </b>";
+
+        for (let j = 0; j < 9; j++) {
+            if (j < num_neighbors) {
+                neighborTable.rows[1].cells[j+1].innerHTML = neighborsOpinionSet[j].toString();
+            } else {
+                neighborTable.rows[1].cells[j+1].innerHTML = "None";
+            }
+        };
         update();
     });
 
@@ -170,6 +180,13 @@
         else
             document.getElementById("neighbor_p").innerHTML =
                 "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'> [" + neighborsOpinionSet + "] </b>";
+
+        for (let j = 0; j < 9; j++) {
+            if (j < num_neighbors)
+                neighborTable.rows[1].cells[j+1].innerHTML = neighborsOpinionSet[j].toString();
+            else
+                neighborTable.rows[1].cells[j+1].innerHTML = 'None';
+        }
         update();
     });
 
@@ -199,6 +216,12 @@
         else
             document.getElementById("neighbor_p").innerHTML =
                 "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'> [" + neighborsOpinionSet + "] </b>";
+        for (let j = 0; j < 9; j++) {
+            if (j < num_neighbors)
+                neighborTable.rows[1].cells[j+1].innerHTML = neighborsOpinionSet[j].toString();
+            else
+                neighborTable.rows[1].cells[j+1].innerHTML = 'None';
+        }
         update();
     });
 
@@ -219,6 +242,12 @@
         else
             document.getElementById("neighbor_p").innerHTML =
                 "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'> [" + neighborsOpinionSet + "] </b>";
+        for (let j = 0; j < 9; j++) {
+            if (j < num_neighbors)
+                neighborTable.rows[1].cells[j+1].innerHTML = neighborsOpinionSet[j].toString();
+            else
+                neighborTable.rows[1].cells[j+1].innerHTML = 'None';
+        }
         update();
     });
 
@@ -347,7 +376,7 @@
             You have <b style="color:DodgerBlue;">{{ num_neighbors }}</b> neighbors in this round and their positions are: <b style="color:DodgerBlue;">{{ neighbors_opinion_set }}</b>
         {% endif %}
 
-    <table class="table">
+    <table class="table" id="neighborTable">
         <tr>
             <th>Neighbor </th>
             <td>1</td>
