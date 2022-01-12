@@ -106,17 +106,6 @@
 
     $("#opinion_this_round").slider().slider("pips");
 
-    function update() {
-        total = 0;
-        currentOpinion = (document.getElementById("opinion_this_round").value)/1;
-        outputValue_1.innerHTML = (document.getElementById("opinion_this_round").value)/1;
-        const neighborsPayoffSet = neighborsOpinionSet.map(neighborPayoffFunction);
-        neighborsPayoffSet.forEach(totalFunction);
-        if (neighborsOpinionSet.length <= 0) {
-            total = -1*(currentOpinion-previousOpinion)*(currentOpinion-previousOpinion)*1;
-        }
-        outputValue_2.innerHTML = Math.round(total*1)/1;
-    }
 
     function neighborPayoffFunction(neighborOpinion, index, array) {
         return 1*(V-f*(currentOpinion-neighborOpinion)*(currentOpinion-neighborOpinion)-(1-f)*(currentOpinion-previousOpinion)*(currentOpinion-previousOpinion));
@@ -197,7 +186,6 @@
           }
           neighborTable.appendChild(row);
         }
-        update();
     });
 
     if_connect_player1No.addEventListener('change', function() {
@@ -258,7 +246,6 @@
           }
           neighborTable.appendChild(row);
         }
-        update();
     });
 
     if_connect_player2Yes.addEventListener('change', function() {
@@ -328,7 +315,6 @@
           }
           neighborTable.appendChild(row);
         }
-        update();
     });
 
     if_connect_player2No.addEventListener('change', function() {
@@ -389,7 +375,6 @@
           }
           neighborTable.appendChild(row);
         }
-        update();
     });
 
     // Event Listeners to update guess set
