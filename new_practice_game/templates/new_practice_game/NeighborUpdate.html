@@ -409,16 +409,20 @@
               var x = tableCell.value;
               if (isNaN(x) == true) {
                 alert('Please input a number');
+                document.getElementsByName(neighborGuess[i])[0].value = "";
               }
               var x = parseFloat(tableCell.value);
               if (x > 80){
                 alert('Value should be less or equal to 80');
+                document.getElementsByName(neighborGuess[i])[0].value = "";
               }
               else if (x < 0){
                 alert('Value should be greater than 0');
+                document.getElementsByName(neighborGuess[i])[0].value = "";
               }
               else if (Number.isInteger(x) == false) {
                 alert('Please input an integer');
+                document.getElementsByName(neighborGuess[i])[0].value = "";
               }
               else {
                 var p = document.getElementById(x.toString());
