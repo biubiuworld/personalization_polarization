@@ -102,7 +102,7 @@
     var num_neighbors = {{num_neighbors}};
 
     const neighborGuess = ['update_neighbor_opinion_1', 'update_neighbor_opinion_2', 'update_neighbor_opinion_3','update_neighbor_opinion_4',
-    'update_neighbor_opinion_5', 'update_neighbor_opinion_6','update_neighbor_opinion_7', 'update_neighbor_opinion_8']
+    'update_neighbor_opinion_5', 'update_neighbor_opinion_6','update_neighbor_opinion_7', 'update_neighbor_opinion_8'];
 
     $("#opinion_this_round").slider().slider("pips");
 
@@ -392,6 +392,60 @@
         update();
     });
 
+    // Event Listeners to update guess set
+    var guessListCopy = [];
+    var ifneighbortablechanged = document.getElementById('neighborTable');
+    ifneighbortablechanged.addEventListener('input', function() {
+
+      for (let i = 0; i < 81; i++){
+        var p = document.getElementById(i.toString());
+        p.style.opacity = '0';
+      }
+      var guessList = [];
+      if (neighborsOpinionSet.length != 0){
+        for (let i = 0; i < neighborsOpinionSet.length; i++){
+          var tableCell = document.getElementsByName(neighborGuess[i])[0];
+            if ((typeof tableCell != 'undefined') && (tableCell.value != '')){
+              var x = tableCell.value;
+              if (isNaN(x) == true) {
+                alert('Please input a number');
+              }
+              var x = parseFloat(tableCell.value);
+              if (x > 80){
+                alert('Value should be less or equal to 80');
+              }
+              else if (x < 0){
+                alert('Value should be greater than 0');
+              }
+              else if (Number.isInteger(x) == false) {
+                alert('Please input an integer');
+              }
+              else {
+                var p = document.getElementById(x.toString());
+                p.style.opacity = '100';
+                guessList.push(x);
+                console.log(guessList);
+              }
+          }
+          }
+        }
+        guessListCopy = guessList;
+      })
+
+    function updatenew() {
+      total = 0;
+      currentOpinion = (document.getElementById("opinion_this_round").value)/1;
+      outputValue_1.innerHTML = (document.getElementById("opinion_this_round").value)/1;
+      const neighborsPayoffSet = guessListCopy.map(neighborPayoffFunction);
+      neighborsPayoffSet.forEach(totalFunction);
+      if (neighborsOpinionSet.length <= 0) {
+          total = -1*(currentOpinion-previousOpinion)*(currentOpinion-previousOpinion)*1;
+      }
+      outputValue_2.innerHTML = Math.round(total*1)/1;
+      console.log(outputValue_2.innerHTML);
+    }
+
+
     var sliderTicks = document.getElementById("sliderticks");
     var sliderTicksAbove = document.getElementById("sliderticksAbove");
     var p;
@@ -431,7 +485,8 @@
 
     }
     for(let i = 0; i < neighborsOpinionSet.length; i++){
-        p = document.getElementById(parseInt(neighborsOpinionSet[i]).toString());
+        // p = document.getElementById(parseInt(neighborsOpinionSet[i]).toString());
+        p = document.getElementsByName(neighborGuess[i])[0];
         p.style.opacity = '100';
     }
 </script>
@@ -519,6 +574,8 @@
             <br> Please write down your guesses of each neighbor's position in this round below:
         {% endif %}
 
+    <p id="demo"></p>
+
     <table class="table" id="neighborTable">
     </table>
 
@@ -529,7 +586,7 @@
     <div class="card-body">
         <h5>Slider</h5>
     <p><strong>Please move the slider and update your position this round. Your position should be between 0 and 80. Your </strong> <b style="color:Tomato;">previous position</b> <strong> and </strong> <b style="color:DodgerBlue;">neighbor positions</b> <strong> are labeled on the slider.</strong></p>
-    <div class="silder_container", oninput="update()">
+    <div class="silder_container", oninput="updatenew()">
         <div class="sliderticksAbove" id="sliderticksAbove">
         </div>
         <input type="range" min="-1" max="80" value="-1" class="slider" name="opinion_this_round" id="opinion_this_round">
