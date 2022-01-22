@@ -123,17 +123,17 @@
             if(disconnect1){
                 disconnect1 = false;
                 neighborsOpinionSet.push(player1OpinionValue);
-                var p = document.getElementById(parseInt(player1OpinionValue).toString());
-                p.style.opacity = '100';
             }
         } else {
             disconnect1 = true;
             const index = neighborsOpinionSet.indexOf(player1OpinionValue);
             if (index > -1) {
                 neighborsOpinionSet.splice(index, 1);
-                var p = document.getElementById(parseInt(player1OpinionValue).toString());
-                p.style.opacity = '0';
             }
+        }
+        for (let i = 0; i < 81; i++){
+          var p = document.getElementById(i.toString());
+          p.style.opacity = '0';
         }
         num_neighbors = neighborsOpinionSet.length;
         if (num_neighbors == 0)
@@ -193,9 +193,11 @@
         const index = neighborsOpinionSet.indexOf(player1OpinionValue);
             if (index > -1) {
                 neighborsOpinionSet.splice(index, 1);
-                var p = document.getElementById(parseInt(player1OpinionValue).toString());
-                p.style.opacity = '0';
             }
+        for (let i = 0; i < 81; i++){
+          var p = document.getElementById(i.toString());
+          p.style.opacity = '0';
+        }
         num_neighbors = neighborsOpinionSet.length;
         if (num_neighbors == 0)
             document.getElementById("neighbor_p").innerHTML = "You don't have neighbors in this round.";
@@ -253,17 +255,17 @@
             if(disconnect2){
                 disconnect2 = false;
                 neighborsOpinionSet.push(player2OpinionValue);
-                var p = document.getElementById(parseInt(player2OpinionValue).toString());
-                p.style.opacity = '100';
             }
         } else {
             disconnect2 = true;
             const index = neighborsOpinionSet.indexOf(player2OpinionValue);
             if (index > -1) {
                 neighborsOpinionSet.splice(index, 1);
-                var p = document.getElementById(parseInt(player2OpinionValue).toString());
-                p.style.opacity = '0';
             }
+        }
+        for (let i = 0; i < 81; i++){
+          var p = document.getElementById(i.toString());
+          p.style.opacity = '0';
         }
         num_neighbors = neighborsOpinionSet.length;
         if (num_neighbors == 0)
@@ -322,9 +324,11 @@
         const index = neighborsOpinionSet.indexOf(player2OpinionValue);
             if (index > -1) {
                 neighborsOpinionSet.splice(index, 1);
-                var p = document.getElementById(parseInt(player2OpinionValue).toString());
-                p.style.opacity = '0';
             }
+        for (let i = 0; i < 81; i++){
+          var p = document.getElementById(i.toString());
+          p.style.opacity = '0';
+        }
         num_neighbors = neighborsOpinionSet.length;
         if (num_neighbors == 0)
             document.getElementById("neighbor_p").innerHTML = "You don't have neighbors in this round.";
@@ -553,10 +557,8 @@
         You don't have neighbors in this round.
         {% elif num_neighbors == 1 %}
             You have <b style="color:DodgerBlue;">{{ num_neighbors }}</b> neighbor in this round and his or her position is: <b style="color:DodgerBlue;">{{ neighbors_opinion_set }}</b>
-            <br> Please write down your guess of this neighbor's position in this round below:
         {% else %}
             You have <b style="color:DodgerBlue;">{{ num_neighbors }}</b> neighbors in this round and their positions are: <b style="color:DodgerBlue;">{{ neighbors_opinion_set }}</b>
-            <br> Please write down your guesses of each neighbor's position in this round below:
         {% endif %}
 
     <p id="demo"></p>
@@ -570,7 +572,7 @@
     <div class="card bg-light m-3">
     <div class="card-body">
         <h5>Slider</h5>
-    <p><strong>Please move the slider and update your position this round. Your position should be between 0 and 80. Your </strong> <b style="color:Tomato;">previous position</b> <strong> and </strong> <b style="color:DodgerBlue;">neighbor positions</b> <strong> are labeled on the slider.</strong></p>
+    <p><strong>Please move the slider and update your position this round. Your position should be between 0 and 80. Your </strong> <b style="color:Tomato;">previous position</b> <strong> and </strong> <b style="color:DodgerBlue;">your guess of neighbor positions</b> <strong> are labeled on the slider.</strong></p>
     <div class="silder_container", oninput="updatenew()">
         <div class="sliderticksAbove" id="sliderticksAbove">
         </div>
@@ -578,7 +580,7 @@
         <div class="sliderticks" id="sliderticks">
         </div>
        <p>Your position: <span id="outputValue_1"></span></p>
-        <p>Total payoff: <span id="outputValue_2"></span> points </p>
+        <p>Total payoff (based on your guesses): <span id="outputValue_2"></span> points </p>
     </div>
     </div>
     </div>
