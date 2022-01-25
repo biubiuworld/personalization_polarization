@@ -397,10 +397,11 @@
             if ((typeof tableCell != 'undefined') && (tableCell.value != '')){
               var x = tableCell.value;
               if (isNaN(x) == true) {
-                alert('Please input a positive number');
+                alert('Please input an integer between 0 and 80');
                 document.getElementsByName(neighborGuess[i])[0].value = "";
               }
-              var x = parseFloat(tableCell.value);
+              else{
+                var x = parseFloat(tableCell.value);
               if (x > 80 || x < 0){
                 alert('Value should be between 0 and 80');
                 document.getElementsByName(neighborGuess[i])[0].value = "";
@@ -414,6 +415,7 @@
                 p.style.opacity = '100';
                 guessList.push(x);
                 console.log(guessList);
+              }
               }
           }
           }
@@ -478,6 +480,23 @@
         p = document.getElementsByName(neighborGuess[i])[0];
         p.style.opacity = '100';
     }
+
+    function myFunction(event) {
+        var a = 0;
+        if (neighborsOpinionSet.length != 0){
+            for (let i = 0; i < neighborsOpinionSet.length; i++){
+                if(document.getElementsByName(neighborGuess[i])[0].value == ''){
+                    a = 1;
+                }
+            }
+        if(a != 0){
+            alert("Please input your guess!");
+            event.preventDefault();
+            }
+        }
+    }
+
+
 </script>
 {% endblock %}
 
@@ -533,22 +552,6 @@
     </p>
     </div>
     </div>
-<!--
-<script>
-    function getSelectedCheckboxValues(name) {
-        const checkboxes = document.querySelectorAll(`input[name="${name}"]:checked`);
-        let values = [];
-        checkboxes.forEach((checkbox) => {
-            values.push(checkbox.value);
-        });
-        return values;
-        }
-    btn.onclick = function () {
-        liveSend(getSelectedCheckboxValues('player'));
-    };
-</script>
--->
-<!--{{ form.non_field_errors }}-->
 
 
 
@@ -586,8 +589,7 @@
     </div>
     <p><strong>Want a higher payoff? Try different connection options and move the slider again. </strong></p>
 
+<button class="otree-btn-next btn btn-primary", onclick="myFunction(event)">Next</button>
 
-
-    {% next_button %}
 {{ form.opinion_this_round.errors }}
 {% endblock %}
