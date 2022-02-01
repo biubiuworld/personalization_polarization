@@ -1,0 +1,52 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block scripts %}
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+{% endblock %}
+
+{% block content %}
+    <div class="card bg-light m-3">
+    <div class="card-body">
+    <h3>
+        Game 1 Instruction
+    </h3>
+        <p>Hello! This is <strong>Game 1 with 30 rounds</strong>.</p>
+        <p style="text-align:justify">
+            At the beginning of the game, you will be randomly assigned an initial position and then in the following rounds, you will
+            (1) observe two other players and decide whether to connect (or reconsider whether to keep the connection if they are already in your network) with them;
+            (2) guess your neighbors' positions;
+            (3) update your position based on your previous position and your neighbors' positions. <br>
+            In Game 1, you will have <b style="color:blue;">60 seconds</b> to choose neighbors, guess neighbors' positions, and update position each round.
+        </p>
+        <p>
+            Your payoff in round \( t \) is as follows:
+        <ol type="1">
+            <li>
+                If you have neighbor(s), your payoff this round is: <br>
+                <strong>Payoff this round = sum of payoffs from all neighbors </strong> <br>
+            And specifically, the payoff with one neighbor is:<br>
+<strong>Payoff with neighbor \(k \) = \( \color{red}{250} \) - \( \color{red}{0.5} \) \( * \color{blue}D1 \)  - \( \color{red}{0.5} \) \( * \color{blue}D2 \)</strong><br>
+            </li>
+            <li>
+                If you don’t have neighbor, your payoff this round is:<br>
+	<strong>Payoff this round = - \( \color{blue}D2 \)</strong>
+            </li>
+        </ol>
+        <br>
+        \( \color{blue}D1 \) =  (your position in current round \( t \) - neighbor \( k \)'s position in current round \( t \) )\( ^2 \) <br>
+        \( \color{blue}D2 \) =  (your position in current round \( t \) - your position in previous round \( t-1 \) )\( ^2 \)
+        </p>
+    </div>
+    </div>
+
+    {% next_button %}
+
+{% endblock %}

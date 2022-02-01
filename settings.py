@@ -1,24 +1,24 @@
 from os import environ
 
 SESSION_CONFIGS = [
-    dict(
-       name='practice_game',
-       display_name="Practice Game",
-       num_demo_participants=3,
-       app_sequence=['new_practice_game']
-    ),
+    # dict(
+    #    name='practice_game',
+    #    display_name="Practice Game",
+    #    num_demo_participants=3,
+    #    app_sequence=['new_practice_game']
+    # ),
     # dict(
     #     name='game_VhFlH0',
     #     display_name="game_VhFlH0",
     #     num_demo_participants=3,
     #     app_sequence=['game_VhFlH0']
     # ),
-    # dict(
-    #     name='game_VhFmH0',
-    #     display_name="game_VhFmH0",
-    #     num_demo_participants=3,
-    #     app_sequence=['game_VhFmH0']
-    # ),
+    dict(
+        name='game_FhH10',
+        display_name="game_FhH10",
+        num_demo_participants=5,
+        app_sequence=['game_FhH10', 'game_FlH10','game_FmH10']
+    ),
     # dict(
     #     name='game_VhFhH0',
     #     display_name="game_VhFhH0",
