@@ -20,7 +20,7 @@ Your app description
 class Constants(BaseConstants):
     name_in_url = 'quiz'
     players_per_group = None
-    num_rounds = 6 #number of quiz questions
+    num_rounds = 7 #number of quiz questions
     quiz_question_text = [
         '''
         Which of the following statements is true?
@@ -41,7 +41,7 @@ class Constants(BaseConstants):
         In Round 4, your position was \( \color{blue} 30 \).
         In Round 4, you had only one neighbor, and her position was \( \color{blue} 40 \). 
         In Round 5 (current round), you decide not to get any new connections, and change your position to \( \color{blue} 50 \). 
-        In Round 5 (current round), your neighbor’s actual position is 42.
+        In Round 5 (current round), your neighbor’s actual position is \( \color{blue} 42 \).
         What is your actual payoff for Round 5? 
         """,  # q6
         '''
@@ -50,7 +50,7 @@ class Constants(BaseConstants):
         In Round 7, you had only one neighbor A, and her position was \( \color{blue} 40 \).
         In Round 8 (current round), you decide to connect to an observed player B and her position in Round 7 was \( \color{blue} 50 \).
         In Round 8 (current round), you then keep your position to be \( \color{blue} 30 \).
-        In Round 8 (current round), your neighbors’ actual positions are 42 for A and 55 for B.
+        In Round 8 (current round), your neighbors’ actual positions are \( \color{blue} 42 \) for A and \( \color{blue} 55 \) for B.
         What is your actual payoff for Round 8?
         ''',  # q7
      ]
