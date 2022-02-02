@@ -5,6 +5,13 @@
     Results
 {% endblock %}
 
+{% block scripts %}
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+{% endblock %}
+
 {% block content %}
 
          <table class="table">
@@ -15,8 +22,8 @@
                 <th>Actual Payoff</th>
             </tr>
             <tr>
-                <td>{{ player.opinion_last_round }} </td>
-                <td>{{ player.opinion_this_round }}</td>
+                <td>\( \color{green}{ {{ player.opinion_last_round }} } \) </td>
+                <td>\( \color{blue}{ {{ player.opinion_this_round }} } \)</td>
                 <td>{{ player.num_neighbors }}</td>
                 <td>{{ player.actual_payoff_round }}</td>
              </tr>
@@ -41,10 +48,14 @@
                 <td> 1 </td>
                 <td>{{ player.neighbor_opinion_1 }}</td>
                 <td>{{ player.update_neighbor_opinion_1 }}</td>
-                <td>{{ player.actual_opinion_neighbor_1 }}</td>
+                <td>\( \color{orange}{ {{ player.actual_opinion_neighbor_1 }} } \)</td>
              </tr>
          </table>
-
+         <br>
+         <p>
+         <strong>Actual payoff is caculated as follow:<br>
+            {{ player.actual_payoff_round }} = \( \color{red}{250} \) - \( \color{red}{0.3} \) \( * (\color{blue}{ {{ player.opinion_this_round }} }-\color{orange}{ {{ player.actual_opinion_neighbor_1 }} } \color{black}{ )^2 } \)  - \( \color{red}{0.7} \) \( * (\color{blue}{ {{ player.opinion_this_round }} }-\color{green}{ {{ player.opinion_last_round }} } \color{black}{ )^2 } \)</strong><br>
+        </p>
     {% elif player.num_neighbors == 2 %}
         <p>
         Your neighbors' information is as follows:
@@ -60,15 +71,21 @@
                 <td> 1 </td>
                 <td>{{ player.neighbor_opinion_1 }}</td>
                 <td>{{ player.update_neighbor_opinion_1 }}</td>
-                <td>{{ player.actual_opinion_neighbor_1 }}</td>
+                <td>\( \color{orange}{ {{ player.actual_opinion_neighbor_1 }} } \)</td>
             </tr>
              <tr>
                 <td> 2 </td>
                 <td>{{ player.neighbor_opinion_2 }}</td>
                 <td>{{ player.update_neighbor_opinion_2 }}</td>
-                <td>{{ player.actual_opinion_neighbor_2 }}</td>
+                <td>\( \color{orange}{ {{ player.actual_opinion_neighbor_2 }} } \)</td>
             </tr>
          </table>
+         <br>
+         <p>
+         <strong>Actual payoff is caculated as follow:<br>
+            {{ player.actual_payoff_round }} = [\( \color{red}{250} \) - \( \color{red}{0.3} \) \( * (\color{blue}{ {{ player.opinion_this_round }} }-\color{orange}{ {{ player.actual_opinion_neighbor_1 }} } \color{black}{ )^2 } \)  - \( \color{red}{0.7} \) \( * (\color{blue}{ {{ player.opinion_this_round }} }-\color{green}{ {{ player.opinion_last_round }} } \color{black}{ )^2 } \)]
+                                                + [\( \color{red}{250} \) - \( \color{red}{0.3} \) \( * (\color{blue}{ {{ player.opinion_this_round }} }-\color{orange}{ {{ player.actual_opinion_neighbor_2 }} } \color{black}{ )^2 } \)  - \( \color{red}{0.7} \) \( * (\color{blue}{ {{ player.opinion_this_round }} }-\color{green}{ {{ player.opinion_last_round }} } \color{black}{ )^2 } \)]</strong><br>
+        </p>
 
     {% elif player.num_neighbors == 3 %}
         <p>
