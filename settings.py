@@ -1,12 +1,12 @@
 from os import environ
 
 SESSION_CONFIGS = [
-    # dict(
-    #    name='practice_game',
-    #    display_name="Practice Game",
-    #    num_demo_participants=3,
-    #    app_sequence=['new_practice_game']
-    # ),
+    dict(
+       name='practice_game',
+       display_name="Practice Game",
+       num_demo_participants=3,
+       app_sequence=['new_practice_game']
+    ),
     # dict(
     #     name='game_FmH10',
     #     display_name="game_FmH10",
@@ -43,12 +43,12 @@ SESSION_CONFIGS = [
     #     num_demo_participants=3,
     #     app_sequence=['game_VhFhH10']
     # ),
-    # dict(
-    #     name='quiz',
-    #     display_name="pilot",
-    #     num_demo_participants=3,
-    #     app_sequence=['quiz', 'practice_game']
-    # ),
+    dict(
+        name='quiz',
+        display_name="pilot",
+        num_demo_participants=1,
+        app_sequence=['quiz']
+    ),
     # dict(
     #     name='quiz',
     #     display_name="pilot",

@@ -200,11 +200,11 @@ class ExperimentPayment(Page):
         return self.round_number == Constants.num_rounds
     def vars_for_template(self):
         return {
-            'payoff_game1': self.participant.vars['FhH0_game_payoff'],
-            'payoff_game2': self.participant.vars['FlH0_game_payoff'],
-            'payoff_game3': self.participant.vars['FmH0_game_payoff'],
-            'payoff_experiment': self.participant.vars['FmH0_game_payoff']
-                                 + self.participant.vars['FhH0_game_payoff']+ self.participant.vars['FlH0_game_payoff'],
+            'payoff_game1': round(self.participant.vars['FhH0_game_payoff']),
+            'payoff_game2': round(self.participant.vars['FlH0_game_payoff']),
+            'payoff_game3': round(self.participant.vars['FmH0_game_payoff']),
+            'payoff_experiment': round(self.participant.vars['FmH0_game_payoff']
+                                 + self.participant.vars['FhH0_game_payoff']+ self.participant.vars['FlH0_game_payoff']),
             'payoff_experiment_dollar': round(
                 float(self.participant.vars['FmH0_game_payoff'] + self.participant.vars['FhH0_game_payoff']
                       + self.participant.vars['FlH0_game_payoff']) * Constants.dollar_per_credit,2),
