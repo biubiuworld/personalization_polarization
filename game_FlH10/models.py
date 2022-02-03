@@ -24,7 +24,7 @@ class Constants(BaseConstants):
     num_rounds = 5
     min_opinion = 0.
     V = 250
-    f = 0.5
+    f = 0.2
     h = 10
     participation_fee = 4.00
     dollar_per_credit = 0.0025
