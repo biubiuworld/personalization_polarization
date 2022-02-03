@@ -489,10 +489,14 @@
                     a = 1;
                 }
             }
-        if(a != 0){
-            alert("Please input your guess!");
-            event.preventDefault();
+            if(a != 0){
+              alert("Please input your guess!");
+              event.preventDefault();
             }
+        }
+        if (document.getElementById("opinion_this_round").value == -1) {
+          alert("Please move the slider!");
+          event.preventDefault();
         }
     }
 
