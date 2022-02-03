@@ -26,6 +26,9 @@ class Constants(BaseConstants):
     V = 250
     f = 0.5
     h = 0
+    participation_fee = 4.00
+    dollar_per_credit = 0.0025
+    endowment = 3.00
 
 
 class Subsession(BaseSubsession):
@@ -109,7 +112,7 @@ class Subsession(BaseSubsession):
             elif p.num_neighbors > 0:
                 for neighbor_Opinion in p.participant.vars['neighbors_actual_opinion_set']:
                     p.actual_payoff_round = p.actual_payoff_round + Constants.V - Constants.f*(p.opinion_this_round - neighbor_Opinion)**2 - (1 - Constants.f)*(p.opinion_this_round - p.opinion_last_round)**2
-
+            p.participant.vars['payoff_in_all_rounds'].append(p.actual_payoff_round)
 
     def generate_observed_players_eachround(self):
         for p in self.get_players():
@@ -173,6 +176,7 @@ class Player(BasePlayer):
 
     game_payoff = models.CurrencyField()
     actual_payoff_round = models.CurrencyField()
+    model_payoff_round = models.CurrencyField()
 
     timeout_choose_neighbors = models.BooleanField(initial=0)
     timeout_update_opinion = models.BooleanField(initial=0)
@@ -208,3 +212,5 @@ class Player(BasePlayer):
     actual_opinion_neighbor_6 = models.FloatField()
     actual_opinion_neighbor_7 = models.FloatField()
     actual_opinion_neighbor_8 = models.FloatField()
+
+    total_payoff_experiment_dollar = models.FloatField()
