@@ -134,15 +134,24 @@ class NeighborUpdate(Page):
         if (self.player.num_neighbors == 0) & (self.player.opinion_this_round >= 0):
             self.player.payoff = -(self.player.opinion_this_round-self.player.opinion_last_round)*(self.player.opinion_this_round-self.player.opinion_last_round)
             self.player.model_payoff_round = -(self.player.opinion_this_round - self.player.opinion_last_round) * (self.player.opinion_this_round - self.player.opinion_last_round)
-        elif (self.player.num_neighbors > 0) & (self.player.opinion_this_round >= 0):
-            for neighbor_Opinion in self.participant.vars['neighbors_opinion_set']:
-                self.player.model_payoff_round = self.player.model_payoff_round + (Constants.V - Constants.f * (self.player.opinion_this_round - neighbor_Opinion) * (self.player.opinion_this_round - neighbor_Opinion) - (1 - Constants.f) * (self.player.opinion_this_round - self.player.opinion_last_round) * (self.player.opinion_this_round - self.player.opinion_last_round))
         elif (self.player.num_neighbors > 0) & (self.player.opinion_this_round >= 0) & (any(x is None for x in self.participant.vars['neighbors_opinion_guess_set']) == False):
             for neighbor_Opinion in self.participant.vars['neighbors_opinion_guess_set']:
                 self.player.payoff += (Constants.V-Constants.f*(self.player.opinion_this_round - neighbor_Opinion)*(self.player.opinion_this_round - neighbor_Opinion) - (1-Constants.f)*(self.player.opinion_this_round - self.player.opinion_last_round)*(self.player.opinion_this_round - self.player.opinion_last_round))
+            for neighbor_Opinion in self.participant.vars['neighbors_opinion_set']:
+                self.player.model_payoff_round = self.player.model_payoff_round + (
+                    Constants.V - Constants.f * (self.player.opinion_this_round - neighbor_Opinion) * (
+                    self.player.opinion_this_round - neighbor_Opinion) - (1 - Constants.f) * (
+                            self.player.opinion_this_round - self.player.opinion_last_round) * (
+                            self.player.opinion_this_round - self.player.opinion_last_round))
+        elif (self.player.num_neighbors > 0) & (self.player.opinion_this_round >= 0):
+            for neighbor_Opinion in self.participant.vars['neighbors_opinion_set']:
+                self.player.model_payoff_round = self.player.model_payoff_round + (
+                            Constants.V - Constants.f * (self.player.opinion_this_round - neighbor_Opinion) * (
+                                self.player.opinion_this_round - neighbor_Opinion) - (1 - Constants.f) * (
+                                        self.player.opinion_this_round - self.player.opinion_last_round) * (
+                                        self.player.opinion_this_round - self.player.opinion_last_round))
         else:
             self.player.payoff = 0
-
         # If a subject didn't update opinion this round, use previous opinion instead.
         if self.timeout_happened:
             self.player.timeout_update_opinion = 1

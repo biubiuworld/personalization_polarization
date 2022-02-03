@@ -8,7 +8,7 @@ class GameInstruction(Page):
     def before_next_page(self):
         self.participant.vars['neighbors_id_set'] = []
         self.participant.vars['FlH10_game_payoff'] = 0.
-        self.participant.vars['FlH10_payoff_in_all_rounds'] = []
+        self.participant.vars['payoff_in_all_rounds'] = []
 
 class GenerateInitialOpinionWaitPage(WaitPage):
     def is_displayed(self):
@@ -130,12 +130,26 @@ class NeighborUpdate(Page):
         if self.timeout_happened:
             self.player.timeout_choose_neighbors = 1
 
-
+        self.player.model_payoff_round = 0
         if (self.player.num_neighbors == 0) & (self.player.opinion_this_round >= 0):
             self.player.payoff = -(self.player.opinion_this_round-self.player.opinion_last_round)*(self.player.opinion_this_round-self.player.opinion_last_round)
+            self.player.model_payoff_round = -(self.player.opinion_this_round - self.player.opinion_last_round) * (self.player.opinion_this_round - self.player.opinion_last_round)
+        elif (self.player.num_neighbors > 0) & (self.player.opinion_this_round >= 0) & (any(x is None for x in self.participant.vars['neighbors_opinion_guess_set']) == False):
+            for neighbor_Opinion in self.participant.vars['neighbors_opinion_guess_set']:
+                self.player.payoff += (Constants.V-Constants.f*(self.player.opinion_this_round - neighbor_Opinion)*(self.player.opinion_this_round - neighbor_Opinion) - (1-Constants.f)*(self.player.opinion_this_round - self.player.opinion_last_round)*(self.player.opinion_this_round - self.player.opinion_last_round))
+            for neighbor_Opinion in self.participant.vars['neighbors_opinion_set']:
+                self.player.model_payoff_round = self.player.model_payoff_round + (
+                    Constants.V - Constants.f * (self.player.opinion_this_round - neighbor_Opinion) * (
+                    self.player.opinion_this_round - neighbor_Opinion) - (1 - Constants.f) * (
+                            self.player.opinion_this_round - self.player.opinion_last_round) * (
+                            self.player.opinion_this_round - self.player.opinion_last_round))
         elif (self.player.num_neighbors > 0) & (self.player.opinion_this_round >= 0):
             for neighbor_Opinion in self.participant.vars['neighbors_opinion_set']:
-                self.player.payoff += (Constants.V-Constants.f*(self.player.opinion_this_round - neighbor_Opinion)*(self.player.opinion_this_round - neighbor_Opinion) - (1-Constants.f)*(self.player.opinion_this_round - self.player.opinion_last_round)*(self.player.opinion_this_round - self.player.opinion_last_round))
+                self.player.model_payoff_round = self.player.model_payoff_round + (
+                            Constants.V - Constants.f * (self.player.opinion_this_round - neighbor_Opinion) * (
+                                self.player.opinion_this_round - neighbor_Opinion) - (1 - Constants.f) * (
+                                        self.player.opinion_this_round - self.player.opinion_last_round) * (
+                                        self.player.opinion_this_round - self.player.opinion_last_round))
         else:
             self.player.payoff = 0
 
@@ -149,7 +163,7 @@ class NeighborUpdate(Page):
 
         # self.participant.vars['practice_game_payoff'] += self.player.payoff
         # self.player.game_payoff = self.participant.vars['practice_game_payoff']
-        self.participant.vars['FlH10_payoff_in_all_rounds'].append(self.player.payoff)
+
 
 
 class BeforeResultsWaitPage(WaitPage):
@@ -174,12 +188,37 @@ class GamePayment(Page):
 
     def vars_for_template(self):
         last_rounds = 5
-        game_payoff_selection_list = self.participant.vars['FlH10_payoff_in_all_rounds'][-last_rounds:]
+        game_payoff_selection_list = self.participant.vars['payoff_in_all_rounds'][-last_rounds:]
         self.participant.vars['FlH10_game_payoff'] = max(random.choice(game_payoff_selection_list), 0)
-        self.player.game_payoff = self.participant.vars['FlH10_game_payoff']
+        self.player.game_payoff = round(self.participant.vars['FlH10_game_payoff'])
         return{
-            'FlH10_game_payoff': self.participant.vars['FlH10_game_payoff'],
+            'FlH10_game_payoff': round(self.participant.vars['FlH10_game_payoff']),
         }
+
+# class ExperimentPayment(Page):
+#     def is_displayed(self):
+#         return self.round_number == Constants.num_rounds
+#     def vars_for_template(self):
+#         return {
+#             'payoff_game1': self.participant.vars['FhH10_game_payoff'],
+#             'payoff_game2': self.participant.vars['FlH10_game_payoff'],
+#             'payoff_game3': self.participant.vars['FmH10_game_payoff'],
+#             'payoff_experiment': self.participant.vars['FmH10_game_payoff']
+#                                  + self.participant.vars['FhH10_game_payoff']+ self.participant.vars['FlH10_game_payoff'],
+#             'payoff_experiment_dollar': round(
+#                 float(self.participant.vars['FmH10_game_payoff'] + self.participant.vars['FhH10_game_payoff']
+#                       + self.participant.vars['FlH10_game_payoff']) * Constants.dollar_per_credit,2),
+#             'total_endowments': Constants.endowment*3,
+#             'total_payoff_experiment_dollar': round(round(
+#                 float(self.participant.vars['FmH10_game_payoff'] + self.participant.vars['FhH10_game_payoff']
+#                       + self.participant.vars['FlH10_game_payoff']) * Constants.dollar_per_credit,
+#                 2) + Constants.participation_fee + Constants.endowment*3, 2),
+#         }
+#
+#     def before_next_page(self):
+#         self.player.total_payoff_experiment_dollar = round(round(float(self.participant.vars['FmH10_game_payoff'] + self.participant.vars['FhH10_game_payoff']
+#                       + self.participant.vars['FlH10_game_payoff'])*Constants.dollar_per_credit,2)+Constants.participation_fee+Constants.endowment*3,2)
+
 
 page_sequence = [
     GameInstruction,

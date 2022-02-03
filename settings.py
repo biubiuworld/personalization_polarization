@@ -8,15 +8,15 @@ SESSION_CONFIGS = [
     #    app_sequence=['new_practice_game']
     # ),
     # dict(
-    #     name='game_VhFlH0',
-    #     display_name="game_VhFlH0",
+    #     name='game_FmH10',
+    #     display_name="game_FmH10",
     #     num_demo_participants=3,
-    #     app_sequence=['game_VhFlH0']
+    #     app_sequence=['game_FmH10']
     # ),
     dict(
         name='game_FhH10',
         display_name="game_FhH10",
-        num_demo_participants=5,
+        num_demo_participants=3,
         app_sequence=['game_FhH10', 'game_FlH10','game_FmH10']
     ),
     # dict(
