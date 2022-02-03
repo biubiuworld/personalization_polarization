@@ -21,7 +21,7 @@ Your app description
 class Constants(BaseConstants):
     name_in_url = 'game_FmH10'
     players_per_group = None
-    num_rounds = 10
+    num_rounds = 5
     min_opinion = 0.
     V = 250
     f = 0.5
@@ -110,6 +110,8 @@ class Subsession(BaseSubsession):
             elif p.num_neighbors > 0:
                 for neighbor_Opinion in p.participant.vars['neighbors_actual_opinion_set']:
                     p.actual_payoff_round = p.actual_payoff_round + Constants.V - Constants.f*(p.opinion_this_round - neighbor_Opinion)**2 - (1 - Constants.f)*(p.opinion_this_round - p.opinion_last_round)**2
+            p.participant.vars['payoff_in_all_rounds'].append(p.actual_payoff_round)
+
 
     def generate_observed_players_eachround(self):
         for p in self.get_players():
@@ -182,6 +184,7 @@ class Player(BasePlayer):
 
     game_payoff = models.CurrencyField()
     actual_payoff_round = models.CurrencyField()
+    model_payoff_round = models.CurrencyField()
 
     timeout_choose_neighbors = models.BooleanField(initial=0)
     timeout_update_opinion = models.BooleanField(initial=0)
