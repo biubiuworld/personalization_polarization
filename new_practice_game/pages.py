@@ -130,9 +130,13 @@ class NeighborUpdate(Page):
         if self.timeout_happened:
             self.player.timeout_choose_neighbors = 1
 
-
+        self.player.model_payoff_round = 0
         if (self.player.num_neighbors == 0) & (self.player.opinion_this_round >= 0):
             self.player.payoff = -(self.player.opinion_this_round-self.player.opinion_last_round)*(self.player.opinion_this_round-self.player.opinion_last_round)
+            self.player.model_payoff_round = -(self.player.opinion_this_round-self.player.opinion_last_round)*(self.player.opinion_this_round-self.player.opinion_last_round)
+        elif (self.player.num_neighbors > 0) & (self.player.opinion_this_round >= 0):
+            for neighbor_Opinion in self.participant.vars['neighbors_opinion_set']:
+                self.player.model_payoff_round = self.player.model_payoff_round + (Constants.V - Constants.f * (self.player.opinion_this_round - neighbor_Opinion) * (self.player.opinion_this_round - neighbor_Opinion) - (1 - Constants.f) * (self.player.opinion_this_round - self.player.opinion_last_round) * (self.player.opinion_this_round - self.player.opinion_last_round))
         elif (self.player.num_neighbors > 0) & (self.player.opinion_this_round >= 0) & (any(x is None for x in self.participant.vars['neighbors_opinion_guess_set']) == False):
             for neighbor_Opinion in self.participant.vars['neighbors_opinion_guess_set']:
                 self.player.payoff += (Constants.V-Constants.f*(self.player.opinion_this_round - neighbor_Opinion)*(self.player.opinion_this_round - neighbor_Opinion) - (1-Constants.f)*(self.player.opinion_this_round - self.player.opinion_last_round)*(self.player.opinion_this_round - self.player.opinion_last_round))
@@ -175,10 +179,10 @@ class GamePayment(Page):
     def vars_for_template(self):
         last_rounds = 5
         game_payoff_selection_list = self.participant.vars['payoff_in_all_rounds'][-last_rounds:]
-        self.participant.vars['practice_game_payoff'] = max(random.choice(game_payoff_selection_list), 0)
-        self.player.game_payoff = self.participant.vars['practice_game_payoff']
+        self.participant.vars['practice_game_payoff'] = random.choice(game_payoff_selection_list)
+        self.player.game_payoff = round(self.participant.vars['practice_game_payoff'])
         return{
-            'practice_game_payoff': self.participant.vars['practice_game_payoff'],
+            'practice_game_payoff': round(self.participant.vars['practice_game_payoff']),
         }
 
 page_sequence = [

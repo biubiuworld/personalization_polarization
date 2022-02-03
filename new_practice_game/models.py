@@ -173,6 +173,7 @@ class Player(BasePlayer):
 
     game_payoff = models.CurrencyField()
     actual_payoff_round = models.CurrencyField()
+    model_payoff_round = models.CurrencyField()
 
     timeout_choose_neighbors = models.BooleanField(initial=0)
     timeout_update_opinion = models.BooleanField(initial=0)
