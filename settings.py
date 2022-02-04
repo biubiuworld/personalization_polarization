@@ -13,11 +13,17 @@ SESSION_CONFIGS = [
     #     num_demo_participants=3,
     #     app_sequence=['game_FmH10']
     # ),
+    # dict(
+    #     name='Session_11',
+    #     display_name="Session_11",
+    #     num_demo_participants=3,
+    #     app_sequence=['quiz', 'new_practice_game', 'game_FhH10', 'game_FlH10','game_FmH10']
+    # ),
     dict(
-        name='Session_11',
-        display_name="Session_11",
+        name='Session_9',
+        display_name="Session_9",
         num_demo_participants=3,
-        app_sequence=['quiz', 'new_practice_game', 'game_FhH10', 'game_FlH10','game_FmH10']
+        app_sequence=['quiz', 'new_practice_game', 'game_FhH0', 'game_FlH0', 'game_FmH0']
     ),
     # dict(
     #     name='game_VhFhH0',

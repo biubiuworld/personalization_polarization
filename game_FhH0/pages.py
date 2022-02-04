@@ -33,7 +33,7 @@ class NeighborUpdate(Page):
                    'update_neighbor_opinion_2', 'update_neighbor_opinion_3', 'update_neighbor_opinion_4',
                    'update_neighbor_opinion_5','update_neighbor_opinion_6','update_neighbor_opinion_7','update_neighbor_opinion_8']
 
-    timeout_seconds = 10
+    timeout_seconds = 60
 
     def vars_for_template(self):
         self.participant.vars['neighbors_opinion_set'] = []
@@ -173,7 +173,7 @@ class BeforeResultsWaitPage(WaitPage):
 
 class Results(Page):
 
-    # timeout_seconds = 5
+    timeout_seconds = 5
 
     def vars_for_template(self):
         return {
