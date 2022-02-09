@@ -210,3 +210,11 @@ class Player(BasePlayer):
     actual_opinion_neighbor_7 = models.FloatField()
     actual_opinion_neighbor_8 = models.FloatField()
 
+    disconnect_with_neighbor_1 = models.BooleanField(blank=True)
+    disconnect_with_neighbor_2 = models.BooleanField(blank=True)
+    disconnect_with_neighbor_3 = models.BooleanField(blank=True)
+    disconnect_with_neighbor_4 = models.BooleanField(blank=True)
+    disconnect_with_neighbor_5 = models.BooleanField(blank=True)
+    disconnect_with_neighbor_6 = models.BooleanField(blank=True)
+    disconnect_with_neighbor_7 = models.BooleanField(blank=True)
+    disconnect_with_neighbor_8 = models.BooleanField(blank=True)

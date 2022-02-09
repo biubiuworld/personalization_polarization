@@ -31,7 +31,9 @@ class NeighborUpdate(Page):
     form_model = 'player'
     form_fields = ['if_connect_player1', 'if_connect_player2', 'opinion_this_round', 'update_neighbor_opinion_1',
                    'update_neighbor_opinion_2', 'update_neighbor_opinion_3', 'update_neighbor_opinion_4',
-                   'update_neighbor_opinion_5','update_neighbor_opinion_6','update_neighbor_opinion_7','update_neighbor_opinion_8']
+                   'update_neighbor_opinion_5','update_neighbor_opinion_6','update_neighbor_opinion_7','update_neighbor_opinion_8',
+                   'disconnect_with_neighbor_1', 'disconnect_with_neighbor_2', 'disconnect_with_neighbor_3', 'disconnect_with_neighbor_4', 'disconnect_with_neighbor_5',
+                   'disconnect_with_neighbor_6', 'disconnect_with_neighbor_7', 'disconnect_with_neighbor_8']
 
     # timeout_seconds = 10
 
