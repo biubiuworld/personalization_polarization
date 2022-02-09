@@ -104,6 +104,11 @@
     const neighborGuess = ['update_neighbor_opinion_1', 'update_neighbor_opinion_2', 'update_neighbor_opinion_3','update_neighbor_opinion_4',
     'update_neighbor_opinion_5', 'update_neighbor_opinion_6','update_neighbor_opinion_7', 'update_neighbor_opinion_8'];
 
+    const disconnectionCheckbox = ['disconnect_with_neighbor_1', 'disconnect_with_neighbor_2', 'disconnect_with_neighbor_3','disconnect_with_neighbor_4',
+    'disconnect_with_neighbor_5', 'disconnect_with_neighbor_6','disconnect_with_neighbor_7', 'disconnect_with_neighbor_8'];
+
+    
+
     $("#opinion_this_round").slider().slider("pips");
 
 
@@ -174,7 +179,18 @@
             row.appendChild(cells);
           }
           neighborTable.appendChild(row);
-          // add third row
+          // add third row (checkbox)
+          var header = document.createElement('th');
+          header.innerText = 'Disconnect?';
+          var row = document.createElement('tr');
+          row.appendChild(header);
+          for (i = 0; i < num_neighbors; i++) {
+            var cells = document.createElement('td');
+            cells.innerHTML = '<input name=' + disconnectionCheckbox[i] + ' type="checkbox" value=0 />';
+            row.appendChild(cells);
+          }
+          neighborTable.appendChild(row);
+          // add forth row
           var header = document.createElement('th');
           header.innerText = 'Your Guess';
           var row = document.createElement('tr');
@@ -236,7 +252,18 @@
             row.appendChild(cells);
           }
           neighborTable.appendChild(row);
-          // add third row
+          // add third row (checkbox)
+          var header = document.createElement('th');
+          header.innerText = 'Disconnect?';
+          var row = document.createElement('tr');
+          row.appendChild(header);
+          for (i = 0; i < num_neighbors; i++) {
+            var cells = document.createElement('td');
+            cells.innerHTML = '<input name=' + disconnectionCheckbox[i] + ' type="checkbox" value=0 />';
+            row.appendChild(cells);
+          }
+          neighborTable.appendChild(row);
+          // add forth row
           var header = document.createElement('th');
           header.innerText = 'Your Guess';
           var row = document.createElement('tr');
@@ -305,7 +332,18 @@
             row.appendChild(cells);
           }
           neighborTable.appendChild(row);
-          // add third row
+          // add third row (checkbox)
+          var header = document.createElement('th');
+          header.innerText = 'Disconnect?';
+          var row = document.createElement('tr');
+          row.appendChild(header);
+          for (i = 0; i < num_neighbors; i++) {
+            var cells = document.createElement('td');
+            cells.innerHTML = '<input name=' + disconnectionCheckbox[i] + ' type="checkbox" value=0 />';
+            row.appendChild(cells);
+          }
+          neighborTable.appendChild(row);
+          // add forth row
           var header = document.createElement('th');
           header.innerText = 'Your Guess';
           var row = document.createElement('tr');
@@ -367,7 +405,18 @@
             row.appendChild(cells);
           }
           neighborTable.appendChild(row);
-          // add third row
+          // add third row (checkbox)
+          var header = document.createElement('th');
+          header.innerText = 'Disconnect?';
+          var row = document.createElement('tr');
+          row.appendChild(header);
+          for (i = 0; i < num_neighbors; i++) {
+            var cells = document.createElement('td');
+            cells.innerHTML = '<input name=' + disconnectionCheckbox[i] + ' type="checkbox" value=0 />';
+            row.appendChild(cells);
+          }
+          neighborTable.appendChild(row);
+          // add forth row
           var header = document.createElement('th');
           header.innerText = 'Your Guess';
           var row = document.createElement('tr');
@@ -393,6 +442,16 @@
       var guessList = [];
       if (neighborsOpinionSet.length != 0){
         for (let i = 0; i < neighborsOpinionSet.length; i++){
+          document.getElementsByName(disconnectionCheckbox[i])[0].value = 0;
+          if (document.getElementsByName(disconnectionCheckbox[i])[0].checked) {
+            document.getElementsByName(neighborGuess[i])[0].value = "";
+            document.getElementsByName(neighborGuess[i])[0].disabled = true;
+            document.getElementsByName(disconnectionCheckbox[i])[0].value = 1;
+          }
+          else {
+            document.getElementsByName(neighborGuess[i])[0].disabled = false;
+            document.getElementsByName(disconnectionCheckbox[i])[0].value = 0;
+          }
           var tableCell = document.getElementsByName(neighborGuess[i])[0];
             if ((typeof tableCell != 'undefined') && (tableCell.value != '')){
               var x = tableCell.value;
@@ -485,7 +544,7 @@
         var a = 0;
         if (neighborsOpinionSet.length != 0){
             for (let i = 0; i < neighborsOpinionSet.length; i++){
-                if(document.getElementsByName(neighborGuess[i])[0].value == ''){
+                if((document.getElementsByName(neighborGuess[i])[0].disabled == false) && (document.getElementsByName(neighborGuess[i])[0].value == '')){
                     a = 1;
                 }
             }

@@ -91,6 +91,26 @@ class NeighborUpdate(Page):
 
         if (self.player.if_connect_player2 == 0) & (self.player.disconnect_with_player2 == 1):
             self.participant.vars['neighbors_id_set'].remove(self.player.observed_id_player2)
+        print(self.participant.vars['neighbors_id_set'])
+        #remove disconnected neighbors
+        disconnection_checkbox = [self.player.disconnect_with_neighbor_1, self.player.disconnect_with_neighbor_2, self.player.disconnect_with_neighbor_3, self.player.disconnect_with_neighbor_4,
+        self.player.disconnect_with_neighbor_5, self.player.disconnect_with_neighbor_6, self.player.disconnect_with_neighbor_7, self.player.disconnect_with_neighbor_8]
+        all_neighbor_guess_set = [self.player.update_neighbor_opinion_1, self.player.update_neighbor_opinion_2, self.player.update_neighbor_opinion_3, self.player.update_neighbor_opinion_4,
+        self.player.update_neighbor_opinion_5, self.player.update_neighbor_opinion_6, self.player.update_neighbor_opinion_7, self.player.update_neighbor_opinion_8]
+        number_neighbors = len(self.participant.vars['neighbors_id_set'])
+        disconnection_checkbox = disconnection_checkbox[:number_neighbors]
+        print(disconnection_checkbox)
+        delete_index = []
+        self.participant.vars['neighbors_opinion_guess_set'] = [] 
+        for i in range(0, number_neighbors):
+            self.participant.vars['neighbors_opinion_guess_set'].append(all_neighbor_guess_set[i])
+            if disconnection_checkbox[i] == 1:
+                delete_index.append(i)
+        self.participant.vars['neighbors_id_set'] = [val for n, val in enumerate(self.participant.vars['neighbors_id_set']) if n not in delete_index]
+        self.participant.vars['neighbors_opinion_guess_set'] = [val for n, val in enumerate(self.participant.vars['neighbors_opinion_guess_set']) if n not in delete_index]
+        print(self.participant.vars['neighbors_id_set'])
+        print(self.participant.vars['neighbors_opinion_guess_set'])
+        
 
         self.participant.vars['neighbors_opinion_set'] = []
         for neighbor in self.participant.vars['neighbors_id_set']:
@@ -98,31 +118,23 @@ class NeighborUpdate(Page):
         self.player.num_neighbors = len(self.participant.vars['neighbors_opinion_set']) #number of neighbors this round
         self.player.neighbors_id_set = ', '.join(map(str, self.participant.vars['neighbors_id_set']))
         self.player.neighbors_opinion_set = ', '.join(map(str, self.participant.vars['neighbors_opinion_set']))
-        self.participant.vars['neighbors_opinion_guess_set'] = []
+        
         if self.player.num_neighbors > 0:
             self.player.neighbor_opinion_1 = self.participant.vars['neighbors_opinion_set'][0]
-            self.participant.vars['neighbors_opinion_guess_set'].append(self.player.update_neighbor_opinion_1)
         if self.player.num_neighbors > 1:
             self.player.neighbor_opinion_2 = self.participant.vars['neighbors_opinion_set'][1]
-            self.participant.vars['neighbors_opinion_guess_set'].append(self.player.update_neighbor_opinion_2)
         if self.player.num_neighbors > 2:
             self.player.neighbor_opinion_3 = self.participant.vars['neighbors_opinion_set'][2]
-            self.participant.vars['neighbors_opinion_guess_set'].append(self.player.update_neighbor_opinion_3)
         if self.player.num_neighbors > 3:
             self.player.neighbor_opinion_4 = self.participant.vars['neighbors_opinion_set'][3]
-            self.participant.vars['neighbors_opinion_guess_set'].append(self.player.update_neighbor_opinion_4)
         if self.player.num_neighbors > 4:
             self.player.neighbor_opinion_5 = self.participant.vars['neighbors_opinion_set'][4]
-            self.participant.vars['neighbors_opinion_guess_set'].append(self.player.update_neighbor_opinion_5)
         if self.player.num_neighbors > 5:
             self.player.neighbor_opinion_6 = self.participant.vars['neighbors_opinion_set'][5]
-            self.participant.vars['neighbors_opinion_guess_set'].append(self.player.update_neighbor_opinion_6)
         if self.player.num_neighbors > 6:
             self.player.neighbor_opinion_7 = self.participant.vars['neighbors_opinion_set'][6]
-            self.participant.vars['neighbors_opinion_guess_set'].append(self.player.update_neighbor_opinion_7)
         if self.player.num_neighbors > 7:
             self.player.neighbor_opinion_8 = self.participant.vars['neighbors_opinion_set'][7]
-            self.participant.vars['neighbors_opinion_guess_set'].append(self.player.update_neighbor_opinion_8)
         self.player.neighbors_opinion_guess_set = ', '.join(map(str, self.participant.vars['neighbors_opinion_guess_set']))
         # self.participant.vars['neighbors_opinion_set'].sort() #reorder neighbors' opinons from low to high
         if (self.player.if_connect_player1 is None) | (self.player.if_connect_player2 is None):
