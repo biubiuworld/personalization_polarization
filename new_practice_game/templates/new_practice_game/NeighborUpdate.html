@@ -488,6 +488,19 @@
       outputValue_1.innerHTML = (document.getElementById("opinion_this_round").value)/1;
       const neighborsPayoffSet = guessListCopy.map(neighborPayoffFunction);
       neighborsPayoffSet.forEach(totalFunction);
+
+      if (neighborsOpinionSet.length > 0){
+        var a = 0;
+        for (let i = 0; i < neighborsOpinionSet.length; i++){
+          if(document.getElementsByName(neighborGuess[i])[0].disabled == true){
+            a = a + 1;
+          }
+        }
+        if (a == neighborsOpinionSet.length) {
+          total = -1*(currentOpinion-previousOpinion)*(currentOpinion-previousOpinion)*1;
+        }
+      }
+
       if (neighborsOpinionSet.length <= 0) {
           total = -1*(currentOpinion-previousOpinion)*(currentOpinion-previousOpinion)*1;
       }

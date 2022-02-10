@@ -91,7 +91,6 @@ class NeighborUpdate(Page):
 
         if (self.player.if_connect_player2 == 0) & (self.player.disconnect_with_player2 == 1):
             self.participant.vars['neighbors_id_set'].remove(self.player.observed_id_player2)
-        print(self.participant.vars['neighbors_id_set'])
         #remove disconnected neighbors
         disconnection_checkbox = [self.player.disconnect_with_neighbor_1, self.player.disconnect_with_neighbor_2, self.player.disconnect_with_neighbor_3, self.player.disconnect_with_neighbor_4,
         self.player.disconnect_with_neighbor_5, self.player.disconnect_with_neighbor_6, self.player.disconnect_with_neighbor_7, self.player.disconnect_with_neighbor_8]
@@ -99,7 +98,6 @@ class NeighborUpdate(Page):
         self.player.update_neighbor_opinion_5, self.player.update_neighbor_opinion_6, self.player.update_neighbor_opinion_7, self.player.update_neighbor_opinion_8]
         number_neighbors = len(self.participant.vars['neighbors_id_set'])
         disconnection_checkbox = disconnection_checkbox[:number_neighbors]
-        print(disconnection_checkbox)
         delete_index = []
         self.participant.vars['neighbors_opinion_guess_set'] = [] 
         for i in range(0, number_neighbors):
@@ -108,8 +106,7 @@ class NeighborUpdate(Page):
                 delete_index.append(i)
         self.participant.vars['neighbors_id_set'] = [val for n, val in enumerate(self.participant.vars['neighbors_id_set']) if n not in delete_index]
         self.participant.vars['neighbors_opinion_guess_set'] = [val for n, val in enumerate(self.participant.vars['neighbors_opinion_guess_set']) if n not in delete_index]
-        print(self.participant.vars['neighbors_id_set'])
-        print(self.participant.vars['neighbors_opinion_guess_set'])
+
         
 
         self.participant.vars['neighbors_opinion_set'] = []
