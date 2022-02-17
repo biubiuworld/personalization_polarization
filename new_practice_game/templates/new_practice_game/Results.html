@@ -54,7 +54,7 @@
          <br>
          <p>
          <strong>Actual payoff is caculated as follow:<br>
-            {{ player.actual_payoff_round }} = \( \color{red}{250} \) - \( \color{red}{0.3} \) \( * (\color{blue}{ {{ player.opinion_this_round }} }-\color{orange}{ {{ player.actual_opinion_neighbor_1 }} } \color{black}{ )^2 } \)  - \( \color{red}{0.7} \) \( * (\color{blue}{ {{ player.opinion_this_round }} }-\color{green}{ {{ player.opinion_last_round }} } \color{black}{ )^2 } \)</strong><br>
+            {{ player.actual_payoff_round }} = \( \color{red}{ {{ Constants.V }} } \) - \( \color{red}{0.3} \) \( * (\color{blue}{ {{ player.opinion_this_round }} }-\color{orange}{ {{ player.actual_opinion_neighbor_1 }} } \color{black}{ )^2 } \)  - \( \color{red}{0.7} \) \( * (\color{blue}{ {{ player.opinion_this_round }} }-\color{green}{ {{ player.opinion_last_round }} } \color{black}{ )^2 } \)</strong><br>
         </p>
     {% elif player.num_neighbors == 2 %}
         <p>
@@ -83,8 +83,8 @@
          <br>
          <p>
          <strong>Actual payoff is caculated as follow:<br>
-            {{ player.actual_payoff_round }} = [\( \color{red}{250} \) - \( \color{red}{0.3} \) \( * (\color{blue}{ {{ player.opinion_this_round }} }-\color{orange}{ {{ player.actual_opinion_neighbor_1 }} } \color{black}{ )^2 } \)  - \( \color{red}{0.7} \) \( * (\color{blue}{ {{ player.opinion_this_round }} }-\color{green}{ {{ player.opinion_last_round }} } \color{black}{ )^2 } \)]
-                                                + [\( \color{red}{250} \) - \( \color{red}{0.3} \) \( * (\color{blue}{ {{ player.opinion_this_round }} }-\color{orange}{ {{ player.actual_opinion_neighbor_2 }} } \color{black}{ )^2 } \)  - \( \color{red}{0.7} \) \( * (\color{blue}{ {{ player.opinion_this_round }} }-\color{green}{ {{ player.opinion_last_round }} } \color{black}{ )^2 } \)]</strong><br>
+            {{ player.actual_payoff_round }} = [\( \color{red}{ {{ Constants.V }} } \) - \( \color{red}{0.3} \) \( * (\color{blue}{ {{ player.opinion_this_round }} }-\color{orange}{ {{ player.actual_opinion_neighbor_1 }} } \color{black}{ )^2 } \)  - \( \color{red}{0.7} \) \( * (\color{blue}{ {{ player.opinion_this_round }} }-\color{green}{ {{ player.opinion_last_round }} } \color{black}{ )^2 } \)]
+                                                + [\( \color{red}{ {{ Constants.V }} } \) - \( \color{red}{0.3} \) \( * (\color{blue}{ {{ player.opinion_this_round }} }-\color{orange}{ {{ player.actual_opinion_neighbor_2 }} } \color{black}{ )^2 } \)  - \( \color{red}{0.7} \) \( * (\color{blue}{ {{ player.opinion_this_round }} }-\color{green}{ {{ player.opinion_last_round }} } \color{black}{ )^2 } \)]</strong><br>
         </p>
 
     {% elif player.num_neighbors == 3 %}
