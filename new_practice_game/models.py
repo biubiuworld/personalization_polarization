@@ -23,7 +23,7 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 5
     min_opinion = 0
-    V = 250
+    V = 150
     f = 0.3
     h = 0
 
