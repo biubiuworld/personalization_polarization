@@ -33,7 +33,7 @@ class Constants(BaseConstants):
 class Subsession(BaseSubsession):
     def generate_initial_opinion(self):
         initial_opinion_set = [0.0, 10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0]
-        random.shuffle(initial_opinion_set)
+        # random.shuffle(initial_opinion_set)
         for p in self.get_players():
             # p.initial_opinion = round(random.uniform(Constants.min_opinion, 1),
             #                           2)  # generate a random 2-decimal number as the initial opinion
@@ -57,49 +57,21 @@ class Subsession(BaseSubsession):
                 p.participant.vars['neighbors_actual_opinion_set'].append(p.participant.vars['others_update_opinions'][
                                                                           p.participant.vars[
                                                                               'others_id_in_group'].index(neighbor)])
-            if len(p.participant.vars['neighbors_actual_opinion_set']) == 1:
+            if len(p.participant.vars['neighbors_actual_opinion_set']) > 0:
                 p.actual_opinion_neighbor_1 = p.participant.vars['neighbors_actual_opinion_set'][0]
-            if len(p.participant.vars['neighbors_actual_opinion_set']) == 2:
-                p.actual_opinion_neighbor_1 = p.participant.vars['neighbors_actual_opinion_set'][0]
+            if len(p.participant.vars['neighbors_actual_opinion_set']) > 1:
                 p.actual_opinion_neighbor_2 = p.participant.vars['neighbors_actual_opinion_set'][1]
-            if len(p.participant.vars['neighbors_actual_opinion_set']) == 3:
-                p.actual_opinion_neighbor_1 = p.participant.vars['neighbors_actual_opinion_set'][0]
-                p.actual_opinion_neighbor_2 = p.participant.vars['neighbors_actual_opinion_set'][1]
+            if len(p.participant.vars['neighbors_actual_opinion_set']) > 2:
                 p.actual_opinion_neighbor_3 = p.participant.vars['neighbors_actual_opinion_set'][2]
-            if len(p.participant.vars['neighbors_actual_opinion_set']) == 4:
-                p.actual_opinion_neighbor_1 = p.participant.vars['neighbors_actual_opinion_set'][0]
-                p.actual_opinion_neighbor_2 = p.participant.vars['neighbors_actual_opinion_set'][1]
-                p.actual_opinion_neighbor_3 = p.participant.vars['neighbors_actual_opinion_set'][2]
+            if len(p.participant.vars['neighbors_actual_opinion_set']) > 3:
                 p.actual_opinion_neighbor_4 = p.participant.vars['neighbors_actual_opinion_set'][3]
-            if len(p.participant.vars['neighbors_actual_opinion_set']) == 5:
-                p.actual_opinion_neighbor_1 = p.participant.vars['neighbors_actual_opinion_set'][0]
-                p.actual_opinion_neighbor_2 = p.participant.vars['neighbors_actual_opinion_set'][1]
-                p.actual_opinion_neighbor_3 = p.participant.vars['neighbors_actual_opinion_set'][2]
-                p.actual_opinion_neighbor_4 = p.participant.vars['neighbors_actual_opinion_set'][3]
+            if len(p.participant.vars['neighbors_actual_opinion_set']) > 4:
                 p.actual_opinion_neighbor_5 = p.participant.vars['neighbors_actual_opinion_set'][4]
-            if len(p.participant.vars['neighbors_actual_opinion_set']) == 6:
-                p.actual_opinion_neighbor_1 = p.participant.vars['neighbors_actual_opinion_set'][0]
-                p.actual_opinion_neighbor_2 = p.participant.vars['neighbors_actual_opinion_set'][1]
-                p.actual_opinion_neighbor_3 = p.participant.vars['neighbors_actual_opinion_set'][2]
-                p.actual_opinion_neighbor_4 = p.participant.vars['neighbors_actual_opinion_set'][3]
-                p.actual_opinion_neighbor_5 = p.participant.vars['neighbors_actual_opinion_set'][4]
+            if len(p.participant.vars['neighbors_actual_opinion_set']) > 5:
                 p.actual_opinion_neighbor_6 = p.participant.vars['neighbors_actual_opinion_set'][5]
-            if len(p.participant.vars['neighbors_actual_opinion_set']) == 7:
-                p.actual_opinion_neighbor_1 = p.participant.vars['neighbors_actual_opinion_set'][0]
-                p.actual_opinion_neighbor_2 = p.participant.vars['neighbors_actual_opinion_set'][1]
-                p.actual_opinion_neighbor_3 = p.participant.vars['neighbors_actual_opinion_set'][2]
-                p.actual_opinion_neighbor_4 = p.participant.vars['neighbors_actual_opinion_set'][3]
-                p.actual_opinion_neighbor_5 = p.participant.vars['neighbors_actual_opinion_set'][4]
-                p.actual_opinion_neighbor_6 = p.participant.vars['neighbors_actual_opinion_set'][5]
+            if len(p.participant.vars['neighbors_actual_opinion_set']) > 6:
                 p.actual_opinion_neighbor_7 = p.participant.vars['neighbors_actual_opinion_set'][6]
-            if len(p.participant.vars['neighbors_actual_opinion_set']) == 8:
-                p.actual_opinion_neighbor_1 = p.participant.vars['neighbors_actual_opinion_set'][0]
-                p.actual_opinion_neighbor_2 = p.participant.vars['neighbors_actual_opinion_set'][1]
-                p.actual_opinion_neighbor_3 = p.participant.vars['neighbors_actual_opinion_set'][2]
-                p.actual_opinion_neighbor_4 = p.participant.vars['neighbors_actual_opinion_set'][3]
-                p.actual_opinion_neighbor_5 = p.participant.vars['neighbors_actual_opinion_set'][4]
-                p.actual_opinion_neighbor_6 = p.participant.vars['neighbors_actual_opinion_set'][5]
-                p.actual_opinion_neighbor_7 = p.participant.vars['neighbors_actual_opinion_set'][6]
+            if len(p.participant.vars['neighbors_actual_opinion_set']) > 7:
                 p.actual_opinion_neighbor_8 = p.participant.vars['neighbors_actual_opinion_set'][7]
 
         for p in self.get_players():
@@ -114,6 +86,8 @@ class Subsession(BaseSubsession):
 
 
     def generate_observed_players_eachround(self):
+        if self.round_number == 1:
+            np.random.seed(223975673)
         for p in self.get_players():
             p.participant.vars['others_last_opinions'] = []
             p.participant.vars['others_id_in_group'] = []
@@ -125,10 +99,12 @@ class Subsession(BaseSubsession):
                 p.participant.vars['others_id_in_group'].append(other.id_in_group) #stores all 10 other players' ids
                 p.participant.vars['others_last_opinions'].append(other.opinion_last_round) #stores all 10 other players' last round opinions
                 p.participant.vars['others_p'].append(((1.-0.01*abs(p.opinion_last_round - other.opinion_last_round))**Constants.h)/p.participant.vars['total_p'])
+            prob = [x for _,x in sorted(zip(p.participant.vars['others_id_in_group'],p.participant.vars['others_p']))]
+            p.participant.vars['others_id_in_group'].sort()  # avoid extra randomization, consistent with the simulation process
             observed_players_id_this_round = np.random.choice(np.asarray(p.participant.vars['others_id_in_group']),
                                                               size=2,
                                                               replace=False,
-                                                              p=np.asarray(p.participant.vars['others_p']))
+                                                              p=np.asarray(prob))
 
             # observed_players_id_this_round = random.sample(p.participant.vars['others_id_in_group'], 2) #randomly choose 2 observed players (id)
             p.observed_id_player1 = observed_players_id_this_round[0]
