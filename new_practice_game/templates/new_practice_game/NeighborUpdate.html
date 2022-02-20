@@ -163,10 +163,13 @@
           header.innerText = 'Position last round';
           var row = document.createElement('tr');
           row.appendChild(header);
+          header.style.width = '50px';
           for (i = 0; i < num_neighbors; i++) {
             var cells = document.createElement('td');
             cells.innerHTML = neighborsOpinionSet[i];
             row.appendChild(cells);
+            cells.style.width = '50px';
+            
           }
           neighborTable.appendChild(row);
           // add third row (checkbox)
@@ -178,6 +181,7 @@
             var cells = document.createElement('td');
             cells.innerHTML = '<input name=' + disconnectionCheckbox[i] + ' type="checkbox" value=0 />';
             row.appendChild(cells);
+            cells.style.width = '50px';
           }
           neighborTable.appendChild(row);
           // add forth row
@@ -187,8 +191,9 @@
           row.appendChild(header);
           for (i = 0; i < num_neighbors; i++) {
             var cells = document.createElement('td');
-            cells.innerHTML = '<input name=' + neighborGuess[i] + ' type="text" />';
+            cells.innerHTML = '<input name=' + neighborGuess[i] + ' type="text" size="5" />';
             row.appendChild(cells);
+            cells.style.width = '50px';
           }
           neighborTable.appendChild(row);
         }
@@ -226,10 +231,12 @@
           header.innerText = 'Position last round';
           var row = document.createElement('tr');
           row.appendChild(header);
+          header.style.width = '50px';
           for (i = 0; i < num_neighbors; i++) {
             var cells = document.createElement('td');
             cells.innerHTML = neighborsOpinionSet[i];
             row.appendChild(cells);
+            cells.style.width = '50px';
           }
           neighborTable.appendChild(row);
           // add third row (checkbox)
@@ -241,6 +248,7 @@
             var cells = document.createElement('td');
             cells.innerHTML = '<input name=' + disconnectionCheckbox[i] + ' type="checkbox" value=0 />';
             row.appendChild(cells);
+            cells.style.width = '50px';
           }
           neighborTable.appendChild(row);
           // add forth row
@@ -250,8 +258,9 @@
           row.appendChild(header);
           for (i = 0; i < num_neighbors; i++) {
             var cells = document.createElement('td');
-            cells.innerHTML = '<input name=' + neighborGuess[i] + ' type="text" />';
+            cells.innerHTML = '<input name=' + neighborGuess[i] + ' type="text" size="5" />';
             row.appendChild(cells);
+            cells.style.width = '50px';
           }
           neighborTable.appendChild(row);
         }
@@ -296,10 +305,12 @@
           header.innerText = 'Position last round';
           var row = document.createElement('tr');
           row.appendChild(header);
+          header.style.width = '50px';
           for (i = 0; i < num_neighbors; i++) {
             var cells = document.createElement('td');
             cells.innerHTML = neighborsOpinionSet[i];
             row.appendChild(cells);
+            cells.style.width = '50px';
           }
           neighborTable.appendChild(row);
           // add third row (checkbox)
@@ -311,6 +322,7 @@
             var cells = document.createElement('td');
             cells.innerHTML = '<input name=' + disconnectionCheckbox[i] + ' type="checkbox" value=0 />';
             row.appendChild(cells);
+            cells.style.width = '50px';
           }
           neighborTable.appendChild(row);
           // add forth row
@@ -320,8 +332,9 @@
           row.appendChild(header);
           for (i = 0; i < num_neighbors; i++) {
             var cells = document.createElement('td');
-            cells.innerHTML = '<input name=' + neighborGuess[i] + ' type="text" />';
+            cells.innerHTML = '<input name=' + neighborGuess[i] + ' type="text" size="5" />';
             row.appendChild(cells);
+            cells.style.width = '50px';
           }
           neighborTable.appendChild(row);
         }
@@ -359,10 +372,12 @@
           header.innerText = 'Position last round';
           var row = document.createElement('tr');
           row.appendChild(header);
+          header.style.width = '50px';
           for (i = 0; i < num_neighbors; i++) {
             var cells = document.createElement('td');
             cells.innerHTML = neighborsOpinionSet[i];
             row.appendChild(cells);
+            cells.style.width = '50px';
           }
           neighborTable.appendChild(row);
           // add third row (checkbox)
@@ -374,6 +389,7 @@
             var cells = document.createElement('td');
             cells.innerHTML = '<input name=' + disconnectionCheckbox[i] + ' type="checkbox" value=0 />';
             row.appendChild(cells);
+            cells.style.width = '50px';
           }
           neighborTable.appendChild(row);
           // add forth row
@@ -383,8 +399,9 @@
           row.appendChild(header);
           for (i = 0; i < num_neighbors; i++) {
             var cells = document.createElement('td');
-            cells.innerHTML = '<input name=' + neighborGuess[i] + ' type="text" />';
+            cells.innerHTML = '<input name=' + neighborGuess[i] + ' type="text" size="5" />';
             row.appendChild(cells);
+            cells.style.width = '50px';
           }
           neighborTable.appendChild(row);
         }
