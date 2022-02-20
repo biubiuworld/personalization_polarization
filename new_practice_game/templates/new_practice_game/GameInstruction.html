@@ -23,7 +23,8 @@
             At the beginning of the game, you will be randomly assigned an initial position and then in the following rounds, you will
             (1) observe two other players and decide whether to connect (or reconsider whether to keep the connection if they are already in your network) with them;
             (2) guess your neighbors' positions;
-            (3) update your position based on your previous position and your neighbors' positions. <br>
+            (3) Observe the positions in the previous round for all neighbors you have connected with so far and decide whether to keep connections with current neighbors.
+            (4) update your position based on your previous position and your neighbors' positions. <br>
         </p>
         <p>
             Your payoff in round \( t \) is as follows:
@@ -32,7 +33,7 @@
                 If you have neighbor(s), your payoff this round is: <br>
                 <strong>Payoff this round = sum of payoffs from all neighbors </strong> <br>
             And specifically, the payoff with one neighbor is:<br>
-<strong>Payoff with neighbor \(k \) = \( \color{red}{ {{ Constants.V }} } \) - \( \color{red}{0.3} \) \( * \color{blue}D1 \)  - \( \color{red}{0.7} \) \( * \color{blue}D2 \)</strong><br>
+<strong>Payoff with neighbor \(k \) = \( \color{red}{ {{ Constants.V }} } \) - \( \color{red}{ {{ Constants.f }} } \) \( * \color{blue}D1 \)  - \( \color{red}{ {{ Constants.one_minus_f }} } \) \( * \color{blue}D2 \)</strong><br>
             </li>
             <li>
                 If you don’t have neighbor, your payoff this round is:<br>
