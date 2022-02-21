@@ -26,7 +26,7 @@ class Constants(BaseConstants):
     min_opinion = 0
     V = 150
     f = 0.2
-    one_minus_f = 1 - f
+    one_minus_f = round(1 - f, 1)
     h = 0
 
 
