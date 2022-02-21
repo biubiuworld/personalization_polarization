@@ -7,6 +7,12 @@ SESSION_CONFIGS = [
        num_demo_participants=9,
        app_sequence=['new_practice_game']
     ),
+    dict(
+       name='fHh10_practice',
+       display_name="fHh10_practice",
+       num_demo_participants=9,
+       app_sequence=['fHh10_practice']
+    ),    
     # dict(
     #     name='game_FmH10',
     #     display_name="game_FmH10",

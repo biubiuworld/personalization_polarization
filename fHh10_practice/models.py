@@ -20,14 +20,14 @@ Your app description
 
 
 class Constants(BaseConstants):
-    name_in_url = 'fHh0_practice'
+    name_in_url = 'fHh10_practice'
     players_per_group = None
     num_rounds = 5
     min_opinion = 0
     V = 150
     f = 0.9
     one_minus_f = round(1 - f, 1)
-    h = 0
+    h = 10
 
 
 class Subsession(BaseSubsession):
@@ -91,15 +91,20 @@ class Subsession(BaseSubsession):
         for p in self.get_players():
             p.participant.vars['others_last_opinions'] = []
             p.participant.vars['others_id_in_group'] = []
+            p.participant.vars['others_p'] = []
+            p.participant.vars['total_p'] = 0  
             for other in p.get_others_in_subsession():
-                p.participant.vars['others_id_in_group'].append(other.id_in_group)  # stores all 10 other players' ids
-                p.participant.vars['others_last_opinions'].append(
-                    other.opinion_last_round)  # stores all 10 other players' last round opinions
+                p.participant.vars['total_p'] += (1.-0.01*abs(p.opinion_last_round - other.opinion_last_round))**Constants.h     
+            for other in p.get_others_in_subsession():
+                p.participant.vars['others_id_in_group'].append(other.id_in_group) #stores all 10 other players' ids
+                p.participant.vars['others_last_opinions'].append(other.opinion_last_round) #stores all 10 other players' last round opinions
+                p.participant.vars['others_p'].append(((1.-0.01*abs(p.opinion_last_round - other.opinion_last_round))**Constants.h)/p.participant.vars['total_p'])
+            prob = [x for _,x in sorted(zip(p.participant.vars['others_id_in_group'],p.participant.vars['others_p']))]
             p.participant.vars['others_id_in_group'].sort()  # avoid extra randomization, consistent with the simulation process
             observed_players_id_this_round = np.random.choice(np.asarray(p.participant.vars['others_id_in_group']),
                                                               size=2,
                                                               replace=False,
-                                                              p=np.asarray([0.125]*8))  # randomly choose 2 observed players (id)
+                                                              p=np.asarray(prob))
             p.observed_id_player1 = observed_players_id_this_round[0]
             p.observed_id_player2 = observed_players_id_this_round[1]
             p.observed_opinion_player1 = p.participant.vars['others_last_opinions'][

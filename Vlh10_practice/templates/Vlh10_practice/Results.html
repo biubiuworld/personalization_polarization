@@ -1,0 +1,369 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block scripts %}
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+{% endblock %}
+
+{% block content %}
+
+         <table class="table">
+            <tr>
+                <th>Previous Position </th>
+                <th>Current Position</th>
+                <th>Num. of Neighbors</th>
+                <th>Actual Payoff</th>
+            </tr>
+            <tr>
+                <td>\( \color{green}{ {{ player.opinion_last_round }} } \) </td>
+                <td>\( \color{blue}{ {{ player.opinion_this_round }} } \)</td>
+                <td>{{ player.num_neighbors }}</td>
+                <td>{{ player.actual_payoff_round }}</td>
+             </tr>
+         </table>
+
+    {% if player.num_neighbors == 0 %}
+        <p>
+        You don't have neighbors this round so you don't have any neighbors' information.
+        </p>
+    {% elif player.num_neighbors == 1 %}
+        <p>
+        Your neighbor's information is as follows:
+        </p>
+         <table class="table">
+            <tr>
+                <th>Neighbor </th>
+                <th>Previous Position</th>
+                <th>Your Guess</th>
+                <th>Actual Position</th>
+            </tr>
+            <tr>
+                <td> 1 </td>
+                <td>{{ player.neighbor_opinion_1 }}</td>
+                <td>{{ player.update_neighbor_opinion_1 }}</td>
+                <td>\( \color{orange}{ {{ player.actual_opinion_neighbor_1 }} } \)</td>
+             </tr>
+         </table>
+         <br>
+         <p>
+         <strong>Actual payoff is caculated as follow:<br>
+            {{ player.actual_payoff_round }} = \( \color{red}{ {{ Constants.V }} } \) - \( \color{red}{ {{ Constants.f }} } \) \( * (\color{blue}{ {{ player.opinion_this_round }} }-\color{orange}{ {{ player.actual_opinion_neighbor_1 }} } \color{black}{ )^2 } \)  - \( \color{red}{ {{ Constants.one_minus_f }} } \) \( * (\color{blue}{ {{ player.opinion_this_round }} }-\color{green}{ {{ player.opinion_last_round }} } \color{black}{ )^2 } \)</strong><br>
+        </p>
+    {% elif player.num_neighbors == 2 %}
+        <p>
+        Your neighbors' information is as follows:
+        </p>
+         <table class="table">
+            <tr>
+                <th>Neighbor </th>
+                <th>Previous Position</th>
+                <th>Your Guess</th>
+                <th>Actual Position</th>
+            </tr>
+            <tr>
+                <td> 1 </td>
+                <td>{{ player.neighbor_opinion_1 }}</td>
+                <td>{{ player.update_neighbor_opinion_1 }}</td>
+                <td>\( \color{orange}{ {{ player.actual_opinion_neighbor_1 }} } \)</td>
+            </tr>
+             <tr>
+                <td> 2 </td>
+                <td>{{ player.neighbor_opinion_2 }}</td>
+                <td>{{ player.update_neighbor_opinion_2 }}</td>
+                <td>\( \color{orange}{ {{ player.actual_opinion_neighbor_2 }} } \)</td>
+            </tr>
+         </table>
+         <br>
+         <p>
+         <strong>Actual payoff is caculated as follow:<br>
+            {{ player.actual_payoff_round }} = [\( \color{red}{ {{ Constants.V }} } \) - \( \color{red}{ {{ Constants.f }} } \) \( * (\color{blue}{ {{ player.opinion_this_round }} }-\color{orange}{ {{ player.actual_opinion_neighbor_1 }} } \color{black}{ )^2 } \)  - \( \color{red}{ {{ Constants.one_minus_f }} } \) \( * (\color{blue}{ {{ player.opinion_this_round }} }-\color{green}{ {{ player.opinion_last_round }} } \color{black}{ )^2 } \)]
+                                                + [\( \color{red}{ {{ Constants.V }} } \) - \( \color{red}{ {{ Constants.f }} } \) \( * (\color{blue}{ {{ player.opinion_this_round }} }-\color{orange}{ {{ player.actual_opinion_neighbor_2 }} } \color{black}{ )^2 } \)  - \( \color{red}{ {{ Constants.one_minus_f }} } \) \( * (\color{blue}{ {{ player.opinion_this_round }} }-\color{green}{ {{ player.opinion_last_round }} } \color{black}{ )^2 } \)]</strong><br>
+        </p>
+
+    {% elif player.num_neighbors == 3 %}
+        <p>
+        Your neighbor's information is as follows:
+        </p>
+         <table class="table">
+            <tr>
+                <th>Neighbor </th>
+                <th>Previous Position</th>
+                <th>Your Guess</th>
+                <th>Actual Position</th>
+            </tr>
+            <tr>
+                <td> 1 </td>
+                <td>{{ player.neighbor_opinion_1 }}</td>
+                <td>{{ player.update_neighbor_opinion_1 }}</td>
+                <td>{{ player.actual_opinion_neighbor_1 }}</td>
+            </tr>
+             <tr>
+                <td> 2 </td>
+                <td>{{ player.neighbor_opinion_2 }}</td>
+                <td>{{ player.update_neighbor_opinion_2 }}</td>
+                <td>{{ player.actual_opinion_neighbor_2 }}</td>
+            </tr>
+             <tr>
+                <td> 3 </td>
+                <td>{{ player.neighbor_opinion_3 }}</td>
+                <td>{{ player.update_neighbor_opinion_3 }}</td>
+                <td>{{ player.actual_opinion_neighbor_3 }}</td>
+            </tr>
+         </table>
+
+    {% elif player.num_neighbors == 4 %}
+        <p>
+        Your neighbor's information is as follows:
+        </p>
+         <table class="table">
+            <tr>
+                <th>Neighbor </th>
+                <th>Previous Position</th>
+                <th>Your Guess</th>
+                <th>Actual Position</th>
+            </tr>
+            <tr>
+                <td> 1 </td>
+                <td>{{ player.neighbor_opinion_1 }}</td>
+                <td>{{ player.update_neighbor_opinion_1 }}</td>
+                <td>{{ player.actual_opinion_neighbor_1 }}</td>
+            </tr>
+             <tr>
+                <td> 2 </td>
+                <td>{{ player.neighbor_opinion_2 }}</td>
+                <td>{{ player.update_neighbor_opinion_2 }}</td>
+                <td>{{ player.actual_opinion_neighbor_2 }}</td>
+            </tr>
+             <tr>
+                <td> 3 </td>
+                <td>{{ player.neighbor_opinion_3 }}</td>
+                <td>{{ player.update_neighbor_opinion_3 }}</td>
+                <td>{{ player.actual_opinion_neighbor_3 }}</td>
+            </tr>
+             <tr>
+                <td> 4 </td>
+                <td>{{ player.neighbor_opinion_4 }}</td>
+                <td>{{ player.update_neighbor_opinion_4 }}</td>
+                <td>{{ player.actual_opinion_neighbor_4 }}</td>
+            </tr>
+         </table>
+    {% elif player.num_neighbors == 5 %}
+        <p>
+        Your neighbor's information is as follows:
+        </p>
+         <table class="table">
+            <tr>
+                <th>Neighbor </th>
+                <th>Previous Position</th>
+                <th>Your Guess</th>
+                <th>Actual Position</th>
+            </tr>
+            <tr>
+                <td> 1 </td>
+                <td>{{ player.neighbor_opinion_1 }}</td>
+                <td>{{ player.update_neighbor_opinion_1 }}</td>
+                <td>{{ player.actual_opinion_neighbor_1 }}</td>
+            </tr>
+             <tr>
+                <td> 2 </td>
+                <td>{{ player.neighbor_opinion_2 }}</td>
+                <td>{{ player.update_neighbor_opinion_2 }}</td>
+                <td>{{ player.actual_opinion_neighbor_2 }}</td>
+            </tr>
+             <tr>
+                <td> 3 </td>
+                <td>{{ player.neighbor_opinion_3 }}</td>
+                <td>{{ player.update_neighbor_opinion_3 }}</td>
+                <td>{{ player.actual_opinion_neighbor_3 }}</td>
+            </tr>
+             <tr>
+                <td> 4 </td>
+                <td>{{ player.neighbor_opinion_4 }}</td>
+                <td>{{ player.update_neighbor_opinion_4 }}</td>
+                <td>{{ player.actual_opinion_neighbor_4 }}</td>
+            </tr>
+             <tr>
+                <td> 5 </td>
+                <td>{{ player.neighbor_opinion_5 }}</td>
+                <td>{{ player.update_neighbor_opinion_5 }}</td>
+                <td>{{ player.actual_opinion_neighbor_5 }}</td>
+            </tr>
+         </table>
+
+    {% elif player.num_neighbors == 6 %}
+        <p>
+        Your neighbor's information is as follows:
+        </p>
+         <table class="table">
+            <tr>
+                <th>Neighbor </th>
+                <th>Previous Position</th>
+                <th>Your Guess</th>
+                <th>Actual Position</th>
+            </tr>
+            <tr>
+                <td> 1 </td>
+                <td>{{ player.neighbor_opinion_1 }}</td>
+                <td>{{ player.update_neighbor_opinion_1 }}</td>
+                <td>{{ player.actual_opinion_neighbor_1 }}</td>
+            </tr>
+             <tr>
+                <td> 2 </td>
+                <td>{{ player.neighbor_opinion_2 }}</td>
+                <td>{{ player.update_neighbor_opinion_2 }}</td>
+                <td>{{ player.actual_opinion_neighbor_2 }}</td>
+            </tr>
+             <tr>
+                <td> 3 </td>
+                <td>{{ player.neighbor_opinion_3 }}</td>
+                <td>{{ player.update_neighbor_opinion_3 }}</td>
+                <td>{{ player.actual_opinion_neighbor_3 }}</td>
+            </tr>
+             <tr>
+                <td> 4 </td>
+                <td>{{ player.neighbor_opinion_4 }}</td>
+                <td>{{ player.update_neighbor_opinion_4 }}</td>
+                <td>{{ player.actual_opinion_neighbor_4 }}</td>
+            </tr>
+             <tr>
+                <td> 5 </td>
+                <td>{{ player.neighbor_opinion_5 }}</td>
+                <td>{{ player.update_neighbor_opinion_5 }}</td>
+                <td>{{ player.actual_opinion_neighbor_5 }}</td>
+            </tr>
+             <tr>
+                <td> 6 </td>
+                <td>{{ player.neighbor_opinion_6 }}</td>
+                <td>{{ player.update_neighbor_opinion_6 }}</td>
+                <td>{{ player.actual_opinion_neighbor_6 }}</td>
+            </tr>
+         </table>
+
+    {% elif player.num_neighbors == 7 %}
+        <p>
+        Your neighbor's information is as follows:
+        </p>
+         <table class="table">
+            <tr>
+                <th>Neighbor </th>
+                <th>Previous Position</th>
+                <th>Your Guess</th>
+                <th>Actual Position</th>
+            </tr>
+            <tr>
+                <td> 1 </td>
+                <td>{{ player.neighbor_opinion_1 }}</td>
+                <td>{{ player.update_neighbor_opinion_1 }}</td>
+                <td>{{ player.actual_opinion_neighbor_1 }}</td>
+            </tr>
+             <tr>
+                <td> 2 </td>
+                <td>{{ player.neighbor_opinion_2 }}</td>
+                <td>{{ player.update_neighbor_opinion_2 }}</td>
+                <td>{{ player.actual_opinion_neighbor_2 }}</td>
+            </tr>
+             <tr>
+                <td> 3 </td>
+                <td>{{ player.neighbor_opinion_3 }}</td>
+                <td>{{ player.update_neighbor_opinion_3 }}</td>
+                <td>{{ player.actual_opinion_neighbor_3 }}</td>
+            </tr>
+             <tr>
+                <td> 4 </td>
+                <td>{{ player.neighbor_opinion_4 }}</td>
+                <td>{{ player.update_neighbor_opinion_4 }}</td>
+                <td>{{ player.actual_opinion_neighbor_4 }}</td>
+            </tr>
+             <tr>
+                <td> 5 </td>
+                <td>{{ player.neighbor_opinion_5 }}</td>
+                <td>{{ player.update_neighbor_opinion_5 }}</td>
+                <td>{{ player.actual_opinion_neighbor_5 }}</td>
+            </tr>
+             <tr>
+                <td> 6 </td>
+                <td>{{ player.neighbor_opinion_6 }}</td>
+                <td>{{ player.update_neighbor_opinion_6 }}</td>
+                <td>{{ player.actual_opinion_neighbor_6 }}</td>
+            </tr>
+             <tr>
+                <td> 7 </td>
+                <td>{{ player.neighbor_opinion_7 }}</td>
+                <td>{{ player.update_neighbor_opinion_7 }}</td>
+                <td>{{ player.actual_opinion_neighbor_7 }}</td>
+            </tr>
+         </table>
+
+    {% elif player.num_neighbors == 8 %}
+        <p>
+        Your neighbor's information is as follows:
+        </p>
+         <table class="table">
+            <tr>
+                <th>Neighbor </th>
+                <th>Previous Position</th>
+                <th>Your Guess</th>
+                <th>Actual Position</th>
+            </tr>
+            <tr>
+                <td> 1 </td>
+                <td>{{ player.neighbor_opinion_1 }}</td>
+                <td>{{ player.update_neighbor_opinion_1 }}</td>
+                <td>{{ player.actual_opinion_neighbor_1 }}</td>
+            </tr>
+             <tr>
+                <td> 2 </td>
+                <td>{{ player.neighbor_opinion_2 }}</td>
+                <td>{{ player.update_neighbor_opinion_2 }}</td>
+                <td>{{ player.actual_opinion_neighbor_2 }}</td>
+            </tr>
+             <tr>
+                <td> 3 </td>
+                <td>{{ player.neighbor_opinion_3 }}</td>
+                <td>{{ player.update_neighbor_opinion_3 }}</td>
+                <td>{{ player.actual_opinion_neighbor_3 }}</td>
+            </tr>
+             <tr>
+                <td> 4 </td>
+                <td>{{ player.neighbor_opinion_4 }}</td>
+                <td>{{ player.update_neighbor_opinion_4 }}</td>
+                <td>{{ player.actual_opinion_neighbor_4 }}</td>
+            </tr>
+             <tr>
+                <td> 5 </td>
+                <td>{{ player.neighbor_opinion_5 }}</td>
+                <td>{{ player.update_neighbor_opinion_5 }}</td>
+                <td>{{ player.actual_opinion_neighbor_5 }}</td>
+            </tr>
+             <tr>
+                <td> 6 </td>
+                <td>{{ player.neighbor_opinion_6 }}</td>
+                <td>{{ player.update_neighbor_opinion_6 }}</td>
+                <td>{{ player.actual_opinion_neighbor_6 }}</td>
+            </tr>
+             <tr>
+                <td> 7 </td>
+                <td>{{ player.neighbor_opinion_7 }}</td>
+                <td>{{ player.update_neighbor_opinion_7 }}</td>
+                <td>{{ player.actual_opinion_neighbor_7 }}</td>
+            </tr>
+             <tr>
+                <td> 8 </td>
+                <td>{{ player.neighbor_opinion_8 }}</td>
+                <td>{{ player.update_neighbor_opinion_8 }}</td>
+                <td>{{ player.actual_opinion_neighbor_8 }}</td>
+            </tr>
+         </table>
+        {% endif %}
+
+    {% next_button %}
+{% endblock %}
+
+
