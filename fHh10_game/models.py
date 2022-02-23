@@ -20,7 +20,7 @@ Your app description
 
 
 class Constants(BaseConstants):
-    name_in_url = 'fHh10_practice'
+    name_in_url = 'fHh10_game'
     players_per_group = None
     num_rounds = 5
     min_opinion = 0
@@ -28,8 +28,8 @@ class Constants(BaseConstants):
     f = 0.9
     one_minus_f = round(1 - f, 1)
     h = 10
-    participation_fee = 4.00
-    dollar_per_credit = 0.0025
+    participation_fee = 5.00
+    dollar_per_credit = 0.08
     endowment = 3.00
 
 

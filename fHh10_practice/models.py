@@ -34,7 +34,7 @@ class Subsession(BaseSubsession):
     def generate_initial_opinion(self):
         # initial_opinion_set = [0.0, 10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0, 90.0, 100.0]
         initial_opinion_set = [0.0, 10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0]  # update initial position from 0-80
-        # random.shuffle(initial_opinion_set)
+        random.shuffle(initial_opinion_set)
         for p in self.get_players():
             # p.initial_opinion = round(random.uniform(Constants.min_opinion, 1),
             #                           2)  # generate a random 2-decimal number as the initial opinion
