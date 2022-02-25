@@ -55,12 +55,12 @@ SESSION_CONFIGS = [
     #     num_demo_participants=3,
     #     app_sequence=['game_VhFhH10']
     # ),
-    dict(
-        name='quiz',
-        display_name="pilot",
-        num_demo_participants=1,
-        app_sequence=['quiz']
-    ),
+    # dict(
+    #     name='quiz',
+    #     display_name="pilot",
+    #     num_demo_participants=1,
+    #     app_sequence=['quiz']
+    # ),
     # dict(
     #     name='quiz',
     #     display_name="pilot",
