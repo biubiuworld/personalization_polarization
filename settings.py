@@ -1,30 +1,24 @@
 from os import environ
 
 SESSION_CONFIGS = [
-    dict(
-       name='practice_game',
-       display_name="Practice Game",
-       num_demo_participants=9,
-       app_sequence=['new_practice_game']
-    ),
-    dict(
-       name='Vlh10_game',
-       display_name="Vlh10_game",
-       num_demo_participants=9,
-       app_sequence=['Vlh10_game']
-    ),   
-    dict(
-       name='fHh0_practice',
-       display_name="fHh0_practice",
-       num_demo_participants=9,
-       app_sequence=['fHh0_practice']
-    ),  
     # dict(
-    #     name='game_FmH10',
-    #     display_name="game_FmH10",
-    #     num_demo_participants=3,
-    #     app_sequence=['game_FmH10']
-    # ),
+    #    name='Vlh10_game',
+    #    display_name="Vlh10_game",
+    #    num_demo_participants=9,
+    #    app_sequence=['Vlh10_game']
+    # ),   
+    # dict(
+    #    name='Vlh10_practice',
+    #    display_name="Vlh10_practice",
+    #    num_demo_participants=9,
+    #    app_sequence=['Vlh10_practice']
+    # ),  
+    dict(
+        name='Treatment4',
+        display_name="Treatment4",
+        num_demo_participants=9,
+        app_sequence=['quiz', 'Vlh10_practice', 'Vlh10_game']
+    ),
     # dict(
     #     name='Session_11',
     #     display_name="Session_11",
@@ -61,12 +55,12 @@ SESSION_CONFIGS = [
     #     num_demo_participants=3,
     #     app_sequence=['game_VhFhH10']
     # ),
-    # dict(
-    #     name='quiz',
-    #     display_name="pilot",
-    #     num_demo_participants=1,
-    #     app_sequence=['quiz']
-    # ),
+    dict(
+        name='quiz',
+        display_name="pilot",
+        num_demo_participants=1,
+        app_sequence=['quiz']
+    ),
     # dict(
     #     name='quiz',
     #     display_name="pilot",
