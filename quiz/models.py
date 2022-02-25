@@ -37,7 +37,7 @@ class Constants(BaseConstants):
         '''
         Which of the following statements is true?
         ''',  # q5
-        """Suppose you are in a game ( \( \color{red} V = 250, f = 0.3 \) ). Consider the following situation:  
+        """Consider the following situation:  
         In Round 4, your position was \( \color{blue} 30 \).
         In Round 4, you had only one neighbor, and her position was \( \color{blue} 40 \). 
         In Round 5 (current round), you decide not to get any new connections, and change your position to \( \color{blue} 50 \). 
@@ -45,7 +45,7 @@ class Constants(BaseConstants):
         What is your actual payoff for Round 5? 
         """,  # q6
         '''
-        Suppose you are in a game ( \( \color{red} V = 250, f = 0.3 \) ). Consider the following situation: 
+        Consider the following situation: 
         In Round 7, your position was \( \color{blue} 30 \). 
         In Round 7, you had only one neighbor A, and her position was \( \color{blue} 40 \).
         In Round 8 (current round), you decide to connect to an observed player B and her position in Round 7 was \( \color{blue} 50 \).
@@ -65,12 +65,12 @@ class Constants(BaseConstants):
          [2, 'B. The actual payoff is calculated based on your position in previous and current round, and the guess of your neighbors’ positions.'],
          [3, 'C. The actual payoff is calculated based on your position in previous and current round, and your neighbors’ updated positions.'],
          [4, 'D. Both A and B are correct.'], [5, 'E. Both A and C are correct.']],  # q5
-        [[1, 'A. \( 250 - 0.3 * (50 - 40)^2 - 0.7 * (50 - 30)^2 \)'], [2, 'B. \( 250 - 0.3 * (30 - 40)^2 - 0.7 * (30 - 50)^2  \)'],
-         [3, 'C. \( 250 - 0.3 * (30 - 42)^2 - 0.7 * (30 - 50)^2 \)'], [4, 'D. \( 250 - 0.3 * (50 - 42)^2 - 0.7 * (50 - 30)^2  \)']],  # q6
-        [[1, 'A. \(  [250 - 0.3 * (40 - 50)^2 - 0.7 * (40 - 40)^2]+[250 - 0.3 * (30 - 30)^2 - 0.7 * (30 - 40)^2]  \)'],
-         [2, 'B. \(  [250 - 0.3 * (30 - 40)^2 - 0.7 * (30 - 30)^2]+[250 - 0.3 * (30 - 50)^2 - 0.7 * (30 - 30)^2] \)'],
-         [3, 'A. \(  [250 - 0.3 * (30 - 42)^2 - 0.7 * (30 - 30)^2]+[250 - 0.3 * (30 - 55)^2 - 0.7 * (30 - 30)^2] \)'],
-         [4, 'B. \(  [250 - 0.3 * (30 - 42)^2 - 0.7 * (30 - 30)^2]+[250 - 0.3 * (30 - 50)^2 - 0.7 * (30 - 30)^2] \)']
+        [[1, 'A. \( 50 - 0.5 * (50 - 40)^2 - 0.5 * (50 - 30)^2 \)'], [2, 'B. \( 50 - 0.5 * (30 - 40)^2 - 0.5 * (30 - 50)^2  \)'],
+         [3, 'C. \( 50 - 0.5 * (30 - 42)^2 - 0.5 * (30 - 50)^2 \)'], [4, 'D. \( 50 - 0.5 * (50 - 42)^2 - 0.5 * (50 - 30)^2  \)']],  # q6
+        [[1, 'A. \(  [50 - 0.5 * (40 - 50)^2 - 0.5 * (40 - 40)^2]+[50 - 0.5 * (30 - 30)^2 - 0.5 * (30 - 40)^2]  \)'],
+         [2, 'B. \(  [50 - 0.5 * (30 - 40)^2 - 0.5 * (30 - 30)^2]+[50 - 0.5 * (30 - 50)^2 - 0.5 * (30 - 30)^2] \)'],
+         [3, 'A. \(  [50 - 0.5 * (30 - 42)^2 - 0.5 * (30 - 30)^2]+[50 - 0.5 * (30 - 55)^2 - 0.5 * (30 - 30)^2] \)'],
+         [4, 'B. \(  [50 - 0.5 * (30 - 42)^2 - 0.5 * (30 - 30)^2]+[50 - 0.5 * (30 - 50)^2 - 0.5 * (30 - 30)^2] \)']
          ],  # q7
     ]
 

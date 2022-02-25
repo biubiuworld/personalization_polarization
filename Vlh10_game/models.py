@@ -29,8 +29,7 @@ class Constants(BaseConstants):
     one_minus_f = round(1 - f, 1)
     h = 10
     participation_fee = 5.00
-    dollar_per_credit = 0.08
-    endowment = 3.00
+    endowment = 5.00
 
 
 class Subsession(BaseSubsession):
@@ -158,7 +157,6 @@ class Player(BasePlayer):
     if_miss_neighbor = models.BooleanField(initial=0)
     if_miss_opinion = models.BooleanField(initial=0)
 
-    game_payoff = models.CurrencyField()
     actual_payoff_round = models.CurrencyField()
     model_payoff_round = models.CurrencyField()
 
@@ -206,4 +204,6 @@ class Player(BasePlayer):
     disconnect_with_neighbor_7 = models.IntegerField(blank=True)
     disconnect_with_neighbor_8 = models.IntegerField(blank=True)
 
+    game_payoff = models.CurrencyField()
+    exchange_rate = models.FloatField() 
     total_payoff_experiment_dollar = models.FloatField()

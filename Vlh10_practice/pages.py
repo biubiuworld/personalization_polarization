@@ -216,8 +216,8 @@ class GamePayment(Page):
         return self.round_number == Constants.num_rounds
 
     def vars_for_template(self):
-        last_rounds = 5
-        game_payoff_selection_list = self.participant.vars['payoff_in_all_rounds'][-last_rounds:]
+        last_rounds = 3
+        game_payoff_selection_list = self.participant.vars['payoff_in_all_rounds'][:last_rounds]
         self.participant.vars['practice_game_payoff'] = random.choice(game_payoff_selection_list)
         self.player.game_payoff = round(self.participant.vars['practice_game_payoff'])
         return{
