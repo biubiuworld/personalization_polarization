@@ -146,11 +146,11 @@
         else if (num_neighbors == 1)
             document.getElementById("neighbor_p").innerHTML =
                 "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbor in this round and his or her position is: <b style='color:DodgerBlue;''> [" + neighborsOpinionSet +
-                  "] </b><br> Please (1) decide whether to disconnect with current neighbor; (2) write down your guess of this neighbor's position in this round below:" ;
+                  "] </b><br> Please (1) write down your guess of this neighbor's position in this round; <br> (2) decide whether to disconnect with current neighbor:" ;
         else
             document.getElementById("neighbor_p").innerHTML =
                 "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'> [" + neighborsOpinionSet +
-                  "] </b><br> Please (1)decide whether to disconnect with current neighbors; (2) write down your guesses of each neighbor's position in this round below:";
+                  "] </b><br> Please (1) write down your guess of each neighbor's position in this round; <br> (2) decide whether to disconnect with current neighbors:";
 
         while(neighborTable.rows.length > 0) {
           neighborTable.deleteRow(0);
@@ -172,18 +172,6 @@
             
           }
           neighborTable.appendChild(row);
-          // add third row (checkbox)
-          var header = document.createElement('th');
-          header.innerText = 'Disconnect?';
-          var row = document.createElement('tr');
-          row.appendChild(header);
-          for (i = 0; i < num_neighbors; i++) {
-            var cells = document.createElement('td');
-            cells.innerHTML = '<input name=' + disconnectionCheckbox[i] + ' type="checkbox" value=0 />';
-            row.appendChild(cells);
-            cells.style.width = '50px';
-          }
-          neighborTable.appendChild(row);
           // add forth row
           var header = document.createElement('th');
           header.innerText = 'Your Guess';
@@ -192,6 +180,18 @@
           for (i = 0; i < num_neighbors; i++) {
             var cells = document.createElement('td');
             cells.innerHTML = '<input name=' + neighborGuess[i] + ' type="text" size="5" />';
+            row.appendChild(cells);
+            cells.style.width = '50px';
+          }
+          neighborTable.appendChild(row);          
+          // add third row (checkbox)
+          var header = document.createElement('th');
+          header.innerText = 'Disconnect?';
+          var row = document.createElement('tr');
+          row.appendChild(header);
+          for (i = 0; i < num_neighbors; i++) {
+            var cells = document.createElement('td');
+            cells.innerHTML = '<input name=' + disconnectionCheckbox[i] + ' type="checkbox" value=0 />';
             row.appendChild(cells);
             cells.style.width = '50px';
           }
@@ -239,18 +239,6 @@
             cells.style.width = '50px';
           }
           neighborTable.appendChild(row);
-          // add third row (checkbox)
-          var header = document.createElement('th');
-          header.innerText = 'Disconnect?';
-          var row = document.createElement('tr');
-          row.appendChild(header);
-          for (i = 0; i < num_neighbors; i++) {
-            var cells = document.createElement('td');
-            cells.innerHTML = '<input name=' + disconnectionCheckbox[i] + ' type="checkbox" value=0 />';
-            row.appendChild(cells);
-            cells.style.width = '50px';
-          }
-          neighborTable.appendChild(row);
           // add forth row
           var header = document.createElement('th');
           header.innerText = 'Your Guess';
@@ -259,6 +247,18 @@
           for (i = 0; i < num_neighbors; i++) {
             var cells = document.createElement('td');
             cells.innerHTML = '<input name=' + neighborGuess[i] + ' type="text" size="5" />';
+            row.appendChild(cells);
+            cells.style.width = '50px';
+          }
+          neighborTable.appendChild(row);          
+          // add third row (checkbox)
+          var header = document.createElement('th');
+          header.innerText = 'Disconnect?';
+          var row = document.createElement('tr');
+          row.appendChild(header);
+          for (i = 0; i < num_neighbors; i++) {
+            var cells = document.createElement('td');
+            cells.innerHTML = '<input name=' + disconnectionCheckbox[i] + ' type="checkbox" value=0 />';
             row.appendChild(cells);
             cells.style.width = '50px';
           }
@@ -313,18 +313,6 @@
             cells.style.width = '50px';
           }
           neighborTable.appendChild(row);
-          // add third row (checkbox)
-          var header = document.createElement('th');
-          header.innerText = 'Disconnect?';
-          var row = document.createElement('tr');
-          row.appendChild(header);
-          for (i = 0; i < num_neighbors; i++) {
-            var cells = document.createElement('td');
-            cells.innerHTML = '<input name=' + disconnectionCheckbox[i] + ' type="checkbox" value=0 />';
-            row.appendChild(cells);
-            cells.style.width = '50px';
-          }
-          neighborTable.appendChild(row);
           // add forth row
           var header = document.createElement('th');
           header.innerText = 'Your Guess';
@@ -333,6 +321,18 @@
           for (i = 0; i < num_neighbors; i++) {
             var cells = document.createElement('td');
             cells.innerHTML = '<input name=' + neighborGuess[i] + ' type="text" size="5" />';
+            row.appendChild(cells);
+            cells.style.width = '50px';
+          }
+          neighborTable.appendChild(row);          
+          // add third row (checkbox)
+          var header = document.createElement('th');
+          header.innerText = 'Disconnect?';
+          var row = document.createElement('tr');
+          row.appendChild(header);
+          for (i = 0; i < num_neighbors; i++) {
+            var cells = document.createElement('td');
+            cells.innerHTML = '<input name=' + disconnectionCheckbox[i] + ' type="checkbox" value=0 />';
             row.appendChild(cells);
             cells.style.width = '50px';
           }
@@ -380,18 +380,6 @@
             cells.style.width = '50px';
           }
           neighborTable.appendChild(row);
-          // add third row (checkbox)
-          var header = document.createElement('th');
-          header.innerText = 'Disconnect?';
-          var row = document.createElement('tr');
-          row.appendChild(header);
-          for (i = 0; i < num_neighbors; i++) {
-            var cells = document.createElement('td');
-            cells.innerHTML = '<input name=' + disconnectionCheckbox[i] + ' type="checkbox" value=0 />';
-            row.appendChild(cells);
-            cells.style.width = '50px';
-          }
-          neighborTable.appendChild(row);
           // add forth row
           var header = document.createElement('th');
           header.innerText = 'Your Guess';
@@ -400,6 +388,18 @@
           for (i = 0; i < num_neighbors; i++) {
             var cells = document.createElement('td');
             cells.innerHTML = '<input name=' + neighborGuess[i] + ' type="text" size="5" />';
+            row.appendChild(cells);
+            cells.style.width = '50px';
+          }
+          neighborTable.appendChild(row);          
+          // add third row (checkbox)
+          var header = document.createElement('th');
+          header.innerText = 'Disconnect?';
+          var row = document.createElement('tr');
+          row.appendChild(header);
+          for (i = 0; i < num_neighbors; i++) {
+            var cells = document.createElement('td');
+            cells.innerHTML = '<input name=' + disconnectionCheckbox[i] + ' type="checkbox" value=0 />';
             row.appendChild(cells);
             cells.style.width = '50px';
           }
