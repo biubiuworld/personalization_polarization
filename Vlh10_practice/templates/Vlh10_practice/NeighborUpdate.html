@@ -421,12 +421,9 @@
         for (let i = 0; i < neighborsOpinionSet.length; i++){
           document.getElementsByName(disconnectionCheckbox[i])[0].value = 0;
           if (document.getElementsByName(disconnectionCheckbox[i])[0].checked) {
-            document.getElementsByName(neighborGuess[i])[0].value = "";
-            document.getElementsByName(neighborGuess[i])[0].disabled = true;
             document.getElementsByName(disconnectionCheckbox[i])[0].value = 1;
           }
           else {
-            document.getElementsByName(neighborGuess[i])[0].disabled = false;
             document.getElementsByName(disconnectionCheckbox[i])[0].value = 0;
           }
           var tableCell = document.getElementsByName(neighborGuess[i])[0];
@@ -447,10 +444,12 @@
                 document.getElementsByName(neighborGuess[i])[0].value = "";
               }
               else {
-                var p = document.getElementById(x.toString());
-                p.style.opacity = '100';
-                guessList.push(x);
-                console.log(guessList);
+                if (document.getElementsByName(disconnectionCheckbox[i])[0].checked==false){
+                  var p = document.getElementById(x.toString());
+                  p.style.opacity = '100';
+                  guessList.push(x);
+                  console.log(guessList);
+                }
               }
               }
           }
@@ -469,7 +468,7 @@
       if (neighborsOpinionSet.length > 0){
         var a = 0;
         for (let i = 0; i < neighborsOpinionSet.length; i++){
-          if(document.getElementsByName(neighborGuess[i])[0].disabled == true){
+          if(document.getElementsByName(disconnectionCheckbox[i])[0].checked){
             a = a + 1;
           }
         }
@@ -534,7 +533,7 @@
         var a = 0;
         if (neighborsOpinionSet.length != 0){
             for (let i = 0; i < neighborsOpinionSet.length; i++){
-                if((document.getElementsByName(neighborGuess[i])[0].disabled == false) && (document.getElementsByName(neighborGuess[i])[0].value == '')){
+                if(document.getElementsByName(neighborGuess[i])[0].value == ''){
                     a = 1;
                 }
             }
