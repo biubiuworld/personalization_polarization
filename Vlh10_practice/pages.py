@@ -91,6 +91,13 @@ class NeighborUpdate(Page):
 
         if (self.player.if_connect_player2 == 0) & (self.player.disconnect_with_player2 == 1):
             self.participant.vars['neighbors_id_set'].remove(self.player.observed_id_player2)
+        
+        self.player.neighbors_id_set_after_choose_neighbors = ', '.join(map(str, self.participant.vars['neighbors_id_set']))
+        self.participant.vars['neighbors_opinion_set_after_choose_neighbors'] = []
+        for neighbor in self.participant.vars['neighbors_id_set']:
+            self.participant.vars['neighbors_opinion_set_after_choose_neighbors'].append(self.participant.vars['others_last_opinions'][self.participant.vars['others_id_in_group'].index(neighbor)])
+        self.player.neighbors_opinion_set_after_choose_neighbors = ', '.join(map(str, self.participant.vars['neighbors_opinion_set_after_choose_neighbors']))
+        
         #remove disconnected neighbors
         disconnection_checkbox = [self.player.disconnect_with_neighbor_1, self.player.disconnect_with_neighbor_2, self.player.disconnect_with_neighbor_3, self.player.disconnect_with_neighbor_4,
         self.player.disconnect_with_neighbor_5, self.player.disconnect_with_neighbor_6, self.player.disconnect_with_neighbor_7, self.player.disconnect_with_neighbor_8]
@@ -104,9 +111,11 @@ class NeighborUpdate(Page):
             self.participant.vars['neighbors_opinion_guess_set'].append(all_neighbor_guess_set[i])
             if disconnection_checkbox[i] == 1:
                 delete_index.append(i)
+        self.player.neighbors_opinion_guess_set_include_disconnect = ', '.join(map(str, self.participant.vars['neighbors_opinion_guess_set']))
         self.participant.vars['neighbors_id_set'] = [val for n, val in enumerate(self.participant.vars['neighbors_id_set']) if n not in delete_index]
+        self.participant.vars['neighbors_opinion_guess_set_disconnect'] =[val for n, val in enumerate(self.participant.vars['neighbors_opinion_guess_set']) if n in delete_index]
         self.participant.vars['neighbors_opinion_guess_set'] = [val for n, val in enumerate(self.participant.vars['neighbors_opinion_guess_set']) if n not in delete_index]
-
+        self.player.neighbors_opinion_guess_set_disconnect = ', '.join(map(str, self.participant.vars['neighbors_opinion_guess_set_disconnect']))
         
 
         self.participant.vars['neighbors_opinion_set'] = []

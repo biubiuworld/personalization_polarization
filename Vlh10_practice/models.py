@@ -22,7 +22,7 @@ Your app description
 class Constants(BaseConstants):
     name_in_url = 'Vlh10_practice'
     players_per_group = None
-    num_rounds = 10
+    num_rounds = 5
     min_opinion = 0
     V = 50
     f = 0.5
@@ -173,6 +173,12 @@ class Player(BasePlayer):
     neighbor_opinion_6 = models.FloatField()
     neighbor_opinion_7 = models.FloatField()
     neighbor_opinion_8 = models.FloatField()
+
+    neighbors_id_set_after_choose_neighbors = models.LongStringField()
+    neighbors_opinion_set_after_choose_neighbors = models.LongStringField()
+
+    neighbors_opinion_guess_set_include_disconnect = models.LongStringField()
+    neighbors_opinion_guess_set_disconnect = models.LongStringField()
 
     neighbors_opinion_guess_set = models.LongStringField()
     update_neighbor_opinion_1 = models.IntegerField(label='', min=0, max=80,blank=True)
