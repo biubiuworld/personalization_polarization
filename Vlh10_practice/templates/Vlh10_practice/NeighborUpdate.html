@@ -127,7 +127,12 @@
         if (this.checked) {
             if(disconnect1){
                 disconnect1 = false;
-                neighborsOpinionSet.push(player1OpinionValue);
+                if(if_connect_player2Yes.checked){
+                  neighborsOpinionSet.splice(neighborsOpinionSet.length-1, 0, player1OpinionValue);
+                } else{
+                  neighborsOpinionSet.push(player1OpinionValue);
+                }
+                
             }
         } else {
             disconnect1 = true;
