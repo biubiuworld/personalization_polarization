@@ -30,6 +30,9 @@ class Constants(BaseConstants):
     h = 10
 
 
+
+
+
 class Subsession(BaseSubsession):
     def generate_initial_opinion(self):
         # initial_opinion_set = [0.0, 10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0, 90.0, 100.0]

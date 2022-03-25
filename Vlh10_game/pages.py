@@ -2,6 +2,7 @@ from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 from .models import Constants
 import random
+import math
 class GameInstruction(Page):
     def is_displayed(self):
         return self.round_number == 1
@@ -91,6 +92,13 @@ class NeighborUpdate(Page):
 
         if (self.player.if_connect_player2 == 0) & (self.player.disconnect_with_player2 == 1):
             self.participant.vars['neighbors_id_set'].remove(self.player.observed_id_player2)
+
+        self.player.neighbors_id_set_after_choose_neighbors = ', '.join(map(str, self.participant.vars['neighbors_id_set']))
+        self.participant.vars['neighbors_opinion_set_after_choose_neighbors'] = []
+        for neighbor in self.participant.vars['neighbors_id_set']:
+            self.participant.vars['neighbors_opinion_set_after_choose_neighbors'].append(self.participant.vars['others_last_opinions'][self.participant.vars['others_id_in_group'].index(neighbor)])
+        self.player.neighbors_opinion_set_after_choose_neighbors = ', '.join(map(str, self.participant.vars['neighbors_opinion_set_after_choose_neighbors']))
+        
         #remove disconnected neighbors
         disconnection_checkbox = [self.player.disconnect_with_neighbor_1, self.player.disconnect_with_neighbor_2, self.player.disconnect_with_neighbor_3, self.player.disconnect_with_neighbor_4,
         self.player.disconnect_with_neighbor_5, self.player.disconnect_with_neighbor_6, self.player.disconnect_with_neighbor_7, self.player.disconnect_with_neighbor_8]
@@ -104,10 +112,12 @@ class NeighborUpdate(Page):
             self.participant.vars['neighbors_opinion_guess_set'].append(all_neighbor_guess_set[i])
             if disconnection_checkbox[i] == 1:
                 delete_index.append(i)
+        self.player.neighbors_opinion_guess_set_include_disconnect = ', '.join(map(str, self.participant.vars['neighbors_opinion_guess_set']))
         self.participant.vars['neighbors_id_set'] = [val for n, val in enumerate(self.participant.vars['neighbors_id_set']) if n not in delete_index]
+        self.participant.vars['neighbors_opinion_guess_set_disconnect'] =[val for n, val in enumerate(self.participant.vars['neighbors_opinion_guess_set']) if n in delete_index]
         self.participant.vars['neighbors_opinion_guess_set'] = [val for n, val in enumerate(self.participant.vars['neighbors_opinion_guess_set']) if n not in delete_index]
-
-        
+        self.player.neighbors_opinion_guess_set_disconnect = ', '.join(map(str, self.participant.vars['neighbors_opinion_guess_set_disconnect']))
+         
 
         self.participant.vars['neighbors_opinion_set'] = []
         for neighbor in self.participant.vars['neighbors_id_set']:
@@ -223,21 +233,7 @@ class GamePayment(Page):
         return{
             'game_payoff': round(self.participant.vars['game_payoff']),
         }
-    def before_next_page(self):
-        if self.player.num_neighbors < 3:
-            self.player.exchange_rate = 0.13
-        if self.player.num_neighbors == 3:
-            self.player.exchange_rate = 0.09
-        if self.player.num_neighbors == 4:
-            self.player.exchange_rate = 0.07
-        if self.player.num_neighbors == 5:
-            self.player.exchange_rate = 0.058           
-        if self.player.num_neighbors == 6:
-            self.player.exchange_rate = 0.05
-        if self.player.num_neighbors == 7:
-            self.player.exchange_rate = 0.045
-        if self.player.num_neighbors == 8:
-            self.player.exchange_rate = 0.04
+
 
 class ExperimentPayment(Page):
     def is_displayed(self):
@@ -245,15 +241,14 @@ class ExperimentPayment(Page):
     def vars_for_template(self):
         return {
             'payoff_experiment': round(self.participant.vars['game_payoff']),
-            'exchange_rate': self.player.exchange_rate,
-            'payoff_experiment_dollar': round(float(self.participant.vars['game_payoff']) * self.player.exchange_rate,2),
+            'payoff_experiment_dollar': round(math.sqrt(round(self.participant.vars['game_payoff'])),2),
             'total_endowments': Constants.endowment,
-            'total_payoff_experiment_dollar': round(round(float(self.participant.vars['game_payoff']) * self.player.exchange_rate,2) 
+            'total_payoff_experiment_dollar': round(round(math.sqrt(round(self.participant.vars['game_payoff'])),2) 
             + Constants.participation_fee + Constants.endowment, 2),
         }
 
     def before_next_page(self):
-        self.player.total_payoff_experiment_dollar = round(round(float(self.participant.vars['game_payoff'])*self.player.exchange_rate,2)+Constants.participation_fee+Constants.endowment,2)
+        self.player.total_payoff_experiment_dollar = round(round(math.sqrt(round(self.participant.vars['game_payoff'])),2) +Constants.participation_fee+Constants.endowment,2)
 
 
 page_sequence = [

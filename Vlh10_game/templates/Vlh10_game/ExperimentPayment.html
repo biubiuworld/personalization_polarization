@@ -5,9 +5,16 @@
     Payment
 {% endblock %}
 
+{% block scripts %}
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+{% endblock %}
+
 {% block content %}
     <p>You have completed the experiment.</p>
-    <p>You will earn ${{exchange_rate}} for every credit earned in the game as your additional payment.</p>
+    <p>You will earn \( \sqrt{ \text{Total credits in game} } \) as your additional payment.</p>
     <br>
 <h5> <b style="color:#1E8BDC"> Your total payment is as follows: </b> </h5>
 <table class="table">

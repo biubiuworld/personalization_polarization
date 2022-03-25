@@ -32,6 +32,7 @@ class Constants(BaseConstants):
     endowment = 5.00
 
 
+
 class Subsession(BaseSubsession):
     def generate_initial_opinion(self):
         # initial_opinion_set = [0.0, 10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0, 90.0, 100.0]
@@ -157,6 +158,7 @@ class Player(BasePlayer):
     if_miss_neighbor = models.BooleanField(initial=0)
     if_miss_opinion = models.BooleanField(initial=0)
 
+
     actual_payoff_round = models.CurrencyField()
     model_payoff_round = models.CurrencyField()
 
@@ -174,6 +176,12 @@ class Player(BasePlayer):
     neighbor_opinion_6 = models.FloatField()
     neighbor_opinion_7 = models.FloatField()
     neighbor_opinion_8 = models.FloatField()
+
+    neighbors_id_set_after_choose_neighbors = models.LongStringField()
+    neighbors_opinion_set_after_choose_neighbors = models.LongStringField()
+
+    neighbors_opinion_guess_set_include_disconnect = models.LongStringField()
+    neighbors_opinion_guess_set_disconnect = models.LongStringField()
 
     neighbors_opinion_guess_set = models.LongStringField()
     update_neighbor_opinion_1 = models.IntegerField(label='', min=0, max=80,blank=True)
