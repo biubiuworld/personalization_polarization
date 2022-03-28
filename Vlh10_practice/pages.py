@@ -2,12 +2,13 @@ from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 from .models import Constants
 import random
+import math
 class GameInstruction(Page):
     def is_displayed(self):
         return self.round_number == 1
     def before_next_page(self):
         self.participant.vars['neighbors_id_set'] = []
-        self.participant.vars['practice_game_payoff'] = 0.
+        self.participant.vars['game_payoff'] = 0.
         self.participant.vars['payoff_in_all_rounds'] = []
 
 class GenerateInitialOpinionWaitPage(WaitPage):
@@ -66,6 +67,7 @@ class NeighborUpdate(Page):
             'if_connect_player1': self.player.if_connect_player1,
             'if_connect_player2': self.player.if_connect_player2,
             'neighbors_opinion_set': self.participant.vars['neighbors_opinion_set'] if self.round_number>1 else [],
+            'neighbors_id_set': self.participant.vars['neighbors_id_set'] if self.round_number>1 else [],
             'num_neighbors': len(self.participant.vars['neighbors_opinion_set']) if self.round_number>1 else 0,
             'neighbor_opinion_1': self.player.neighbor_opinion_1,
             'neighbor_opinion_2': self.player.neighbor_opinion_2,
@@ -75,6 +77,8 @@ class NeighborUpdate(Page):
             'neighbor_opinion_6': self.player.neighbor_opinion_6,
             'neighbor_opinion_7': self.player.neighbor_opinion_7,
             'neighbor_opinion_8': self.player.neighbor_opinion_8,
+            'observed_id_player1': self.player.observed_id_player1,
+            'observed_id_player2': self.player.observed_id_player2,
         }
 
 
@@ -91,7 +95,7 @@ class NeighborUpdate(Page):
 
         if (self.player.if_connect_player2 == 0) & (self.player.disconnect_with_player2 == 1):
             self.participant.vars['neighbors_id_set'].remove(self.player.observed_id_player2)
-        
+
         self.player.neighbors_id_set_after_choose_neighbors = ', '.join(map(str, self.participant.vars['neighbors_id_set']))
         self.participant.vars['neighbors_opinion_set_after_choose_neighbors'] = []
         for neighbor in self.participant.vars['neighbors_id_set']:
@@ -116,7 +120,7 @@ class NeighborUpdate(Page):
         self.participant.vars['neighbors_opinion_guess_set_disconnect'] =[val for n, val in enumerate(self.participant.vars['neighbors_opinion_guess_set']) if n in delete_index]
         self.participant.vars['neighbors_opinion_guess_set'] = [val for n, val in enumerate(self.participant.vars['neighbors_opinion_guess_set']) if n not in delete_index]
         self.player.neighbors_opinion_guess_set_disconnect = ', '.join(map(str, self.participant.vars['neighbors_opinion_guess_set_disconnect']))
-        
+         
 
         self.participant.vars['neighbors_opinion_set'] = []
         for neighbor in self.participant.vars['neighbors_id_set']:
@@ -199,8 +203,8 @@ class NeighborUpdate(Page):
             self.player.if_miss_opinion = 1
             self.player.opinion_this_round = self.player.opinion_last_round
 
-        # self.participant.vars['practice_game_payoff'] += self.player.payoff
-        # self.player.game_payoff = self.participant.vars['practice_game_payoff']
+        # self.participant.vars['game_payoff'] += self.player.payoff
+        # self.player.game_payoff = self.participant.vars['game_payoff']
 
 
 
@@ -225,12 +229,12 @@ class GamePayment(Page):
         return self.round_number == Constants.num_rounds
 
     def vars_for_template(self):
-        last_rounds = 3
-        game_payoff_selection_list = self.participant.vars['payoff_in_all_rounds'][:last_rounds]
-        self.participant.vars['practice_game_payoff'] = random.choice(game_payoff_selection_list)
-        self.player.game_payoff = round(self.participant.vars['practice_game_payoff'])
+        last_rounds = 5
+        game_payoff_selection_list = self.participant.vars['payoff_in_all_rounds'][-last_rounds:]
+        self.participant.vars['game_payoff'] = max(random.choice(game_payoff_selection_list), 50) #set lower bound 50
+        self.player.game_payoff = round(self.participant.vars['game_payoff'])
         return{
-            'practice_game_payoff': round(self.participant.vars['practice_game_payoff']),
+            'game_payoff': round(self.participant.vars['game_payoff']),
         }
 
 page_sequence = [
