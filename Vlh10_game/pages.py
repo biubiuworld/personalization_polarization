@@ -36,7 +36,7 @@ class NeighborUpdate(Page):
                    'disconnect_with_neighbor_1', 'disconnect_with_neighbor_2', 'disconnect_with_neighbor_3', 'disconnect_with_neighbor_4', 'disconnect_with_neighbor_5',
                    'disconnect_with_neighbor_6', 'disconnect_with_neighbor_7', 'disconnect_with_neighbor_8']
 
-    timeout_seconds = 90
+    # timeout_seconds = 90
 
     def vars_for_template(self):
         self.participant.vars['neighbors_opinion_set'] = []
@@ -67,6 +67,7 @@ class NeighborUpdate(Page):
             'if_connect_player1': self.player.if_connect_player1,
             'if_connect_player2': self.player.if_connect_player2,
             'neighbors_opinion_set': self.participant.vars['neighbors_opinion_set'] if self.round_number>1 else [],
+            'neighbors_id_set': self.participant.vars['neighbors_id_set'] if self.round_number>1 else [],
             'num_neighbors': len(self.participant.vars['neighbors_opinion_set']) if self.round_number>1 else 0,
             'neighbor_opinion_1': self.player.neighbor_opinion_1,
             'neighbor_opinion_2': self.player.neighbor_opinion_2,
@@ -76,6 +77,8 @@ class NeighborUpdate(Page):
             'neighbor_opinion_6': self.player.neighbor_opinion_6,
             'neighbor_opinion_7': self.player.neighbor_opinion_7,
             'neighbor_opinion_8': self.player.neighbor_opinion_8,
+            'observed_id_player1': self.player.observed_id_player1,
+            'observed_id_player2': self.player.observed_id_player2,
         }
 
 
@@ -212,7 +215,7 @@ class BeforeResultsWaitPage(WaitPage):
 
 class Results(Page):
 
-    timeout_seconds = 15
+    # timeout_seconds = 15
 
     def vars_for_template(self):
         return {
