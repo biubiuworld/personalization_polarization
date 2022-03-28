@@ -8,7 +8,7 @@ class GameInstruction(Page):
         return self.round_number == 1
     def before_next_page(self):
         self.participant.vars['neighbors_id_set'] = []
-        self.participant.vars['game_payoff'] = 0.
+        self.participant.vars['practice_game_payoff'] = 0.
         self.participant.vars['payoff_in_all_rounds'] = []
 
 class GenerateInitialOpinionWaitPage(WaitPage):
@@ -203,8 +203,6 @@ class NeighborUpdate(Page):
             self.player.if_miss_opinion = 1
             self.player.opinion_this_round = self.player.opinion_last_round
 
-        # self.participant.vars['game_payoff'] += self.player.payoff
-        # self.player.game_payoff = self.participant.vars['game_payoff']
 
 
 
@@ -229,12 +227,12 @@ class GamePayment(Page):
         return self.round_number == Constants.num_rounds
 
     def vars_for_template(self):
-        last_rounds = 5
-        game_payoff_selection_list = self.participant.vars['payoff_in_all_rounds'][-last_rounds:]
-        self.participant.vars['game_payoff'] = max(random.choice(game_payoff_selection_list), 50) #set lower bound 50
-        self.player.game_payoff = round(self.participant.vars['game_payoff'])
+        last_rounds = 3
+        game_payoff_selection_list = self.participant.vars['payoff_in_all_rounds'][:last_rounds]
+        self.participant.vars['practice_game_payoff'] = random.choice(game_payoff_selection_list)
+        self.player.game_payoff = round(self.participant.vars['practice_game_payoff'])
         return{
-            'game_payoff': round(self.participant.vars['game_payoff']),
+            'practice_game_payoff': round(self.participant.vars['practice_game_payoff']),
         }
 
 page_sequence = [
