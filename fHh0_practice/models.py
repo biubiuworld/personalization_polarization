@@ -169,6 +169,12 @@ class Player(BasePlayer):
     neighbor_opinion_7 = models.FloatField()
     neighbor_opinion_8 = models.FloatField()
 
+    neighbors_id_set_after_choose_neighbors = models.LongStringField()
+    neighbors_opinion_set_after_choose_neighbors = models.LongStringField()
+
+    neighbors_opinion_guess_set_include_disconnect = models.LongStringField()
+    neighbors_opinion_guess_set_disconnect = models.LongStringField()
+
     neighbors_opinion_guess_set = models.LongStringField()
     update_neighbor_opinion_1 = models.IntegerField(label='', min=0, max=80,blank=True)
     update_neighbor_opinion_2 = models.IntegerField(label='', min=0, max=80,blank=True)
