@@ -81,6 +81,14 @@
     var outputValue_1 = document.getElementById("outputValue_1");
     var outputValue_2 = document.getElementById("outputValue_2");
     var neighborsOpinionSet = {{ neighbors_opinion_set }};
+    var neighborsIdSet = {{ neighbors_id_set }};
+    var observed_id_player1 = {{ observed_id_player1 }};
+    var observed_id_player2 = {{ observed_id_player2 }};
+    var neighborConnected = new Array(neighborsOpinionSet.length).fill(true);
+    var neighborsIdSetCopy = {{ neighbors_id_set }};
+    var neighborsOpinionSetCopy = {{ neighbors_opinion_set }};
+    var neighborsOpinionSetDisplayCopy = [];
+
 
     var disconnect1 = ("{{ player.disconnect_with_player1 }}" != "True");
     var disconnect2 = ("{{ player.disconnect_with_player2 }}" != "True" );
@@ -127,30 +135,64 @@
         if (this.checked) {
             if(disconnect1){
                 disconnect1 = false;
-                neighborsOpinionSet.push(player1OpinionValue);
+                if((if_connect_player2Yes.checked)&(disconnect2 == true)) {
+                  neighborsOpinionSet.splice(neighborsOpinionSet.length-1, 0, player1OpinionValue);
+                  if (neighborsIdSetCopy.includes(observed_id_player1)) {
+                    neighborsOpinionSetCopy[neighborsIdSetCopy.indexOf(observed_id_player1)] = player1OpinionValue;
+                    neighborConnected[neighborsIdSetCopy.indexOf(observed_id_player1)] = true;
+                  }
+                  else {
+                    neighborsIdSetCopy.push(observed_id_player1)
+                    neighborConnected.splice(neighborConnected.length-1, 0, true);
+                    neighborsOpinionSetCopy.splice(neighborsOpinionSetCopy.length-1, 0, player1OpinionValue);
+                  }
+                } else{
+                  neighborsOpinionSet.push(player1OpinionValue);
+                  if (neighborsIdSetCopy.includes(observed_id_player1)) {
+                    neighborsOpinionSetCopy[neighborsIdSetCopy.indexOf(observed_id_player1)] = player1OpinionValue;
+                    neighborConnected[neighborsIdSetCopy.indexOf(observed_id_player1)] = true;
+                  }
+                  else {
+                    neighborsIdSetCopy.push(observed_id_player1)
+                    neighborConnected.push(true);
+                    neighborsOpinionSetCopy.push(player1OpinionValue);
+                  }
+                }
             }
         } else {
             disconnect1 = true;
-            const index = neighborsOpinionSet.indexOf(player1OpinionValue);
+            const index = neighborsIdSet.indexOf(observed_id_player1);
             if (index > -1) {
                 neighborsOpinionSet.splice(index, 1);
             }
+            const index_disconnect =   neighborsIdSetCopy.indexOf(observed_id_player1);
+            if (index_disconnect > -1) {
+              neighborConnected[index_disconnect] = false;
+            }
         }
+
         for (let i = 0; i < 81; i++){
           var p = document.getElementById(i.toString());
           p.style.opacity = '0';
         }
-        num_neighbors = neighborsOpinionSet.length;
+        var neighborsOpinionSetDisplay = [];
+        for (let i = 0; i < neighborsOpinionSetCopy.length; i++){
+          if (neighborConnected[i] == true) {
+            neighborsOpinionSetDisplay.push(neighborsOpinionSetCopy[i]);
+          }
+        }
+        neighborsOpinionSetDisplayCopy = neighborsOpinionSetDisplay;
+        num_neighbors = neighborsOpinionSetDisplay.length;
         if (num_neighbors == 0)
             document.getElementById("neighbor_p").innerHTML = "You don't have neighbors in this round.";
         else if (num_neighbors == 1)
             document.getElementById("neighbor_p").innerHTML =
-                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbor in this round and his or her position is: <b style='color:DodgerBlue;''> [" + neighborsOpinionSet +
-                  "] </b><br> Please (1) decide whether to disconnect with current neighbor; (2) write down your guess of this neighbor's position in this round below:" ;
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbor in this round and his or her position is: <b style='color:DodgerBlue;''> [" + neighborsOpinionSetDisplay +
+                  "] </b><br> Please (1) write down your guess of this neighbor's position in this round; <br> (2) decide whether to disconnect with current neighbor:" ;
         else
             document.getElementById("neighbor_p").innerHTML =
-                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'> [" + neighborsOpinionSet +
-                  "] </b><br> Please (1)decide whether to disconnect with current neighbors; (2) write down your guesses of each neighbor's position in this round below:";
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'> [" + neighborsOpinionSetDisplay +
+                  "] </b><br> Please (1) write down your guess of each neighbor's position in this round; <br> (2) decide whether to disconnect with current neighbors:";
 
         while(neighborTable.rows.length > 0) {
           neighborTable.deleteRow(0);
@@ -166,22 +208,10 @@
           header.style.width = '50px';
           for (i = 0; i < num_neighbors; i++) {
             var cells = document.createElement('td');
-            cells.innerHTML = neighborsOpinionSet[i];
+            cells.innerHTML = neighborsOpinionSetDisplay[i];
             row.appendChild(cells);
             cells.style.width = '50px';
             
-          }
-          neighborTable.appendChild(row);
-          // add third row (checkbox)
-          var header = document.createElement('th');
-          header.innerText = 'Disconnect?';
-          var row = document.createElement('tr');
-          row.appendChild(header);
-          for (i = 0; i < num_neighbors; i++) {
-            var cells = document.createElement('td');
-            cells.innerHTML = '<input name=' + disconnectionCheckbox[i] + ' type="checkbox" value=0 />';
-            row.appendChild(cells);
-            cells.style.width = '50px';
           }
           neighborTable.appendChild(row);
           // add forth row
@@ -195,31 +225,55 @@
             row.appendChild(cells);
             cells.style.width = '50px';
           }
+          neighborTable.appendChild(row);          
+          // add third row (checkbox)
+          var header = document.createElement('th');
+          header.innerText = 'Disconnect?';
+          var row = document.createElement('tr');
+          row.appendChild(header);
+          for (i = 0; i < num_neighbors; i++) {
+            var cells = document.createElement('td');
+            cells.innerHTML = '<input name=' + disconnectionCheckbox[i] + ' type="checkbox" value=0 />';
+            row.appendChild(cells);
+            cells.style.width = '50px';
+          }
           neighborTable.appendChild(row);
         }
     });
 
     if_connect_player1No.addEventListener('change', function() {
         disconnect1 = true;
-        const index = neighborsOpinionSet.indexOf(player1OpinionValue);
-            if (index > -1) {
-                neighborsOpinionSet.splice(index, 1);
-            }
+        const index = neighborsIdSet.indexOf(observed_id_player1);
+        if (index > -1) {
+            neighborsOpinionSet.splice(index, 1);
+        }
+        const index_disconnect = neighborsIdSetCopy.indexOf(observed_id_player1);
+        if (index_disconnect > -1){
+          neighborConnected[index_disconnect] = false;
+        }
+
         for (let i = 0; i < 81; i++){
           var p = document.getElementById(i.toString());
           p.style.opacity = '0';
         }
-        num_neighbors = neighborsOpinionSet.length;
+        var neighborsOpinionSetDisplay = [];
+        for (let i = 0; i < neighborsOpinionSetCopy.length; i++){
+          if (neighborConnected[i] == true) {
+            neighborsOpinionSetDisplay.push(neighborsOpinionSetCopy[i]);
+          }
+        }
+        neighborsOpinionSetDisplayCopy = neighborsOpinionSetDisplay;
+        num_neighbors = neighborsOpinionSetDisplay.length;
         if (num_neighbors == 0)
             document.getElementById("neighbor_p").innerHTML = "You don't have neighbors in this round.";
         else if (num_neighbors == 1)
             document.getElementById("neighbor_p").innerHTML =
-                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbor in this round and his or her position is: <b style='color:DodgerBlue;''> [" + neighborsOpinionSet +
-                  "] </b><br> Please (1)decide whether to disconnect with current neighbor; (2) write down your guess of this neighbor's position in this round below:" ;
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbor in this round and his or her position is: <b style='color:DodgerBlue;''> [" + neighborsOpinionSetDisplay +
+                  "] </b><br> Please (1) write down your guess of this neighbor's position in this round; <br> (2) decide whether to disconnect with current neighbor:" ;
         else
             document.getElementById("neighbor_p").innerHTML =
-                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'> [" + neighborsOpinionSet +
-                  "] </b><br> Please (1)decide whether to disconnect with current neighbors; (2) write down your guesses of each neighbor's position in this round below:";
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'> [" + neighborsOpinionSetDisplay +
+                  "] </b><br> Please (1) write down your guess of each neighbor's position in this round; <br> (2) decide whether to disconnect with current neighbors:";
 
         while(neighborTable.rows.length > 0) {
           neighborTable.deleteRow(0);
@@ -234,19 +288,7 @@
           header.style.width = '50px';
           for (i = 0; i < num_neighbors; i++) {
             var cells = document.createElement('td');
-            cells.innerHTML = neighborsOpinionSet[i];
-            row.appendChild(cells);
-            cells.style.width = '50px';
-          }
-          neighborTable.appendChild(row);
-          // add third row (checkbox)
-          var header = document.createElement('th');
-          header.innerText = 'Disconnect?';
-          var row = document.createElement('tr');
-          row.appendChild(header);
-          for (i = 0; i < num_neighbors; i++) {
-            var cells = document.createElement('td');
-            cells.innerHTML = '<input name=' + disconnectionCheckbox[i] + ' type="checkbox" value=0 />';
+            cells.innerHTML = neighborsOpinionSetDisplay[i];
             row.appendChild(cells);
             cells.style.width = '50px';
           }
@@ -259,6 +301,18 @@
           for (i = 0; i < num_neighbors; i++) {
             var cells = document.createElement('td');
             cells.innerHTML = '<input name=' + neighborGuess[i] + ' type="text" size="5" />';
+            row.appendChild(cells);
+            cells.style.width = '50px';
+          }
+          neighborTable.appendChild(row);          
+          // add third row (checkbox)
+          var header = document.createElement('th');
+          header.innerText = 'Disconnect?';
+          var row = document.createElement('tr');
+          row.appendChild(header);
+          for (i = 0; i < num_neighbors; i++) {
+            var cells = document.createElement('td');
+            cells.innerHTML = '<input name=' + disconnectionCheckbox[i] + ' type="checkbox" value=0 />';
             row.appendChild(cells);
             cells.style.width = '50px';
           }
@@ -271,29 +325,52 @@
             if(disconnect2){
                 disconnect2 = false;
                 neighborsOpinionSet.push(player2OpinionValue);
+                if (neighborsIdSetCopy.includes(observed_id_player2)) {
+                    neighborsOpinionSetCopy[neighborsIdSetCopy.indexOf(observed_id_player2)] = player2OpinionValue;
+                    neighborConnected[neighborsIdSetCopy.indexOf(observed_id_player2)] = true;
+                }
+                else {
+                  neighborsIdSetCopy.push(observed_id_player2)
+                  neighborConnected.splice(neighborConnected.length, 0, true);
+                  neighborsOpinionSetCopy.splice(neighborsOpinionSetCopy.length, 0, player2OpinionValue);
+                }
+                // neighborConnected.push(true);
+                // neighborsOpinionSetCopy.push(player2OpinionValue);
             }
         } else {
             disconnect2 = true;
-            const index = neighborsOpinionSet.indexOf(player2OpinionValue);
+            const index = neighborsIdSet.indexOf(observed_id_player2);
             if (index > -1) {
                 neighborsOpinionSet.splice(index, 1);
             }
+            const index_disconnect = neighborsIdSetCopy.indexOf(observed_id_player2);
+            if (index_disconnect > -1) {
+              neighborConnected[index_disconnect] = false;
+            }
+            
         }
         for (let i = 0; i < 81; i++){
           var p = document.getElementById(i.toString());
           p.style.opacity = '0';
         }
-        num_neighbors = neighborsOpinionSet.length;
+        var neighborsOpinionSetDisplay = [];
+        for (let i = 0; i < neighborsOpinionSetCopy.length; i++){
+          if (neighborConnected[i] == true) {
+            neighborsOpinionSetDisplay.push(neighborsOpinionSetCopy[i]);
+          }
+        }
+        neighborsOpinionSetDisplayCopy = neighborsOpinionSetDisplay;
+        num_neighbors = neighborsOpinionSetDisplay.length;
         if (num_neighbors == 0)
             document.getElementById("neighbor_p").innerHTML = "You don't have neighbors in this round.";
         else if (num_neighbors == 1)
             document.getElementById("neighbor_p").innerHTML =
-                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbor in this round and his or her position is: <b style='color:DodgerBlue;''> [" + neighborsOpinionSet +
-                  "] </b><br> Please (1)decide whether to disconnect with current neighbor; (2) write down your guess of this neighbor's position in this round below:" ;
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbor in this round and his or her position is: <b style='color:DodgerBlue;''> [" + neighborsOpinionSetDisplay +
+                  "] </b><br> Please (1) write down your guess of this neighbor's position in this round; <br> (2) decide whether to disconnect with current neighbor:" ;
         else
             document.getElementById("neighbor_p").innerHTML =
-                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'> [" + neighborsOpinionSet +
-                  "] </b><br> Please (1)decide whether to disconnect with current neighbors; (2) write down your guesses of each neighbor's position in this round below:";
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'> [" + neighborsOpinionSetDisplay +
+                  "] </b><br> Please (1) write down your guess of each neighbor's position in this round; <br> (2) decide whether to disconnect with current neighbors:";
 
         while(neighborTable.rows.length > 0) {
           neighborTable.deleteRow(0);
@@ -308,19 +385,7 @@
           header.style.width = '50px';
           for (i = 0; i < num_neighbors; i++) {
             var cells = document.createElement('td');
-            cells.innerHTML = neighborsOpinionSet[i];
-            row.appendChild(cells);
-            cells.style.width = '50px';
-          }
-          neighborTable.appendChild(row);
-          // add third row (checkbox)
-          var header = document.createElement('th');
-          header.innerText = 'Disconnect?';
-          var row = document.createElement('tr');
-          row.appendChild(header);
-          for (i = 0; i < num_neighbors; i++) {
-            var cells = document.createElement('td');
-            cells.innerHTML = '<input name=' + disconnectionCheckbox[i] + ' type="checkbox" value=0 />';
+            cells.innerHTML = neighborsOpinionSetDisplay[i];
             row.appendChild(cells);
             cells.style.width = '50px';
           }
@@ -333,6 +398,18 @@
           for (i = 0; i < num_neighbors; i++) {
             var cells = document.createElement('td');
             cells.innerHTML = '<input name=' + neighborGuess[i] + ' type="text" size="5" />';
+            row.appendChild(cells);
+            cells.style.width = '50px';
+          }
+          neighborTable.appendChild(row);          
+          // add third row (checkbox)
+          var header = document.createElement('th');
+          header.innerText = 'Disconnect?';
+          var row = document.createElement('tr');
+          row.appendChild(header);
+          for (i = 0; i < num_neighbors; i++) {
+            var cells = document.createElement('td');
+            cells.innerHTML = '<input name=' + disconnectionCheckbox[i] + ' type="checkbox" value=0 />';
             row.appendChild(cells);
             cells.style.width = '50px';
           }
@@ -342,25 +419,36 @@
 
     if_connect_player2No.addEventListener('change', function() {
         disconnect2 = true;
-        const index = neighborsOpinionSet.indexOf(player2OpinionValue);
-            if (index > -1) {
-                neighborsOpinionSet.splice(index, 1);
-            }
+        const index = neighborsIdSet.indexOf(observed_id_player2);
+        if (index > -1) {
+            neighborsOpinionSet.splice(index, 1);
+        }
+        const index_disconnect = neighborsIdSetCopy.indexOf(observed_id_player2);
+        if (index_disconnect > -1){
+          neighborConnected[index_disconnect] = false;
+        }
         for (let i = 0; i < 81; i++){
           var p = document.getElementById(i.toString());
           p.style.opacity = '0';
         }
-        num_neighbors = neighborsOpinionSet.length;
+        var neighborsOpinionSetDisplay = [];
+        for (let i = 0; i < neighborsOpinionSetCopy.length; i++){
+          if (neighborConnected[i] == true) {
+            neighborsOpinionSetDisplay.push(neighborsOpinionSetCopy[i]);
+          }
+        }
+        neighborsOpinionSetDisplayCopy = neighborsOpinionSetDisplay;
+        num_neighbors = neighborsOpinionSetDisplay.length;
         if (num_neighbors == 0)
             document.getElementById("neighbor_p").innerHTML = "You don't have neighbors in this round.";
         else if (num_neighbors == 1)
             document.getElementById("neighbor_p").innerHTML =
-                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbor in this round and his or her position is: <b style='color:DodgerBlue;''> [" + neighborsOpinionSet +
-                  "] </b><br> Please (1)decide whether to disconnect with current neighbor; (2) write down your guess of this neighbor's position in this round below:" ;
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbor in this round and his or her position is: <b style='color:DodgerBlue;''> [" + neighborsOpinionSetDisplay +
+                  "] </b><br> Please (1) write down your guess of this neighbor's position in this round; <br> (2) decide whether to disconnect with current neighbor:" ;
         else
             document.getElementById("neighbor_p").innerHTML =
-                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'> [" + neighborsOpinionSet +
-                  "] </b><br> Please (1)decide whether to disconnect with current neighbors; (2) write down your guesses of each neighbor's position in this round below:";
+                "You have <b style='color:DodgerBlue;''>" + num_neighbors.toString() + "</b> neighbors in this round and their positions are: <b style='color:DodgerBlue;'> [" + neighborsOpinionSetDisplay +
+                  "] </b><br> Please (1) write down your guess of each neighbor's position in this round; <br> (2) decide whether to disconnect with current neighbors:";
 
         while(neighborTable.rows.length > 0) {
           neighborTable.deleteRow(0);
@@ -375,19 +463,7 @@
           header.style.width = '50px';
           for (i = 0; i < num_neighbors; i++) {
             var cells = document.createElement('td');
-            cells.innerHTML = neighborsOpinionSet[i];
-            row.appendChild(cells);
-            cells.style.width = '50px';
-          }
-          neighborTable.appendChild(row);
-          // add third row (checkbox)
-          var header = document.createElement('th');
-          header.innerText = 'Disconnect?';
-          var row = document.createElement('tr');
-          row.appendChild(header);
-          for (i = 0; i < num_neighbors; i++) {
-            var cells = document.createElement('td');
-            cells.innerHTML = '<input name=' + disconnectionCheckbox[i] + ' type="checkbox" value=0 />';
+            cells.innerHTML = neighborsOpinionSetDisplay[i];
             row.appendChild(cells);
             cells.style.width = '50px';
           }
@@ -400,6 +476,18 @@
           for (i = 0; i < num_neighbors; i++) {
             var cells = document.createElement('td');
             cells.innerHTML = '<input name=' + neighborGuess[i] + ' type="text" size="5" />';
+            row.appendChild(cells);
+            cells.style.width = '50px';
+          }
+          neighborTable.appendChild(row);          
+          // add third row (checkbox)
+          var header = document.createElement('th');
+          header.innerText = 'Disconnect?';
+          var row = document.createElement('tr');
+          row.appendChild(header);
+          for (i = 0; i < num_neighbors; i++) {
+            var cells = document.createElement('td');
+            cells.innerHTML = '<input name=' + disconnectionCheckbox[i] + ' type="checkbox" value=0 />';
             row.appendChild(cells);
             cells.style.width = '50px';
           }
@@ -417,16 +505,13 @@
         p.style.opacity = '0';
       }
       var guessList = [];
-      if (neighborsOpinionSet.length != 0){
-        for (let i = 0; i < neighborsOpinionSet.length; i++){
+      if (neighborsOpinionSetDisplayCopy.length != 0){
+        for (let i = 0; i < neighborsOpinionSetDisplayCopy.length; i++){
           document.getElementsByName(disconnectionCheckbox[i])[0].value = 0;
           if (document.getElementsByName(disconnectionCheckbox[i])[0].checked) {
-            document.getElementsByName(neighborGuess[i])[0].value = "";
-            document.getElementsByName(neighborGuess[i])[0].disabled = true;
             document.getElementsByName(disconnectionCheckbox[i])[0].value = 1;
           }
           else {
-            document.getElementsByName(neighborGuess[i])[0].disabled = false;
             document.getElementsByName(disconnectionCheckbox[i])[0].value = 0;
           }
           var tableCell = document.getElementsByName(neighborGuess[i])[0];
@@ -447,10 +532,12 @@
                 document.getElementsByName(neighborGuess[i])[0].value = "";
               }
               else {
-                var p = document.getElementById(x.toString());
-                p.style.opacity = '100';
-                guessList.push(x);
-                console.log(guessList);
+                if (document.getElementsByName(disconnectionCheckbox[i])[0].checked==false){
+                  var p = document.getElementById(x.toString());
+                  p.style.opacity = '100';
+                  guessList.push(x);
+                  console.log(guessList);
+                }
               }
               }
           }
@@ -466,19 +553,19 @@
       const neighborsPayoffSet = guessListCopy.map(neighborPayoffFunction);
       neighborsPayoffSet.forEach(totalFunction);
 
-      if (neighborsOpinionSet.length > 0){
+      if (neighborsOpinionSetDisplayCopy.length > 0){
         var a = 0;
-        for (let i = 0; i < neighborsOpinionSet.length; i++){
-          if(document.getElementsByName(neighborGuess[i])[0].disabled == true){
+        for (let i = 0; i < neighborsOpinionSetDisplayCopy.length; i++){
+          if(document.getElementsByName(disconnectionCheckbox[i])[0].checked){
             a = a + 1;
           }
         }
-        if (a == neighborsOpinionSet.length) {
+        if (a == neighborsOpinionSetDisplayCopy.length) {
           total = -1*(currentOpinion-previousOpinion)*(currentOpinion-previousOpinion)*1;
         }
       }
 
-      if (neighborsOpinionSet.length <= 0) {
+      if (neighborsOpinionSetDisplayCopy.length <= 0) {
           total = -1*(currentOpinion-previousOpinion)*(currentOpinion-previousOpinion)*1;
       }
       outputValue_2.innerHTML = Math.round(total*1)/1;
@@ -524,7 +611,7 @@
         div.append(node);
 
     }
-    for(let i = 0; i < neighborsOpinionSet.length; i++){
+    for(let i = 0; i < neighborsOpinionSetDisplayCopy.length; i++){
         // p = document.getElementById(parseInt(neighborsOpinionSet[i]).toString());
         p = document.getElementsByName(neighborGuess[i])[0];
         p.style.opacity = '100';
@@ -532,9 +619,9 @@
 
     function myFunction(event) {
         var a = 0;
-        if (neighborsOpinionSet.length != 0){
-            for (let i = 0; i < neighborsOpinionSet.length; i++){
-                if((document.getElementsByName(neighborGuess[i])[0].disabled == false) && (document.getElementsByName(neighborGuess[i])[0].value == '')){
+        if (neighborsOpinionSetDisplayCopy.length != 0){
+            for (let i = 0; i < neighborsOpinionSetDisplayCopy.length; i++){
+                if(document.getElementsByName(neighborGuess[i])[0].value == ''){
                     a = 1;
                 }
             }
