@@ -29,8 +29,9 @@ class Constants(BaseConstants):
     one_minus_f = round(1 - f, 1)
     h = 0
     participation_fee = 5.00
-    dollar_per_credit = 0.08
-    endowment = 3.00
+    endowment = 5.00
+
+
 
 class Subsession(BaseSubsession):
     def generate_initial_opinion(self):
@@ -156,6 +157,11 @@ class Player(BasePlayer):
     actual_payoff_round = models.CurrencyField()
     model_payoff_round = models.CurrencyField()
 
+
+
+    actual_payoff_round = models.CurrencyField()
+    model_payoff_round = models.CurrencyField()
+
     timeout_choose_neighbors = models.BooleanField(initial=0)
     timeout_update_opinion = models.BooleanField(initial=0)
 
@@ -170,6 +176,12 @@ class Player(BasePlayer):
     neighbor_opinion_6 = models.FloatField()
     neighbor_opinion_7 = models.FloatField()
     neighbor_opinion_8 = models.FloatField()
+
+    neighbors_id_set_after_choose_neighbors = models.LongStringField()
+    neighbors_opinion_set_after_choose_neighbors = models.LongStringField()
+
+    neighbors_opinion_guess_set_include_disconnect = models.LongStringField()
+    neighbors_opinion_guess_set_disconnect = models.LongStringField()
 
     neighbors_opinion_guess_set = models.LongStringField()
     update_neighbor_opinion_1 = models.IntegerField(label='', min=0, max=80,blank=True)
@@ -200,4 +212,6 @@ class Player(BasePlayer):
     disconnect_with_neighbor_7 = models.IntegerField(blank=True)
     disconnect_with_neighbor_8 = models.IntegerField(blank=True)
 
+    game_payoff = models.CurrencyField()
+    exchange_rate = models.FloatField() 
     total_payoff_experiment_dollar = models.FloatField()
