@@ -8,16 +8,16 @@ SESSION_CONFIGS = [
     #    app_sequence=['Vlh10_game']
     # ),   
     # dict(
-    #    name='fHh10_practice',
-    #    display_name="fHh10_practice",
+    #    name='Vlh0_practice',
+    #    display_name="Vlh0_practice",
     #    num_demo_participants=9,
-    #    app_sequence=['fHh10_practice']
+    #    app_sequence=['Vlh0_practice']
     # ),  
     dict(
-        name='Treatment4',
-        display_name="Treatment4",
+        name='Treatment3',
+        display_name="Treatment3",
         num_demo_participants=9,
-        app_sequence=['Vlh0_practice', 'Vlh0_game']
+        app_sequence=['quiz','Vlh0_practice', 'Vlh0_game']
     ),
     # dict(
     #     name='Session_11',
