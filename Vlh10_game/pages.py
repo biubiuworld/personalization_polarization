@@ -231,7 +231,7 @@ class GamePayment(Page):
     def vars_for_template(self):
         last_rounds = 5
         game_payoff_selection_list = self.participant.vars['payoff_in_all_rounds'][-last_rounds:]
-        self.participant.vars['game_payoff'] = max(random.choice(game_payoff_selection_list), 50) #set lower bound 50
+        self.participant.vars['game_payoff'] = max(random.choice(game_payoff_selection_list), 100) #set lower bound 50
         self.player.game_payoff = round(self.participant.vars['game_payoff'])
         return{
             'game_payoff': round(self.participant.vars['game_payoff']),
