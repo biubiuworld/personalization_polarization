@@ -2,100 +2,46 @@ from os import environ
 
 SESSION_CONFIGS = [
     # dict(
-    #    name='Vlh10_game',
-    #    display_name="Vlh10_game",
+    #    name='fHh10_game',
+    #    display_name="fHh10_game",
     #    num_demo_participants=9,
-    #    app_sequence=['Vlh10_game']
+    #    app_sequence=['fHh10_game']
     # ),   
     # dict(
-    #    name='Vlh0_practice',
-    #    display_name="Vlh0_practice",
+    #    name='fHh10_practice',
+    #    display_name="fHh10_practice",
     #    num_demo_participants=9,
-    #    app_sequence=['Vlh0_practice']
+    #    app_sequence=['fHh10_practice']
     # ),  
+    # dict(
+    #     name='Treatment4',
+    #     display_name="Treatment4",
+    #     num_demo_participants=9,
+    #     app_sequence=['quiz','Vlh10_practice', 'Vlh10_game']
+    # ),
+    # dict(
+    #     name='Treatment3',
+    #     display_name="Treatment3",
+    #     num_demo_participants=9,
+    #     app_sequence=['quiz','Vlh0_practice', 'Vlh0_game']
+    # ),
+    # dict(
+    #     name='Treatment2',
+    #     display_name="Treatment2",
+    #     num_demo_participants=9,
+    #     app_sequence=['fHh10_practice', 'fHh10_game']
+    # ),
     dict(
-        name='Treatment3',
-        display_name="Treatment3",
+        name='Treatment2',
+        display_name="Treatment2",
         num_demo_participants=9,
-        app_sequence=['quiz','Vlh0_practice', 'Vlh0_game']
+        app_sequence=['quiz_VhFh','fHh10_practice', 'fHh10_game']
     ),
     # dict(
-    #     name='Session_11',
-    #     display_name="Session_11",
-    #     num_demo_participants=3,
-    #     app_sequence=['quiz', 'new_practice_game', 'game_FhH10', 'game_FlH10','game_FmH10']
-    # ),
-    # dict(
-    #     name='Session_9',
-    #     display_name="Session_9",
-    #     num_demo_participants=3,
-    #     app_sequence=['quiz', 'new_practice_game', 'game_FhH0', 'game_FlH0', 'game_FmH0']
-    # ),
-    # dict(
-    #     name='game_VhFhH0',
-    #     display_name="game_VhFhH0",
-    #     num_demo_participants=3,
-    #     app_sequence=['game_VhFhH0']
-    # ),
-    # dict(
-    #     name='game_VlFmH0',
-    #     display_name="game_VlFmH0",
-    #     num_demo_participants=3,
-    #     app_sequence=['game_VlFmH0', 'game_VhFhH0']
-    # ),
-    # dict(
-    #     name='game_VhFmH10',
-    #     display_name="game_VhFmH10",
-    #     num_demo_participants=5,
-    #     app_sequence=['game_VhFmH10']
-    # ),
-    # dict(
-    #     name='game_VhFhH10',
-    #     display_name="game_VhFhH10",
-    #     num_demo_participants=3,
-    #     app_sequence=['game_VhFhH10']
-    # ),
-    # dict(
-    #     name='quiz',
-    #     display_name="pilot",
-    #     num_demo_participants=1,
-    #     app_sequence=['quiz']
-    # ),
-    # dict(
-    #     name='quiz',
-    #     display_name="pilot",
-    #     num_demo_participants=3,
-    #     app_sequence=['quiz', 'practice_game', 'game_VhFmH0', 'game_VhFlH0']
-    # ),
-    # dict(
-    #     name='quiz',
-    #     display_name="pilot",
-    #     num_demo_participants=3,
-    #     app_sequence=['quiz', 'practice_game', 'game_VhFmH10', 'game_VhFhH10']
-    # ),
-    # dict(
-    #     name='quiz',
-    #     display_name="pilot",
-    #     num_demo_participants=3,
-    #     app_sequence=['game_VhFmH0', 'game_VhFlH0']
-    # ),
-    # dict(
-    #     name='quiz',
-    #     display_name="pilot",
-    #     num_demo_participants=1,
-    #     app_sequence=['quiz']
-    # ),
-    # dict(
-    #     name='Experiment_Survey',
-    #     display_name="Experiment_Survey",
-    #     num_demo_participants=1,
-    #     app_sequence=['Experiment_Survey']
-    # ),
-    # dict(
-    #     name='game_VhFmH0',
-    #     display_name="Pilot",
-    #     num_demo_participants=3,
-    #     app_sequence=['game_VhFmH0','game_VhFhH10', 'experiment_payment_dollar']
+    #     name='Treatment1',
+    #     display_name="Treatment1",
+    #     num_demo_participants=9,
+    #     app_sequence=['quiz_VhFh','fHh0_practice', 'fHh0_game']
     # ),
 
 ]
