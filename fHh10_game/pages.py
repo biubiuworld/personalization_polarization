@@ -36,7 +36,7 @@ class NeighborUpdate(Page):
                    'disconnect_with_neighbor_1', 'disconnect_with_neighbor_2', 'disconnect_with_neighbor_3', 'disconnect_with_neighbor_4', 'disconnect_with_neighbor_5',
                    'disconnect_with_neighbor_6', 'disconnect_with_neighbor_7', 'disconnect_with_neighbor_8']
 
-    timeout_seconds = 10
+    timeout_seconds = 90
 
     def vars_for_template(self):
         self.participant.vars['neighbors_opinion_set'] = []
@@ -215,7 +215,7 @@ class BeforeResultsWaitPage(WaitPage):
 
 class Results(Page):
 
-    timeout_seconds = 5
+    timeout_seconds = 15
 
     def vars_for_template(self):
         return {
@@ -231,7 +231,7 @@ class GamePayment(Page):
     def vars_for_template(self):
         last_rounds = 5
         game_payoff_selection_list = self.participant.vars['payoff_in_all_rounds'][-last_rounds:]
-        self.participant.vars['game_payoff'] = max(random.choice(game_payoff_selection_list), 150) #set lower bound 150
+        self.participant.vars['game_payoff'] = max(random.choice(game_payoff_selection_list), 400) #set lower bound 150
         self.player.game_payoff = round(self.participant.vars['game_payoff'])
         return{
             'game_payoff': round(self.participant.vars['game_payoff']),
@@ -244,14 +244,14 @@ class ExperimentPayment(Page):
     def vars_for_template(self):
         return {
             'payoff_experiment': round(self.participant.vars['game_payoff']),
-            'payoff_experiment_dollar': round(math.sqrt(round(self.participant.vars['game_payoff'])/3),2),
+            'payoff_experiment_dollar': round(math.sqrt(round(self.participant.vars['game_payoff'])/4),2),
             'total_endowments': Constants.endowment,
-            'total_payoff_experiment_dollar': round(round(math.sqrt(round(self.participant.vars['game_payoff'])/3),2) 
+            'total_payoff_experiment_dollar': round(round(math.sqrt(round(self.participant.vars['game_payoff'])/4),2) 
             + Constants.participation_fee + Constants.endowment, 2),
         }
 
     def before_next_page(self):
-        self.player.total_payoff_experiment_dollar = round(round(math.sqrt(round(self.participant.vars['game_payoff'])/3),2) +Constants.participation_fee+Constants.endowment,2)
+        self.player.total_payoff_experiment_dollar = round(round(math.sqrt(round(self.participant.vars['game_payoff'])/4),2) +Constants.participation_fee+Constants.endowment,2)
 
 
 page_sequence = [
