@@ -90,7 +90,8 @@ class Subsession(BaseSubsession):
 
     def generate_observed_players_eachround(self):
         if self.round_number == 1:
-            np.random.seed(223975673)        
+            # np.random.seed(223975673)
+            np.random.seed(35355454)        
         for p in self.get_players():
             p.participant.vars['others_last_opinions'] = []
             p.participant.vars['others_id_in_group'] = []
