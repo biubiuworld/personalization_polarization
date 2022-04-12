@@ -22,7 +22,7 @@ Your app description
 class Constants(BaseConstants):
     name_in_url = 'fHh0_game'
     players_per_group = None
-    num_rounds = 22
+    num_rounds = 21
     min_opinion = 0
     V = 150
     f = 0.9
