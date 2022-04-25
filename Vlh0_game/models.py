@@ -22,7 +22,7 @@ Your app description
 class Constants(BaseConstants):
     name_in_url = 'Vlh0_game'
     players_per_group = None
-    num_rounds = 25
+    num_rounds = 20
     min_opinion = 0
     V = 50
     f = 0.5
@@ -91,7 +91,8 @@ class Subsession(BaseSubsession):
     def generate_observed_players_eachround(self):
         if self.round_number == 1:
             # np.random.seed(223975673)
-            np.random.seed(35355454)         
+            np.random.seed(35355454)
+            # np.random.seed(8786685)         
         for p in self.get_players():
             p.participant.vars['others_last_opinions'] = []
             p.participant.vars['others_id_in_group'] = []
