@@ -2,35 +2,35 @@ from os import environ
 
 SESSION_CONFIGS = [
     # dict(
-    #    name='fHh0_game',
-    #    display_name="fHh0_game",
+    #    name='Vlh10_game',
+    #    display_name="Vlh10_game",
     #    num_demo_participants=9,
-    #    app_sequence=['fHh0_game']
+    #    app_sequence=['Vlh10_game']
     # ),   
     # dict(
-    #    name='fHh0_practice',
-    #    display_name="fHh0_practice",
+    #    name='Vlh0_practice',
+    #    display_name="Vlh0_practice",
     #    num_demo_participants=9,
-    #    app_sequence=['fHh0_practice']
+    #    app_sequence=['Vlh0_practice']
     # ),  
-    # dict(
-    #     name='Treatment4',
-    #     display_name="Treatment4",
-    #     num_demo_participants=9,
-    #     app_sequence=['quiz','Vlh10_practice', 'Vlh10_game']
-    # ),
+    dict(
+        name='Treatment4',
+        display_name="Treatment4",
+        num_demo_participants=9,
+        app_sequence=['quiz','Vlh10_practice', 'Vlh10_game']
+    ),
     # dict(
     #     name='Treatment3',
     #     display_name="Treatment3",
     #     num_demo_participants=9,
     #     app_sequence=['quiz','Vlh0_practice', 'Vlh0_game']
     # ),
-    dict(
-        name='Treatment2',
-        display_name="Treatment2",
-        num_demo_participants=9,
-        app_sequence=['quiz_VhFh','fHh10_practice', 'fHh10_game']
-    ),
+    # dict(
+    #     name='Treatment2',
+    #     display_name="Treatment2",
+    #     num_demo_participants=9,
+    #     app_sequence=['quiz_VhFh','fHh10_practice', 'fHh10_game']
+    # ),
     # dict(
     #     name='Treatment1',
     #     display_name="Treatment1",
