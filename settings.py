@@ -7,12 +7,12 @@ SESSION_CONFIGS = [
     #    num_demo_participants=9,
     #    app_sequence=['Vlh0_game']
     # ),   
-    dict(
-       name='Vlh10_practice',
-       display_name="Vlh10_practice",
-       num_demo_participants=9,
-       app_sequence=['Vlh10_practice']
-    ),  
+    # dict(
+    #    name='fHh0_practice',
+    #    display_name="fHh0_practice",
+    #    num_demo_participants=9,
+    #    app_sequence=['fHh0_practice']
+    # ),  
     # dict(
     #     name='Treatment4',
     #     display_name="Treatment4",
@@ -31,12 +31,12 @@ SESSION_CONFIGS = [
     #     num_demo_participants=9,
     #     app_sequence=['quiz_VhFh','fHh10_practice', 'fHh10_game']
     # ),
-    # dict(
-    #     name='Treatment1',
-    #     display_name="Treatment1",
-    #     num_demo_participants=9,
-    #     app_sequence=['quiz_VhFh','fHh0_practice', 'fHh0_game']
-    # ),
+    dict(
+        name='Treatment1',
+        display_name="Treatment1",
+        num_demo_participants=9,
+        app_sequence=['quiz_VhFh','fHh0_practice', 'fHh0_game']
+    ),
 
 ]
 
