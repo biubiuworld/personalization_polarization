@@ -2,10 +2,10 @@ from os import environ
 
 SESSION_CONFIGS = [
     # dict(
-    #    name='Vlh0_game',
-    #    display_name="Vlh0_game",
+    #    name='fHh10_game',
+    #    display_name="fHh10_game",
     #    num_demo_participants=9,
-    #    app_sequence=['Vlh0_game']
+    #    app_sequence=['fHh10_game']
     # ),   
     # dict(
     #    name='fHh10_practice',
