@@ -36,7 +36,7 @@ class NeighborUpdate(Page):
                    'disconnect_with_neighbor_1', 'disconnect_with_neighbor_2', 'disconnect_with_neighbor_3', 'disconnect_with_neighbor_4', 'disconnect_with_neighbor_5',
                    'disconnect_with_neighbor_6', 'disconnect_with_neighbor_7', 'disconnect_with_neighbor_8']
 
-    timeout_seconds = 90
+    # timeout_seconds = 90
 
     def vars_for_template(self):
         self.participant.vars['neighbors_opinion_set'] = []
